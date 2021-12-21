@@ -1,0 +1,17 @@
+[
+	{
+		"protocol": "qws",
+		"address": "dm6.uk:27500",
+		"status": "online",
+		"hostname": "dm6.uk:27500",
+		"name": "Barrysworld FFA Tribute",
+		"gametype": "qw",
+		"map": "ztndm3",
+		"numplayers": 3,
+		"maxplayers": 26,
+		"numspectators": 2,
+		"maxspectators": 6,
+		"ping": 58,
+		"retries": 0
+	}
+]

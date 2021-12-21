@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Hello World!</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Server</th>
+                    <th>Ping</th>
+                    <th>Map</th>
+                    <th>Players</th>
+
+                </tr>
+            </thead>
+            <tbody class="serverList">
+                <!-- servers go here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./renderer.js"></script>
+</body>
+
+</html>
