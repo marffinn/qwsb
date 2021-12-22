@@ -1,2 +1,0 @@
-# qwsb
-nnoee

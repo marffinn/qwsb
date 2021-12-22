@@ -1,14 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 body {
     padding: 1em;
+    line-height: 1em;
+    font-family: 'Open Sans', sans-serif;
 }
-.table td, .table th {
-
-    padding: 0.1em 0.1em;
-    vertical-align: top;
-    background: #30343a;
-    color: white;
-    font-size: 0.8em;
-}
-.table td:first-child {
-    padding-left: 1em;
+.container {
+    border: 1px solid dimgrey;
+    padding: 1em;
 }

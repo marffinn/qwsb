@@ -5,34 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.min.css">
+
     <link rel="stylesheet" href="css/style.css">
-    <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+    
+    <title>QuakeWorld Server Browser</title>
 </head>
 
 <body>
-
-
     <div class="container">
-        <table class="table">
+        <table class="table hover row-border">
             <thead>
                 <tr>
                     <th>Server</th>
+                    <th>IP/Address</th>
                     <th>Ping</th>
                     <th>Map</th>
                     <th>Players</th>
                 </tr>
             </thead>
             <tbody class="serverList">
-                <!-- servers go here -->
+                
             </tbody>
         </table>
     </div>
-    <script src="./node_modules/jquery-tablesort/jquery.tablesort.min.js"></script>
     <script src="./renderer.js"></script>
-    <script>
-        $('.table').tablesort()
-    </script>
 </body>
 
 </html>
