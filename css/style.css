@@ -1,4 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+@font-face {
+    font-family: "DroidSerif";
+    src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "DroidSerif";
+    src: url("/fonts/OpenSans-Medium.ttf") format("truetype");
+    font-weight: medium;
+    font-style: normal;
+}
+@font-face {
+    font-family: "DroidSerif";
+    src: url("/fonts//OpenSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     padding: 1em;
     line-height: 1em;
@@ -7,4 +26,25 @@ body {
 .container {
     border: 1px solid dimgrey;
     padding: 1em;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 2px 2px !important
+}
+.qwsResultName {
+    font-weight: bold;
+    font-size: .9em;
+}
+.qwsResultAddress {
+    color: crimson;
+    font-size: .7em;
+    font-weight: bold;}
+.qwsResultPing {
+    text-align: center;
+    font-weight: bold;
+}
+.qwsResultMap {
+    font-size: .8em;
+}
+.qwsResultPlayers {
+    text-align: center;
 }

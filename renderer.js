@@ -12,11 +12,11 @@ let refreshMasters = () => {
             else {
                 let oneServerPrepare =
                 `<tr>
-                    <td>${qwServers[i].name}</td>
-                    <td>${qwServers[i].address}</td>
-                    <td>${qwServers[i].ping}</td>
-                    <td>${qwServers[i].map}</td>
-                    <td>${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
+                    <td class="qwsResultName">${qwServers[i].name}</td>
+                    <td class="qwsResultAddress">${qwServers[i].address}</td>
+                    <td class="qwsResultPing">${qwServers[i].ping}</td>
+                    <td class="qwsResultMap">${qwServers[i].map}</td>
+                    <td class="qwsResultPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
                 </tr>`          
                 $('.serverList').append(oneServerPrepare)
             }
