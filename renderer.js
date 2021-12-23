@@ -7,14 +7,31 @@ $('body').overlayScrollbars({
     className: "os-theme-dark",
   });
 
+let tableHeader = ` <table class="table hover row-border">
+                        <thead>
+                            <tr>
+                                <th>Server</th>
+                                <th>Ping</th>
+                                <th>Map</th>
+                                <th>Players</th>
+                            </tr>
+                        </thead>
+                        <tbody class="serverList">
+                        <!-- here list of servers  -->
+                        </tbody>
+                    </table>`
+
 let refreshMasters = () => {
+    
     execute('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -u -sort p -json', function (err, data) {
         if(err) return console.error(err);
         let qwServers = JSON.parse(data)
+
+        $('.container').append(tableHeader)
         for (let i in qwServers) {
             if( qwServers[i].ping >= 60 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
-                let oneServerPrepare =
+            let oneServerPrepare =
                 `<tr>
                     <td class="qwsResultName">${qwServers[i].name}</td>
                     <td class="qwsResultPing">${qwServers[i].ping}</td>
@@ -31,6 +48,7 @@ let refreshMasters = () => {
         } );
     })
 }
+
 let checkPing = (addre) => {
     execute(`qstat.exe -qws ${addre} -noconsole -json`, function (err, data) {
         let qsPing = JSON.parse(data)
