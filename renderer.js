@@ -1,7 +1,11 @@
 let $ = require('jquery')
 require( 'datatables.net-dt' )()
-
+require( './node_modules/overlayscrollbars/js/jquery.overlayScrollbars' )()
 const execute = require('child_process').exec
+
+$('body').overlayScrollbars({
+    className: "os-theme-dark",
+  });
 
 let refreshMasters = () => {
     execute('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -u -sort p -json', function (err, data) {
@@ -13,7 +17,6 @@ let refreshMasters = () => {
                 let oneServerPrepare =
                 `<tr>
                     <td class="qwsResultName">${qwServers[i].name}</td>
-                    <td class="qwsResultAddress">${qwServers[i].address}</td>
                     <td class="qwsResultPing">${qwServers[i].ping}</td>
                     <td class="qwsResultMap">${qwServers[i].map}</td>
                     <td class="qwsResultPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
@@ -23,8 +26,8 @@ let refreshMasters = () => {
         }
         $('.table').DataTable( {
             stateSave: true,
-            "searching": false,
-            "lengthMenu": [[25, 50, -1], [25, 50, "All"]]
+            searching: false,
+            paging: false
         } );
     })
 }

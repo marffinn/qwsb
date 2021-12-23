@@ -17,34 +17,37 @@
     font-weight: normal;
     font-style: normal;
 }
-
 body {
-    padding: 1em;
-    line-height: 1em;
     font-family: 'Open Sans', sans-serif;
-}
-.container {
-    border: 1px solid dimgrey;
     padding: 1em;
+}
+
+
+.container {
+    /* padding: 1em; */
 }
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 2px 2px !important
 }
 .qwsResultName {
-    font-weight: bold;
-    font-size: .9em;
+    font-size: .8em;
+    text-transform: lowercase;
 }
 .qwsResultAddress {
-    color: crimson;
+    color: #cccccc;
     font-size: .7em;
-    font-weight: bold;}
+    float: right;
+    font-weight: bold;
+    padding: 3px;
+}
 .qwsResultPing {
     text-align: center;
-    font-weight: bold;
+    font-size: .8em;
 }
 .qwsResultMap {
     font-size: .8em;
 }
 .qwsResultPlayers {
     text-align: center;
+    font-size: .8em;
 }

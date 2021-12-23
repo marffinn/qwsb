@@ -3,8 +3,12 @@ const path = require('path')
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 800,
+    width: 470,
+    minWidth: 470,
+    maxWidth: 470,
     height: 600,
+    center: true,
+    icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
