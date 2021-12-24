@@ -1,19 +1,19 @@
 
 @font-face {
     font-family: "DroidSerif";
-    src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
+    src: url("/data/fonts/OpenSans-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: "DroidSerif";
-    src: url("/fonts/OpenSans-Medium.ttf") format("truetype");
+    src: url("/data/fonts/OpenSans-Medium.ttf") format("truetype");
     font-weight: medium;
     font-style: normal;
 }
 @font-face {
     font-family: "DroidSerif";
-    src: url("/fonts//OpenSans-Regular.ttf") format("truetype");
+    src: url("/data/fonts//OpenSans-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -22,10 +22,6 @@ body {
     padding: 1em;
 }
 
-
-.container {
-    /* padding: 1em; */
-}
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 0px 2px !important;
 
@@ -39,15 +35,6 @@ table.dataTable thead th, table.dataTable thead td {
 .qwsResultName {
     font-size: .8em;
     text-transform: lowercase;
-}
-.qwsResultAddress {
-    color: #cccccc;
-    font-size: .7em;
-    float: right;
-    font-weight: bold;
-    padding: 3px;
-}
-.qwsResultPing {
     text-align: center;
     font-size: .8em;
 }
@@ -57,4 +44,7 @@ table.dataTable thead th, table.dataTable thead td {
 .qwsResultPlayers {
     text-align: center;
     font-size: .8em;
+}
+a {
+    text-decoration: none;
 }

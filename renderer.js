@@ -22,7 +22,6 @@ let tableHeader = ` <table class="table hover row-border">
                     </table>`
 
 let refreshMasters = () => {
-    
     execute('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -u -sort p -json', function (err, data) {
         if(err) return console.error(err);
         let qwServers = JSON.parse(data)
@@ -32,8 +31,8 @@ let refreshMasters = () => {
             if( qwServers[i].ping >= 60 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
             let oneServerPrepare =
-                `<tr>
-                    <td class="qwsResultName">${qwServers[i].name}</td>
+                `<tr data="${qwServers[i].address}">
+                    <td class="qwsResultName"><a href="qw://${qwServers[i].address}">${qwServers[i].name}</a></td>
                     <td class="qwsResultPing">${qwServers[i].ping}</td>
                     <td class="qwsResultMap">${qwServers[i].map}</td>
                     <td class="qwsResultPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
@@ -45,7 +44,7 @@ let refreshMasters = () => {
             stateSave: true,
             searching: false,
             paging: false
-        } );
+        });
     })
 }
 
@@ -59,3 +58,7 @@ let checkPing = (addre) => {
 
 refreshMasters()
 
+$('body').on('click', 'a', function (e) {
+    e.preventDefault()
+    console.log( $(this).attr('href') )
+})
