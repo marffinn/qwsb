@@ -1,7 +1,8 @@
 let $ = require('jquery')
 require( 'datatables.net-dt' )()
-require( './node_modules/overlayscrollbars/js/jquery.overlayScrollbars' )()
+require( './node_modules/overlayscrollbars/js/jquery.overlayScrollbars' )     
 const execute = require('child_process').exec
+
 
 $('body').overlayScrollbars({
     className: "os-theme-dark",
@@ -32,7 +33,7 @@ let refreshMasters = () => {
             else {
             let oneServerPrepare =
                 `<tr data="${qwServers[i].address}">
-                    <td class="qwsResultName"><a href="qw://${qwServers[i].address}">${qwServers[i].name}</a></td>
+                    <td class="qwsResultName"><a  href="${qwServers[i].address}">${qwServers[i].name}</a></td>
                     <td class="qwsResultPing">${qwServers[i].ping}</td>
                     <td class="qwsResultMap">${qwServers[i].map}</td>
                     <td class="qwsResultPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
@@ -48,10 +49,13 @@ let refreshMasters = () => {
     })
 }
 
-let checkPing = (addre) => {
-    execute(`qstat.exe -qws ${addre} -noconsole -json`, function (err, data) {
+let checkServer = (addre) => {
+    execute(`qstat.exe -qws ${addre} -json`, function (err, data) {
+        if(err) throw err
         let qsPing = JSON.parse(data)
-        clientPing = qsPing[0].ping
+        let clientPing = qsPing[0].ping
+        console.log(clientPing)
+        console.log(qsPing[0]);
         return clientPing
     })
 }
@@ -60,5 +64,7 @@ refreshMasters()
 
 $('body').on('click', 'a', function (e) {
     e.preventDefault()
-    console.log( $(this).attr('href') )
+    let svAdress = $(this).attr('href')
+    console.log(svAdress)
+    checkServer(svAdress)
 })
