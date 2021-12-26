@@ -13,9 +13,12 @@ function createWindow () {
         nodeIntegration: true,
         contextIsolation: false,
         devTools: true,
+        frame: false,
+        autoHideMenuBar: true,
         preload: path.join(__dirname, 'preload.js')
     }
   })
+  win.setMenuBarVisibility(false)
 
   win.loadFile('index.html')
 }
