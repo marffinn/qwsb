@@ -1,6 +1,6 @@
 var mapsArray = {
-   dm4: '../images/mapshots/dm4.jpg',
-   aerowalk: '../images/mapshots/dm4.jpg'
+   dm4: 'data/images/mapshots/dm4.jpg',
+   aerowalk: 'data/images/mapshots/aerowalk.jpg'
    
 }
-module.exports = { mapsArray };
+module.exports = { mapsArray }

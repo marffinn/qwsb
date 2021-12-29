@@ -14,6 +14,7 @@ function createWindow () {
         contextIsolation: false,
         devTools: true,
         frame: false,
+        webSecurity: false,
         autoHideMenuBar: true,
         preload: path.join(__dirname, 'preload.js')
     }
