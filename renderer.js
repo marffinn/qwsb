@@ -2,18 +2,9 @@ const $ = require('jquery')
 const exe = require('child_process').exec
 const qw = require('./data/scripts/quakeworld')
 const ls = require('./data/scripts/levelshots')
-require( 'datatables.net-dt' )()
-require('./node_modules/overlayscrollbars/js/jquery.overlayScrollbars')  
-
-import map_dm4_img from './data/images/mapshots/dm4.jpg'
 
 
 // event listeners ////////////////////////////////////////////////////////////////////////////
-$('body').overlayScrollbars({
-    className: "os-theme-dark",
-});
-
-// console.log(ls.mapsArray)
 
 $('body').on('click', 'a', function (e) {
     e.preventDefault()
@@ -35,12 +26,15 @@ let checkServer = (addre) => {
     let serverIP = addre.split(':')[0]
     let serverPort = addre.split(':')[1]
     qw(serverIP, serverPort, 'status', [31], function (err, data) {
+
+        console.log(data)
         if (err) console.log('ERROR: ', err)
+
+        console.log(data)
 
         $('.modal .content .modalSvName').append(data.hostname)
         $('.modal .content .modalMap').append(data.map)
-        $('.modal .content .modalMapPic').append('<img scr="'+map_dm4_img+'" alt="'+ data.map +'" />')
-
+        $('.modal .content .modalMapPic').append('<img src="'+__dirname+'/data/images/mapshots/'+ data.map +'.jpg" alt="data.map"></img>')
         if(data.players){
             for(let i in data.players )
             $('.modalPlayers').append(data.players[i].name + '<br>')
@@ -67,11 +61,6 @@ let refreshMasters = () => {
                 $('.serverList').append(oneServerPrepare)
             }
         }
-        $('.table').DataTable( {
-            stateSave: true,
-            searching: false,
-            paging: false
-        });
         $('.table').show()
     })
 }
