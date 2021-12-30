@@ -3,9 +3,9 @@ const path = require('path')
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 520,
-    maxWidth: 520,
+    width:500,
     height: 600,
+    transparent: true,
     frame: false,
     icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
     webPreferences: {
@@ -14,7 +14,6 @@ function createWindow () {
         preload: path.join(__dirname, 'preload.js')
     }
   })
-  // win.setMenuBarVisibility(false)
 
   win.loadFile('index.html')
 }
