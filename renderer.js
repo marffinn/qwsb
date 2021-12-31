@@ -30,7 +30,7 @@ let checkServer = (addre) => {
         console.log(data)
         if (err) console.log('ERROR: ', err)
 
-        console.log(data)
+        // console.log(data)
 
         $('.modal .content .modalSvName').append(data.hostname)
         $('.modal .content .modalMap').append(data.map)
