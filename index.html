@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="./node_modules/overlayscrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="./node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
-    <title>QuakeWorld Server Browser</title>
+    <title>QW_SB</title>
 </head>
 
 <body>
 
     <div class="titleBar">
-        <div class="minimizeButton">_</div>
-        <div class="closeButton">x</div>
+        <div class="titleBarText">
+           QuakeWorld Server Browser
+        </div>
+        <div class="closeButton"></div>
+        <div class="minimizeButton"></div>
     </div>
 
     <div class="modal">
@@ -34,10 +37,10 @@
         <table class="table hover row-border">
             <thead>
                 <tr>
-                    <th>Server</th>
-                    <th>Ping</th>
-                    <th>Map</th>
-                    <th>Players</th>
+                    <th class="tbServerHeadName">Server</th>
+                    <th  class="tbPingHeadName">Ping</th>
+                    <th class="tbMapHeadName">Map</th>
+                    <th class="tbPlayersHeadName">Players</th>
                 </tr>
             </thead>
             <tbody class="serverList">

@@ -38,11 +38,28 @@ body {
 .scroll_enabled {
     overflow-y: scroll;
     height: 500px;
-    overflow-x: clip;
 }
 
 .scroll_enabled::-webkit-scrollbar {
     width: 10px;
+}
+
+.modalSvName {
+    color:wheat;
+    font-size:.8em;
+    width: 50%;
+    float: left;
+}
+.modalMap {
+    color:wheat;
+    font-size:.8em;
+    width: 50%;
+    /* float: left; */
+    display: block;
+    float: left;
+}
+.modalPlayers {
+    color:wheat
 }
 
 .scroll_enabled::-webkit-scrollbar-corner {
@@ -50,21 +67,23 @@ body {
 }
 
 .scroll_enabled::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #795548;
     border-radius: 5px;
-    background-clip: content-box;
-    min-width: 34px;
-    min-height: 32px;
-    /* width: 10px; */
+    /* background-clip: content-box; */
+    /* min-width: 34px; */
+    /* min-height: 64px; */
+    width: 8px;
+    display: block;
+    float: left;
 }
 
 .scroll_enabled::-webkit-scrollbar-track {
-    background-color: rgb(245 42 42 / 0%);
+    background-color: rgba(245 42 42 / 0%);
 }
 
 
 .titleBar {
-    background-color: #292929;
+    background-color: #212121;
     height: 30px;
     width: 100%;
     position: relative;
@@ -73,6 +92,19 @@ body {
     border-radius: 2px 2px 0 0;
     display: block;
     float: left;
+    color: white;
+    line-height: 30px;
+}
+
+.titleBarText {
+    height: 30px;
+    width: auto;
+    display: block;
+    float: left;
+    position: relative;
+    line-height: 30px;
+    left: .8em;
+    font-size: .8em;
 }
 
 .minimizeButton {
@@ -80,10 +112,24 @@ body {
     width: 30px;
     height: 30px;
     display: block;
+    position: relative;
     float: right;
-    background-color: #292929;
+    background-color: #212121;
     color: white;
     -webkit-app-region: no-drag;
+}
+
+.minimizeButton::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 2px;
+    background-color: wheat;
+    position: relative;
+    left: 50%;
+    margin-top: 2px;
+    margin-left: -6px;
+    top: 50%;
 }
 
 .closeButton {
@@ -93,13 +139,41 @@ body {
     display: block;
     position: relative;
     float: right;
-    background-color: #292929;
+    background-color: #212121;
     color: white;
     -webkit-app-region: no-drag;
 }
 
+.closeButton::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 2px;
+    background-color: wheat;
+    position: relative;
+    transform: rotate(-45deg);
+    top: 50%;
+    margin-top: -1px;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.closeButton::after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 2px;
+    background-color: wheat;
+    position: relative;
+    transform: rotate(45deg);
+    top: 50%;
+    margin-top: -2px;
+    left: 50%;
+    margin-left: -6px;
+}
+
 .closeButton:hover {
-    background-color: #414141;
+    background-color: #ff3737;
 }
 
 .minimizeButton:hover {
@@ -108,48 +182,52 @@ body {
 
 
 .container {
-    width: 496px;
+    width: 500px;
     background-color: #292929;
-    display: block;
-    position: relative;
-    float: left;
 }
 
 .content {
     padding: 1em;
+    width: 100%;
+    display: block;
+    float: left;
 }
 
 .modal {
     display: block;
-    background-color: blueviolet;
+    background-color: #2b2828;
     position: absolute;
     z-index: 1;
     margin: 0 auto;
     left: 100%;
+    top: 30px;
+    width: 100%;
 }
 
 .modalNav {
-    width: 100%;
+    width: auto;
     display: block;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     margin: 1em;
 }
 
 .modalNav span {
     color: white;
-    padding: .2em;
+    /* padding: .2em; */
     border: 1px solid #ccc;
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     cursor: pointer;
+    border-radius: 50%;
+    padding: 16px;
 }
 
 .modalNav span::before {
     content: '';
-    width: 15px;
+    width: 14px;
     height: 2px;
     display: block;
     background-color: white;
@@ -158,11 +236,12 @@ body {
     margin: 0 auto;
     top: 50%;
     margin-top: -1px;
+    left: -7px;
 }
 
 .modalNav span::after {
     content: '';
-    width: 15px;
+    width: 14px;
     height: 2px;
     display: block;
     background-color: white;
@@ -171,6 +250,7 @@ body {
     margin: 0 auto;
     top: 50%;
     margin-top: -2px;
+    left: -7px;
 }
 
 .modalNav content {
@@ -178,54 +258,66 @@ body {
 }
 
 .modalMapPic {
-    width: 100%;
-    padding: 1em;
+    width: 50%;
+    /* padding: 1em; */
     position: relative;
 }
 
 .modalMapPic img {
-    width: 100%;
+    width: 40%;
 }
 
 .os-content {
     padding: 0 !important
 }
 
-.qwsResultName {
-    font-size: .8em;
-    text-transform: lowercase;
-    text-align: left;
-    font-size: .8em;
-}
 
-.qwsResultMap {
-    font-size: .8em;
-}
-
-.qwsResultPlayers {
-    text-align: center;
-    font-size: .8em;
-}
 .serverList {
     height: 478px;
     display: block;
     float: left;
-}
-table {
-    width: 100;
-    display: block;
-    float: left;
+    margin-top: 25px;
 }
 
-th, td {
+table {
+    width: 100%;
+    display: block;
+    float: left;
+    border-spacing: 0;
+}
+
+thead {
+    width: 100%;
+    display: block;
+    float: left;
+    position: fixed;
+    /* margin-bottom: 61px; */
+}
+
+thead tr {
+    height: 25px;
+    line-height: 25px;
+    font-size: .8em;
+}
+
+th,
+td {
     text-align: left;
 }
 
 th {
-    background-color: #292929;
+    background-color: #323232;
     color: #fff;
     font-weight: 100;
     font-size: 1em;
+}
+
+tr {
+    height: 15px;
+    width: 100%;
+    display: block;
+    float: left;
+    line-height: 15px;
 }
 
 tbody tr:nth-child(odd) {
@@ -241,4 +333,67 @@ a {
     text-decoration: none;
     float: left;
     color: black;
+}
+
+.tbServerHeadName {
+    width: 55%;
+    display: block;
+    float: left;
+    text-indent: 1em;
+}
+
+.tbPingHeadName {
+    width: 10%;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.tbMapHeadName {
+    width: 20%;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.tbPlayersHeadName {
+    width: 15%;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.qwsResultPing {
+    width: 10%;
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: .8em;
+}
+
+.qwsResultName {
+    font-size: .8em;
+    text-transform: lowercase;
+    text-align: left;
+    font-size: .8em;
+    width: 55%;
+    display: block;
+    float: left;
+    text-indent: 1em;
+}
+
+.qwsResultMap {
+    font-size: .8em;
+    width: 20%;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.qwsResultPlayers {
+    text-align: center;
+    font-size: .8em;
+    width: 15%;
+    display: block;
+    float: left;
 }
