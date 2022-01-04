@@ -34,7 +34,19 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-
+.appBtns {
+    content: "";
+}
+.refreshBtn {
+    content: "";
+}
+.appMain {
+    content: "";
+    padding: 1em;
+    display: block;
+    float: left;
+    background: crimson;
+}
 .scroll_enabled {
     overflow-y: scroll;
     height: 500px;
@@ -67,18 +79,16 @@ body {
 }
 
 .scroll_enabled::-webkit-scrollbar-thumb {
-    background-color: #795548;
+    background-color: #ff3737;
     border-radius: 5px;
-    /* background-clip: content-box; */
-    /* min-width: 34px; */
-    /* min-height: 64px; */
-    width: 8px;
+   
+    width: 2px;
     display: block;
     float: left;
 }
 
 .scroll_enabled::-webkit-scrollbar-track {
-    background-color: rgba(245 42 42 / 0%);
+    background-color: rgb(255 255 255 / 0%)
 }
 
 
@@ -182,8 +192,9 @@ body {
 
 
 .container {
-    width: 500px;
+    /* width: 500px; */
     background-color: #292929;
+    /* padding: 1em; */
 }
 
 .content {
@@ -276,7 +287,7 @@ body {
     height: 478px;
     display: block;
     float: left;
-    margin-top: 25px;
+    /* margin-top: 25px; */
 }
 
 table {
@@ -290,7 +301,7 @@ thead {
     width: 100%;
     display: block;
     float: left;
-    position: fixed;
+    /* position: fixed; */
     /* margin-bottom: 61px; */
 }
 
