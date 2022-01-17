@@ -1,8 +1,13 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
+let win = null
+
+
+
+
 function createWindow () {
-  const win = new BrowserWindow({
+    win = new BrowserWindow({
     width: 500,
     minWidth:500,
     maxWidth:500,
@@ -29,8 +34,18 @@ app.whenReady().then(() => {
   })
 })
 
+
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+ipcMain.on('close-me', (evt, arg) => {
+  app.quit()
+})
+
+ipcMain.on('minimize-me', (evt, arg) => {
+  win.minimize()
 })

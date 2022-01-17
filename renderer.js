@@ -1,7 +1,10 @@
 const $ = require('jquery')
 const exe = require('child_process').exec
 const qw = require('./data/scripts/quakeworld')
-const ls = require('./data/scripts/levelshots')
+const {ipcRenderer} = require('electron');
+const remote = require('electron').remote
+
+
 
 
 // event listeners ////////////////////////////////////////////////////////////////////////////
@@ -16,6 +19,18 @@ $('.modalNav span').on('click', () => {
         'left': '100%'
     }, 200)
 })
+
+
+let closeApp = $('.closeButton')
+closeApp.on('click', () => {
+    ipcRenderer.send('close-me')
+})
+
+let minimizeApp = $('.minimizeButton')
+minimizeApp.on('click', () => {
+    ipcRenderer.send('minimize-me')
+})
+
 // event listeners END ////////////////////////////////////////////////////////////////////////////
 
 // methods ////////////////////////////////////////////////////////////////////////////

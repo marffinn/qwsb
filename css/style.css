@@ -36,9 +36,18 @@ body {
 }
 .appBtns {
     content: "";
+    background: white;
+    width: 100%;
+    display: block;
+    height: 40px;
+    margin-top: 30px;
 }
 .refreshBtn {
     content: "";
+    background: aquamarine;
+    width: 40px;
+    float: left;
+    height: 40px;
 }
 .appMain {
     content: "";
