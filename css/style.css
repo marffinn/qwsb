@@ -89,7 +89,6 @@ body {
 
 .scroll_enabled::-webkit-scrollbar-thumb {
     background-color: #ff3737;
-    border-radius: 5px;
    
     width: 2px;
     display: block;
