@@ -1,4 +1,4 @@
-* {
+p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,6 +11,7 @@ body {
     float: left;
     justify-content: center;
     overflow: hidden;
+    /* border-radius: 46px; */
 }
 
 
@@ -36,22 +37,33 @@ body {
 }
 .appBtns {
     content: "";
-    background: white;
+    background: #404040;
     width: 100%;
     display: block;
-    height: 40px;
+    min-height: 20px;
     margin-top: 30px;
 }
 .refreshBtn {
     content: "";
-    background: aquamarine;
-    width: 40px;
+    background: #4c3e42;
+    width: auto;
     float: left;
-    height: 40px;
+    margin-left: .2em;
+    padding: .2em 0.6em;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid #333;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    color: wheat;
+}
+
+.refreshBtn:hover {
+    background: #3e529a;
 }
 .appMain {
     content: "";
-    padding: 1em;
+    /* padding: 1em; */
     display: block;
     float: left;
     background: crimson;
@@ -88,30 +100,32 @@ body {
 }
 
 .scroll_enabled::-webkit-scrollbar-thumb {
-    background-color: #ff3737;
+    background-color: #644f4f;
    
-    width: 2px;
+    width: 10px;
     display: block;
     float: left;
 }
 
-.scroll_enabled::-webkit-scrollbar-track {
-    background-color: rgb(255 255 255 / 0%)
-}
-
 
 .titleBar {
-    background-color: #212121;
+    background-color: #272727;
     height: 30px;
     width: 100%;
     position: relative;
     -webkit-app-region: drag;
     overflow: hidden;
-    border-radius: 2px 2px 0 0;
+    /* border-radius: 12px 2px 0 0; */
     display: block;
     float: left;
     color: white;
     line-height: 30px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .titleBarText {
@@ -141,11 +155,11 @@ body {
     content: "";
     display: block;
     width: 12px;
-    height: 2px;
+    height: 3px;
     background-color: wheat;
     position: relative;
     left: 50%;
-    margin-top: 2px;
+    margin-top: 3px;
     margin-left: -6px;
     top: 50%;
 }
@@ -191,11 +205,18 @@ body {
 }
 
 .closeButton:hover {
-    background-color: #ff3737;
+    background-color: #ef0a3d;
 }
 
 .minimizeButton:hover {
-    background-color: #414141;
+    background-color: #585691;
+}
+.closeButton:active {
+    background-color: #e50000;
+}
+
+.minimizeButton:active {
+    background-color: #3a2d2d;
 }
 
 
@@ -387,7 +408,9 @@ a {
     display: block;
     float: left;
     text-align: center;
-    font-size: .8em;
+    font-size: .7em;
+    color: crimson;
+    font-weight: bold;
 }
 
 .qwsResultName {
