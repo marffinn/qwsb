@@ -5,10 +5,6 @@ const {ipcRenderer} = require('electron');
 const remote = require('electron').remote
 
 
-
-
-// event listeners ////////////////////////////////////////////////////////////////////////////
-
 $('body').on('click', 'a', function (e) {
     e.preventDefault()
     let svAdress = $(this).attr('href')
@@ -20,7 +16,6 @@ $('.modalNav span').on('click', () => {
     }, 200)
 })
 
-
 let closeApp = $('.closeButton')
 closeApp.on('click', () => {
     ipcRenderer.send('close-me')
@@ -31,22 +26,16 @@ minimizeApp.on('click', () => {
     ipcRenderer.send('minimize-me')
 })
 
-// event listeners END ////////////////////////////////////////////////////////////////////////////
 
-// methods ////////////////////////////////////////////////////////////////////////////
 let checkServer = (addre) => {
 
     $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalMapPic ').empty()
-
     let serverIP = addre.split(':')[0]
     let serverPort = addre.split(':')[1]
     qw(serverIP, serverPort, 'status', [31], function (err, data) {
 
         console.log(data)
         if (err) console.log('ERROR: ', err)
-
-        // console.log(data)
-
         $('.modal .content .modalSvName').append(data.hostname)
         $('.modal .content .modalMap').append(data.map)
         $('.modal .content .modalMapPic').append('<img src="'+__dirname+'/data/images/mapshots/'+ data.map +'.jpg" alt="data.map"></img>')
@@ -79,7 +68,5 @@ let refreshMasters = () => {
         $('.table').show()
     })
 }
-////////////////////////////////////////////////////////////////////////////
-// end of methods
 
 refreshMasters()

@@ -11,8 +11,8 @@ function createWindow () {
     width: 500,
     minWidth:500,
     maxWidth:500,
-    height: 600,
-    // transparent: true,
+    height: 550,
+    maxHeight: 500,
     frame: false,
     icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
     webPreferences: {

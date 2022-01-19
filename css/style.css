@@ -49,7 +49,6 @@ body {
     background: #4c3e42;
     width: auto;
     float: left;
-    /* margin: 0.2em; */
     padding: .2em 0.6em;
     border-radius: 2px;
     cursor: pointer;
@@ -81,7 +80,7 @@ body {
     /* background: crimson; */
 }
 .scroll_enabled {
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
     height: 500px;
 }
 
@@ -339,7 +338,8 @@ thead {
 thead tr {
     height: 25px;
     line-height: 25px;
-    font-size: .8em;
+    font-size: .6em;
+    text-transform: uppercase;
 }
 
 th,
