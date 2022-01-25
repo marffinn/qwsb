@@ -40,20 +40,29 @@
     </div>
 
     <div class="appMain">
-        <div class="container scroll_enabled">
-            <table class="table hover row-border">
-                <thead>
-                    <tr>
-                        <th class="tbServerHeadName">Server</th>
-                        <th  class="tbPingHeadName">Ping</th>
-                        <th class="tbMapHeadName">Map</th>
-                        <th class="tbPlayersHeadName">Players</th>
-                    </tr>
-                </thead>
-                <tbody class="serverList">
-                <!-- here list of servers  -->
-                </tbody>
-            </table>
+
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th class="headServerName">Server</th>
+                            <th class="headServerPing">Ping</th>
+                            <th class="headServerMap">Map</th>
+                            <th class="headServerPlayers">Players</th>
+                            <th class="headSpace"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="tbl-content">
+               <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                    <!-- here list of servers  -->
+                    </tbody>
+                </table> 
+            </div>
+            
         </div>
     </div>
     

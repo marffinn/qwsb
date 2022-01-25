@@ -26,6 +26,11 @@ minimizeApp.on('click', () => {
     ipcRenderer.send('minimize-me')
 })
 
+$(window).on("load resize ", function() {
+    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    $('.tbl-header').css({'padding-right':scrollWidth})
+  }).resize()
+
 
 let checkServer = (addre) => {
 
@@ -56,16 +61,15 @@ let refreshMasters = () => {
             if( qwServers[i].ping >= 200 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
             let oneServerPrepare =
-                `<tr data="${qwServers[i].address}">
-                    <td class="qwsResultName"><a  href="${qwServers[i].address}">${qwServers[i].name}</a></td>
-                    <td class="qwsResultPing">${qwServers[i].ping}</td>
-                    <td class="qwsResultMap">${qwServers[i].map}</td>
-                    <td class="qwsResultPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
+                `<tr>
+                    <td class="serverName"><a href="${qwServers[i].address}">${qwServers[i].name}</a></td>
+                    <td class="serverPing">${qwServers[i].ping}</td>
+                    <td class="serverMap">${qwServers[i].map}</td>
+                    <td class="serverPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
                 </tr>`          
-                $('.serverList').append(oneServerPrepare)
+                $('tbody').append(oneServerPrepare)
             }
         }
-        $('.table').show()
     })
 }
 
