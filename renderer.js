@@ -60,6 +60,7 @@ let refreshMasters = () => {
         for (let i in qwServers) {
             if( qwServers[i].ping >= 200 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
+            
             let oneServerPrepare =
                 `<tr>
                     <td class="serverName"><a href="${qwServers[i].address}">${qwServers[i].name}</a></td>

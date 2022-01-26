@@ -3,14 +3,12 @@ const path = require('path')
 
 let win = null
 
-
-
-
 function createWindow () {
     win = new BrowserWindow({
     width: 500,
     minWidth:500,
-    height: 650,
+    height: 648,
+    maxHeight: 648,
     frame: false,
     icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
     webPreferences: {
@@ -19,7 +17,6 @@ function createWindow () {
         preload: path.join(__dirname, 'preload.js')
     }
   })
-
   win.loadFile('index.html')
 }
 
@@ -31,8 +28,6 @@ app.whenReady().then(() => {
     }
   })
 })
-
-
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
