@@ -16,6 +16,12 @@ $('.modalNav span').on('click', () => {
     }, 200)
 })
 
+let refreshTopServer = $('.refreshTopServer')
+refreshTopServer.on('click', () => {
+    refreshMasters()
+})
+let refreshTopPlayer = $('.refreshTopPlayer')
+
 let closeApp = $('.closeButton')
 closeApp.on('click', () => {
     ipcRenderer.send('close-me')
@@ -54,11 +60,14 @@ let checkServer = (addre) => {
 }
 
 let refreshMasters = () => {
+
+    $('tbody').empty()
+
     exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -u -sort p -json', function (err, data) {
         if(err) return console.error(err);
         let qwServers = JSON.parse(data)
         for (let i in qwServers) {
-            if( qwServers[i].ping >= 200 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
+            if( qwServers[i].ping >= 76 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
             
             let oneServerPrepare =

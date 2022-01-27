@@ -97,7 +97,7 @@ body {
     display: block;
     height: auto;
     float: left;
-    padding: 2px;
+    padding: 5px;
 }
 
 .refreshBtn {
@@ -105,7 +105,7 @@ body {
     background: #25b7c4;
     width: auto;
     float: left;
-    padding: 1.2em 0.6em;
+    padding: .6em 0.6em;
     border-radius: 2px;
     cursor: pointer;
     border: 1px solid white;
