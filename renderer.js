@@ -5,7 +5,7 @@ const {ipcRenderer} = require('electron');
 const remote = require('electron').remote
 
 
-$('body').on('click', 'a', function (e) {
+$('body').on('click', 'tbody tr', function (e) {
     e.preventDefault()
     let svAdress = $(this).attr('href')
     checkServer(svAdress)
@@ -79,7 +79,7 @@ let refreshMasters = () => {
             else {
             
             let oneServerPrepare =
-                `<tr>
+                `<tr href="${qwServers[i].address}">
                     <td class="serverName"><a href="${qwServers[i].address}">${qwServers[i].name}</a></td>
                     <td class="serverPing">${qwServers[i].ping}</td>
                     <td class="serverMap">${qwServers[i].map}</td>
