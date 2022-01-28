@@ -7,7 +7,8 @@ function createWindow () {
     win = new BrowserWindow({
     width: 520,
     minWidth:520,
-    height: 648,
+    height: 650,
+    minHeight: 650,
     maxHeight: 650,
     frame: false,
     icon: path.join(__dirname, 'data/icons/Quake-icon.png '),

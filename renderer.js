@@ -20,7 +20,6 @@ let refreshTopServer = $('.refreshTopServer')
 refreshTopServer.on('click', () => {
     refreshMasters()
 })
-let refreshTopPlayer = $('.refreshTopPlayer')
 
 let closeApp = $('.closeButton')
 closeApp.on('click', () => {
@@ -32,10 +31,22 @@ minimizeApp.on('click', () => {
     ipcRenderer.send('minimize-me')
 })
 
+$('.headServerName').on('click', ()=>{
+    sortTable(0)
+})
+
+$('.headServerPing').on('click', ()=>{
+    sortTable(1)
+})
+$('.headServerPlayers').on('click', ()=>{
+    sortTable(3)
+})
+
+
 $(window).on("load resize ", function() {
     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
     $('.tbl-header').css({'padding-right':scrollWidth})
-  }).resize()
+  })
 
 
 let checkServer = (addre) => {
@@ -45,7 +56,7 @@ let checkServer = (addre) => {
     let serverPort = addre.split(':')[1]
     qw(serverIP, serverPort, 'status', [31], function (err, data) {
 
-        console.log(data)
+        // console.log(data)
         if (err) console.log('ERROR: ', err)
         $('.modal .content .modalSvName').append(data.hostname)
         $('.modal .content .modalMap').append(data.map)
@@ -67,7 +78,7 @@ let refreshMasters = () => {
         if(err) return console.error(err);
         let qwServers = JSON.parse(data)
         for (let i in qwServers) {
-            if( qwServers[i].ping >= 76 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
+            if( qwServers[i].ping >= 70 || qwServers[i].map === undefined || qwServers[i].map === "?" ) continue
             else {
             
             let oneServerPrepare =
@@ -84,3 +95,52 @@ let refreshMasters = () => {
 }
 
 refreshMasters()
+
+
+/////////////////////////////////////////////////////////////////////// table sort
+function sortTable(n) {
+    console.log('aasdasdasd');
+    var table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+    table = document.getElementById("properTable");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        for (i = 0; i < rows.length - 1; i++) { //Change i=0 if you have the header th a separate table.
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+            }
+        } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+            }
+        }
+        }
+        if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount++;
+        } else {
+        if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+        }
+    }
+    }
