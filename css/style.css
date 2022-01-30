@@ -60,6 +60,7 @@ body {
 
 .serverPlayers {
     width: 10%;
+    cursor: pointer;
 }
 
 .headServerName {
@@ -90,32 +91,17 @@ body {
     cursor: pointer;
 }
 
-.onePlayer {
-    
+.onePlayer {                                        
 background: #7c7c7c;
-    
 font-size: .7em;
-    
 box-shadow: 0px 0px 0px 1px #000;
-    
 display: block;
-    
 float: left;
-    
 width: 80%;
-    
 height: 20px;
-    
 line-height: 20px;
-    
 text-align: center;
-    
-/* padding: 0 1em; */
-    
-/* width: 100%; */
-    
 left: 10%;
-    
 position: relative;
 }
 
@@ -135,7 +121,6 @@ position: relative;
 
 .refreshBtn {
     content: "";
-    /* background: #25b7c4; */
     width: auto;
     float: left;
     padding: .6em 0.6em;
@@ -146,15 +131,10 @@ position: relative;
     font-size: 0.7em;
     color: white;
     -webkit-touch-callout: none;
-    /* iOS Safari */
     -webkit-user-select: none;
-    /* Safari */
     -khtml-user-select: none;
-    /* Konqueror HTML */
     -moz-user-select: none;
-    /* Old versions of Firefox */
     -ms-user-select: none;
-    /* Internet Explorer/Edge */
     user-select: none;
     margin-right: 2px;
 }
@@ -162,15 +142,10 @@ position: relative;
 .refreshBtn:hover {
     background: #3e529a;
     -webkit-touch-callout: none;
-    /* iOS Safari */
     -webkit-user-select: none;
-    /* Safari */
     -khtml-user-select: none;
-    /* Konqueror HTML */
     -moz-user-select: none;
-    /* Old versions of Firefox */
     -ms-user-select: none;
-    /* Internet Explorer/Edge */
     user-select: none;
 }
 
@@ -182,41 +157,41 @@ position: relative;
 
 .modalSvName {
     color: white;
-    font-size: .7em;
-    width: 50%;
-    float: left;
-    background: black;
-    /* padding: 0.2em; */
-    text-align: center;
-    padding: 0.4em 0;
-    position: relative;
-    top: -25px;
-}
-
-.modalMap {
-    color: white;
-    /* font-size: .8em; */
+    font-size: .8em;
     width: 50%;
     display: block;
     float: left;
     background: black;
     text-align: center;
     text-transform: uppercase;
-    padding: 0.4em 0;
+    padding: 1em 0;
     font-size: .7em;
-    top: -25px;
-    position: relative;
+}
+
+.modalMap {
+        color: white;
+    font-size: .8em;
+    width: 50%;
+    display: block;
+    float: left;
+    background: black;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1em 0;
+    font-size: .7em;
+}
+.modalSvPicture {
+    height: 150px;
+    overflow: hidden;
 }
 
 .modalPlayers {
     color: white;
     float: left;
-    width: 100%;
+    width: 50%;
     display: block;
-    /* background: #342619; */
     height: auto;
-    /* padding: .2em; */
-    /* justify-content: center; */
+    padding: 1em 0em;
 }
 
 
@@ -233,15 +208,10 @@ position: relative;
     line-height: 30px;
     font-weight: 600;
     -webkit-touch-callout: none;
-    /* iOS Safari */
     -webkit-user-select: none;
-    /* Safari */
     -khtml-user-select: none;
-    /* Konqueror HTML */
     -moz-user-select: none;
-    /* Old versions of Firefox */
     -ms-user-select: none;
-    /* Internet Explorer/Edge */
     user-select: none;
 }
 
@@ -303,7 +273,6 @@ position: relative;
     float: right;
     background-color: #212121;
     color: white;
-    /* box-shadow: 0px 0px 0px 1px inset #25b7c2; */
     -webkit-app-region: no-drag;
 }
 
@@ -357,11 +326,9 @@ position: relative;
 }
 
 .content {
-    padding-bottom: .5em;
     width: 100%;
     display: block;
     float: left;
-    /* padding-bottom: .2em; */
     height: auto;
 }
 
@@ -380,25 +347,22 @@ position: relative;
     width: 22px;
     display: block;
     display: flex;
-    /* margin: 0.3em; */
     position: absolute;
     left: 50%;
     top: 5px;
-}
-.modalNav:hover {
-    background-color:aquamarine
+    border-radius: 10px;
 }
 
 .modalNav span {
-    color: white;
     border: 1px solid #25b9bb;
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     cursor: pointer;
-    /* border-radius: 50%; */
-    /* padding: 16px; */
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
 }
 
 .modalNav span::before {
@@ -432,13 +396,13 @@ position: relative;
 }
 
 .modalMapPic {
-    min-height: 150px;
+    float: left;
+    display: block;
 }
 
 .modalMapPic img {
-    width: 100%;
-    object-fit: cover;
     height: 150px;
+    width: 520px;
 }
 
 .os-content {
