@@ -91,7 +91,7 @@ body {
     cursor: pointer;
 }
 
-.onePlayer {background: #7c7c7c;font-size: .7em;box-shadow: 0px 0px 0px 1px #000;display: block;float: left;width: 80%;height: 20px;line-height: 20px;/* text-align: center; */left: 10%;position: relative;text-indent: 10px;}
+.onePlayer {background: #7c7c7c;font-size: .7em;box-shadow: 1px 1px 0px 1px #3a3a3a;display: block;float: left;width: 80%;height: 20px;line-height: 20px;/* text-align: center; */left: 10%;position: relative;text-indent: 10px;font-weight: 600;}
 
 .headSpace {
     width: 10px;
@@ -149,7 +149,7 @@ body {
     width: 100%;
     display: block;
     float: left;
-    background: #ff3f60;
+    background: #7e1c1c;
     text-transform: uppercase;
     padding: .5em 0;
     font-size: .7em;
@@ -166,7 +166,7 @@ body {
         width: 100%;
         display: block;
         float: left;
-        background: black;
+        background: #3e0e0e;
         text-transform: uppercase;
         padding: .5em 0;
         font-size: 1em;
@@ -210,6 +210,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-size: .8em;
 }
 
 .titleBarText {
@@ -343,23 +344,24 @@ body {
 .modalNav {
     position: absolute;
     left: 50%;
-    bottom: 11px;
-    background: #4c4c4c;
+    bottom: -2px;
+    /* background: #4c4c4c; */
     display: block;
     margin-left: -11px;
 }
 
 .modalNav span {
-    border: 1px solid rgba(255, 255, 255, 0.9);
+    /* border: 1px solid rgba(255, 255, 255, 0.9); */
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     cursor: pointer;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     position: absolute;
     z-index: 1;
     background: #4b4b4b;
+    transform: scale(1.2);
 }
 .modalNav span:hover {
     background:#ff3f60;
@@ -371,11 +373,12 @@ body {
     height: 2px;
     display: block;
     background-color: rgba(255, 255, 255, 0.9);
-    transform: rotate(45deg);
+    transform: rotate(45deg) scale(.8);
     position: relative;
     margin: 0 auto;
     top: 50%;
     margin-top: -1px;
+    /* transform: scale(.8); */
 }
 
 .modalNav span::after {
@@ -384,7 +387,7 @@ body {
     height: 2px;
     display: block;
     background-color: rgba(255, 255, 255, 0.9);
-    transform: rotate(-45deg);
+    transform: rotate(-45deg)  scale(.8);
     position: relative;
     margin: 0 auto;
     top: 50%;
@@ -466,8 +469,9 @@ body {
 }
 
 .player_spectacor {
-    color: red;
+    color: #ffc107;
     order: 1;
+    font-weight: 699;
 }
 .onePlayer span {
     display: block;
@@ -485,15 +489,14 @@ body {
     padding: .5em 0em;
 }
 .team1 {
-    /* width: 50%; */
     height: auto;
     display: block;
     float: left;
     text-align: center;
     width: 80%;
-    border: 1px solid #fff;
     left: 10%;
     position: relative;
+    box-shadow: 0px 0px 0px 1px #6e1616;
 }
 .pName {
     width: 100%;
@@ -501,8 +504,9 @@ body {
     display: block;
     float: left;
     font-size: 0.8em;
-    color: white;
+    color: brown;
     height: 20px;
+    font-weight: 600;
     line-height: 20px;
 }
 
@@ -510,7 +514,7 @@ body {
     width: 100%;
     background: burlywood;
     /* padding: 0 .5em; */
-    font-size: 2em;
+    font-size: 1em;
     display: block;
     float: left;
     font-weight: 600;
