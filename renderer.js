@@ -51,18 +51,31 @@ $(window).on("load resize ", function() {
 
 let checkServer = (addre) => {
 
-    $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalSvPicture ').empty()
+    $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalStatus').empty()
     let serverIP = addre.split(':')[0]
     let serverPort = addre.split(':')[1]
     qw(serverIP, serverPort, 'status', [31], function (err, data) {
+
+        console.log(data);
+
+        let inGameArray = []
+
         if (err) console.log('ERROR: ', err)
         $('.modalSvName').append(data.hostname)
         $('.modalMap').append(data.map)
-        $('.modalSvPicture').append(`<img src="${__dirname}/data/images/mapshots/${data.map }.jpg" alt="${data.map}"></img>`)
         if(data.players){
             for(let i in data.players )
-            $('.modalPlayers').append(`<div class="onePlayer">${data.players[i].name}</div>`)
+
+            if( data.players[i].frags ==='S' ){
+                $('.modalPlayers').append(`<div class="onePlayer">${data.players[i].name}<span class="player_spectacor">SPEC</span></div>`)
+            } else {
+                inGameArray.push(data.players[i])
+            }
         }
+        for( let p in inGameArray ){
+            $('.modalStatus').append(`<div class="team1"><span class="pName">${data.players[p].name}</span><span class="pFrags">${data.players[p].frags}</span></div>`)
+        }
+
         $('.modal').animate({ 'left': '0' }, 'fast')
     })
 }

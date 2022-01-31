@@ -91,19 +91,7 @@ body {
     cursor: pointer;
 }
 
-.onePlayer {                                        
-background: #7c7c7c;
-font-size: .7em;
-box-shadow: 0px 0px 0px 1px #000;
-display: block;
-float: left;
-width: 80%;
-height: 20px;
-line-height: 20px;
-text-align: center;
-left: 10%;
-position: relative;
-}
+.onePlayer {background: #7c7c7c;font-size: .7em;box-shadow: 0px 0px 0px 1px #000;display: block;float: left;width: 80%;height: 20px;line-height: 20px;/* text-align: center; */left: 10%;position: relative;text-indent: 10px;}
 
 .headSpace {
     width: 10px;
@@ -158,37 +146,47 @@ position: relative;
 .modalSvName {
     color: white;
     font-size: .8em;
-    width: 50%;
+    width: 100%;
     display: block;
     float: left;
-    background: black;
-    text-align: center;
+    background: #ff3f60;
     text-transform: uppercase;
-    padding: 1em 0;
+    padding: .5em 0;
     font-size: .7em;
+    position: relative;
+    /* text-indent: 10px; */
+    /* bottom: 0px; */
+    /* top: 20px; */
+    text-align: center;
 }
 
 .modalMap {
         color: white;
-    font-size: .8em;
-    width: 50%;
-    display: block;
-    float: left;
-    background: black;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 1em 0;
-    font-size: .7em;
+        font-size: .8em;
+        width: 100%;
+        display: block;
+        float: left;
+        background: black;
+        text-transform: uppercase;
+        padding: .5em 0;
+        font-size: 1em;
+        /* text-indent: 10px; */
+        font-weight: 600;
+        position: relative;
+        text-align: center;
 }
 .modalSvPicture {
     height: 150px;
-    overflow: hidden;
+    background: darkslateblue;
+    position: relative;
+    float: left;
+    width: 100%;
 }
 
 .modalPlayers {
     color: white;
     float: left;
-    width: 50%;
+    width: 100%;
     display: block;
     height: auto;
     padding: 1em 0em;
@@ -196,15 +194,14 @@ position: relative;
 
 
 .titleBar {
-    background-color: linear-gradient(to right, #25c481, #25b7c4);
-    height: 30px;
+    background: #212121;
     width: 100%;
     position: relative;
     -webkit-app-region: drag;
     overflow: hidden;
     display: block;
     float: left;
-    color: #212121;
+    color: rgb(255 255 255 / 90%);
     line-height: 30px;
     font-weight: 600;
     -webkit-touch-callout: none;
@@ -243,7 +240,7 @@ position: relative;
     display: block;
     width: 12px;
     height: 2px;
-    background-color: #25b7c4;
+    background-color: rgb(255 255 255 / 90%);
     position: relative;
     left: 50%;
     margin-top: 3px;
@@ -281,7 +278,7 @@ position: relative;
     display: block;
     width: 12px;
     height: 2px;
-    background-color: #25b7c4;
+    background-color: rgb(255 255 255 / 90%);
     position: relative;
     transform: rotate(-45deg);
     top: 50%;
@@ -295,7 +292,7 @@ position: relative;
     display: block;
     width: 12px;
     height: 2px;
-    background-color: #25b7c4;
+    background-color: rgb(255 255 255 / 90%);
     position: relative;
     transform: rotate(45deg);
     top: 50%;
@@ -344,17 +341,16 @@ position: relative;
 }
 
 .modalNav {
-    width: 22px;
-    display: block;
-    display: flex;
     position: absolute;
     left: 50%;
-    top: 5px;
-    border-radius: 10px;
+    bottom: 11px;
+    background: #4c4c4c;
+    display: block;
+    margin-left: -11px;
 }
 
 .modalNav span {
-    border: 1px solid #25b9bb;
+    border: 1px solid rgba(255, 255, 255, 0.9);
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -363,6 +359,10 @@ position: relative;
     border-radius: 50%;
     position: absolute;
     z-index: 1;
+    background: #4b4b4b;
+}
+.modalNav span:hover {
+    background:#ff3f60;
 }
 
 .modalNav span::before {
@@ -370,7 +370,7 @@ position: relative;
     width: 14px;
     height: 2px;
     display: block;
-    background-color: #25b7c4;
+    background-color: rgba(255, 255, 255, 0.9);
     transform: rotate(45deg);
     position: relative;
     margin: 0 auto;
@@ -383,7 +383,7 @@ position: relative;
     width: 14px;
     height: 2px;
     display: block;
-    background-color: #25b7c4;
+    background-color: rgba(255, 255, 255, 0.9);
     transform: rotate(-45deg);
     position: relative;
     margin: 0 auto;
@@ -396,8 +396,10 @@ position: relative;
 }
 
 .modalMapPic {
-    float: left;
-    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    background: darkslateblue;
 }
 
 .modalMapPic img {
@@ -461,4 +463,55 @@ body {
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.player_spectacor {
+    color: red;
+    order: 1;
+}
+.onePlayer span {
+    display: block;
+    float: right;
+    padding: 0 .5em;
+    text-align: right;
+}
+.modalStatus {
+    display: block;
+    height: auto;
+    float: left;
+    position: relative;
+    width: 100%;
+    background-color: brown;
+    padding: .5em 0em;
+}
+.team1 {
+    /* width: 50%; */
+    height: auto;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 80%;
+    border: 1px solid #fff;
+    left: 10%;
+    position: relative;
+}
+.pName {
+    width: 100%;
+    background: burlywood;
+    display: block;
+    float: left;
+    font-size: 0.8em;
+    color: white;
+    height: 20px;
+    line-height: 20px;
+}
+
+.pFrags {
+    width: 100%;
+    background: burlywood;
+    /* padding: 0 .5em; */
+    font-size: 2em;
+    display: block;
+    float: left;
+    font-weight: 600;
 }
