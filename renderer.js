@@ -11,9 +11,7 @@ $('body').on('click', 'tbody tr', function (e) {
     checkServer(svAdress)
 })
 $('.modalNav span').on('click', () => {
-    $('.modal').animate({
-        'left': '100%'
-    }, 200)
+    $('.modal').css({ 'left': '100%'})
 })
 
 let refreshTopServer = $('.refreshTopServer')
@@ -56,27 +54,31 @@ let checkServer = (addre) => {
     let serverPort = addre.split(':')[1]
     qw(serverIP, serverPort, 'status', [31], function (err, data) {
 
-        console.log(data);
+        console.log(data)
 
         let inGameArray = []
 
         if (err) console.log('ERROR: ', err)
+
         $('.modalSvName').append(data.hostname)
         $('.modalMap').append(data.map)
         if(data.players){
-            for(let i in data.players )
+            
+            for(let i in data.players ){
+                if( data.players[i].frags === 'S' ){
+                    $('.modalPlayers').append(`<div class="team1"><span class="pName">${data.players[i].name}</span><span class="pFrags">${data.players[i].frags}</span></div>`)
+                } else {
+                    inGameArray.push(data.players[i])
+                } 
+            }
 
-            if( data.players[i].frags ==='S' ){
-                $('.modalPlayers').append(`<div class="onePlayer">${data.players[i].name}<span class="player_spectacor">SPEC</span></div>`)
-            } else {
-                inGameArray.push(data.players[i])
+            for( let p in inGameArray ){
+                $('.modalPlayers').prepend(`<div class="team1"><span class="pName">${data.players[p].name}</span><span class="pFrags">${data.players[p].frags}</span></div>`)
             }
         }
-        for( let p in inGameArray ){
-            $('.modalStatus').append(`<div class="team1"><span class="pName">${data.players[p].name}</span><span class="pFrags">${data.players[p].frags}</span></div>`)
-        }
+        
 
-        $('.modal').animate({ 'left': '0' }, 'fast')
+        $('.modal').css({ 'left': '0' })
     })
 }
 
@@ -109,7 +111,6 @@ refreshMasters()
 
 /////////////////////////////////////////////////////////////////////// table sort
 function sortTable(n) {
-    console.log('aasdasdasd');
     var table,
         rows,
         switching,

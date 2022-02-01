@@ -36,7 +36,6 @@ body {
     font-style: normal;
 }
 
-/*  */
 .serverName {
     width: 60%;
     text-indent: 5px;
@@ -91,50 +90,55 @@ body {
     cursor: pointer;
 }
 
-.onePlayer {background: #7c7c7c;font-size: .7em;box-shadow: 1px 1px 0px 1px #3a3a3a;display: block;float: left;width: 80%;height: 20px;line-height: 20px;/* text-align: center; */left: 10%;position: relative;text-indent: 10px;font-weight: 600;}
+.onePlayer {
+    background: #7c7c7c;
+    font-size: .7em;
+    box-shadow: 1px 1px 0px 1px #3a3a3a;
+    display: block;
+    float: left;
+    width: 80%;
+    height: 20px;
+    line-height: 20px;
+    left: 10%;
+    position: relative;
+    text-indent: 10px;
+    font-weight: 600;
+}
 
 .headSpace {
     width: 10px;
 }
 
-/*  */
 .appBtns {
-    background: linear-gradient(to right, #25c481, #25b7c4);
     width: 100%;
     display: block;
     height: auto;
     float: left;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 .refreshBtn {
-    content: "";
+    /* content: ""; */
     width: auto;
     float: left;
-    padding: .6em 0.6em;
-    border-radius: 2px;
+    padding: .5em 0.5em;
     cursor: pointer;
-    border: 1px solid white;
     text-transform: uppercase;
     font-size: 0.7em;
-    color: white;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin-right: 2px;
+    /* box-shadow: 1px 1px 0px 1px #3a3939; */
+    background: antiquewhite;
+    /* margin: 5px; */
+    border-left: 1px solid;
 }
 
 .refreshBtn:hover {
-    background: #3e529a;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    background: #ffffff;
 }
 
 .appMain {
@@ -144,37 +148,36 @@ body {
 }
 
 .modalSvName {
-    color: white;
+    color: burlywood;
     font-size: .8em;
     width: 100%;
     display: block;
     float: left;
-    background: #7e1c1c;
+    background: #4a1212;
     text-transform: uppercase;
     padding: .5em 0;
-    font-size: .7em;
+    font-size: .6em;
     position: relative;
-    /* text-indent: 10px; */
-    /* bottom: 0px; */
-    /* top: 20px; */
     text-align: center;
+    font-weight: 600;
 }
 
 .modalMap {
-        color: white;
-        font-size: .8em;
-        width: 100%;
-        display: block;
-        float: left;
-        background: #3e0e0e;
-        text-transform: uppercase;
-        padding: .5em 0;
-        font-size: 1em;
-        /* text-indent: 10px; */
-        font-weight: 600;
-        position: relative;
-        text-align: center;
+    color: burlywood;
+    font-size: .8em;
+    width: 100%;
+    display: block;
+    float: left;
+    background: #5e2020;
+    text-transform: uppercase;
+    padding: .5em 0;
+    font-size: 1em;
+    font-weight: 600;
+    position: relative;
+    text-align: center;
+    text-shadow: 1px 1px #000;
 }
+
 .modalSvPicture {
     height: 150px;
     background: darkslateblue;
@@ -248,6 +251,7 @@ body {
     margin-left: -6px;
     top: 50%;
 }
+
 .verInfo {
     content: "";
     width: auto;
@@ -332,7 +336,7 @@ body {
 
 .modal {
     display: block;
-    background: linear-gradient(to top, #4c4c4c,#3a3a3a );
+    background: #3e0e0ef0;
     position: absolute;
     z-index: 1;
     margin: 0 auto;
@@ -345,26 +349,24 @@ body {
     position: absolute;
     left: 50%;
     bottom: -2px;
-    /* background: #4c4c4c; */
     display: block;
     margin-left: -11px;
 }
 
 .modalNav span {
-    /* border: 1px solid rgba(255, 255, 255, 0.9); */
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     cursor: pointer;
-    /* border-radius: 50%; */
     position: absolute;
     z-index: 1;
-    background: #4b4b4b;
+    background: #3e0e0e;
     transform: scale(1.2);
 }
+
 .modalNav span:hover {
-    background:#ff3f60;
+    background: #4a1212;
 }
 
 .modalNav span::before {
@@ -378,7 +380,6 @@ body {
     margin: 0 auto;
     top: 50%;
     margin-top: -1px;
-    /* transform: scale(.8); */
 }
 
 .modalNav span::after {
@@ -387,7 +388,7 @@ body {
     height: 2px;
     display: block;
     background-color: rgba(255, 255, 255, 0.9);
-    transform: rotate(-45deg)  scale(.8);
+    transform: rotate(-45deg) scale(.8);
     position: relative;
     margin: 0 auto;
     top: 50%;
@@ -396,18 +397,6 @@ body {
 
 .modalNav content {
     color: white;
-}
-
-.modalMapPic {
-    width: 100%;
-    height: auto;
-    position: relative;
-    background: darkslateblue;
-}
-
-.modalMapPic img {
-    height: 150px;
-    width: 520px;
 }
 
 .os-content {
@@ -449,13 +438,13 @@ td {
 
 
 body {
-    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-    background: linear-gradient(to right, #25c481, #25b7c4);
+    background: dimgray;
 }
 
 
 ::-webkit-scrollbar {
     width: 10px;
+    background: #3e0e0e;
 }
 
 ::-webkit-scrollbar-track {
@@ -466,6 +455,7 @@ body {
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #deb887;
 }
 
 .player_spectacor {
@@ -473,21 +463,14 @@ body {
     order: 1;
     font-weight: 699;
 }
+
 .onePlayer span {
     display: block;
     float: right;
     padding: 0 .5em;
     text-align: right;
 }
-.modalStatus {
-    display: block;
-    height: auto;
-    float: left;
-    position: relative;
-    width: 100%;
-    background-color: brown;
-    padding: .5em 0em;
-}
+
 .team1 {
     height: auto;
     display: block;
@@ -496,26 +479,48 @@ body {
     width: 80%;
     left: 10%;
     position: relative;
-    box-shadow: 0px 0px 0px 1px #6e1616;
+    box-shadow: 0px 0px 0px 1px #161616;
 }
+
 .pName {
-    width: 100%;
+    width: 75%;
     background: burlywood;
     display: block;
     float: left;
     font-size: 0.8em;
-    color: brown;
+    color: #3e0e0e;
     height: 20px;
     font-weight: 600;
     line-height: 20px;
+    text-align: left;
+    text-indent: 10px;
 }
 
 .pFrags {
-    width: 100%;
+    width: 25%;
     background: burlywood;
-    /* padding: 0 .5em; */
-    font-size: 1em;
+    font-size: .8em;
     display: block;
     float: left;
+    color: #3e0e0e;
+    height: 20px;
     font-weight: 600;
+    line-height: 20px;
+    box-shadow: 0px 0px 0px 1px #000;
+}
+
+.mainSettings {
+    display: block;
+    width: 40px;
+    height: 40px;
+    float: right;
+    background: antiquewhite;
+    margin: 5px;
+}
+
+.inAppBtns {
+    padding: 5px;
+    width: auto;
+    display: block;
+    float: left;
 }
