@@ -80,23 +80,8 @@ let checkServer = (addre) => {
 
 let refreshMasters = () => {
     $('tbody').empty()
-    exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -u -sort p -json', function (err, data) {
-        if (err) return console.error(err);
-        let qwServers = JSON.parse(data)
-        for (let i in qwServers) {
-            if (qwServers[i].map === undefined || qwServers[i].map === "?") continue
-            else {
-                let oneServerPrepare =
-                    `<tr href="${qwServers[i].address}">
-                    <td class="serverName"><a href="${qwServers[i].address}">${qwServers[i].name}</a></td>
-                    <td class="serverPing">${qwServers[i].ping}</td>
-                    <td class="serverMap">${qwServers[i].map}</td>
-                    <td class="serverPlayers">${qwServers[i].numplayers}/${qwServers[i].maxplayers}</td>
-                </tr>`
-                $('tbody').append(oneServerPrepare)
-            }
-        }
-        fs.writeFileSync('servers.json', data);
+    exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -progress -u -sort p -json -of servers.json', function () {
+
     })
 }
 let refreshServers = () => {
@@ -105,7 +90,7 @@ let refreshServers = () => {
     let serverList = JSON.parse(rawdata);
     
         for (let s in serverList) {
-            if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+            if( serverList[s].ping >= 55 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
             else {
                 exe(`qstat.exe -qws ${serverList[s].address} -nh -json`, function (err, data) {
                     if (err) console.log('ERROR: ', err)
@@ -132,7 +117,7 @@ let onStartRefreshServers = () => {
     console.log( serverList );
     
         for (let s in serverList) {
-            if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+            if( serverList[s].ping >= 55 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
             else {
                 let oneServerPrepare =
                         `<tr href="${serverList[s].address}">
