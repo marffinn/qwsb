@@ -2,9 +2,7 @@ const $ = require('jquery')
 const exe = require('child_process').exec
 const qw = require('./data/scripts/quakeworld')
 const fs = require('fs')
-const {
-    ipcRenderer
-} = require('electron')
+const { ipcRenderer} = require('electron')
 const remote = require('electron').remote
 
 $('body').on('click', 'tbody tr', function (e) {
@@ -17,7 +15,6 @@ $('.modalNav span').on('click', () => {
         'left': '100%'
     })
 })
-
 let refreshTopMaster = $('.refreshTopMaster')
 refreshTopMaster.on('click', () => {
     refreshMasters()
@@ -26,21 +23,17 @@ let refreshTopServer = $('.refreshTopServer')
 refreshTopServer.on('click', () => {
     refreshServers()
 })
-
 let closeApp = $('.closeButton')
 closeApp.on('click', () => {
     ipcRenderer.send('close-me')
 })
-
 let minimizeApp = $('.minimizeButton')
 minimizeApp.on('click', () => {
     ipcRenderer.send('minimize-me')
 })
-
 $('.headServerName').on('click', () => {
     sortTable(0)
 })
-
 $('.headServerPing').on('click', () => {
     sortTable(1)
 })
@@ -108,15 +101,12 @@ let refreshMasters = () => {
 }
 let refreshServers = () => {
     $('tbody').empty()
-
-
     let rawdata = fs.readFileSync('servers.json');
     let serverList = JSON.parse(rawdata);
     
         for (let s in serverList) {
             if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
             else {
-                console.log(s);
                 exe(`qstat.exe -qws ${serverList[s].address} -nh -json`, function (err, data) {
                     if (err) console.log('ERROR: ', err)
                     else {
@@ -135,6 +125,29 @@ let refreshServers = () => {
             }
         }
 }
+let onStartRefreshServers = () => {
+    $('tbody').empty()
+    let rawdata = fs.readFileSync('servers.json');
+    let serverList = JSON.parse(rawdata);
+    console.log( serverList );
+    
+        for (let s in serverList) {
+            if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+            else {
+                let oneServerPrepare =
+                        `<tr href="${serverList[s].address}">
+                            <td class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></td>
+                            <td class="serverPing">${serverList[s].ping}</td>
+                            <td class="serverMap">${serverList[s].map}</td>
+                            <td class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</td>
+                        </tr>`
+                $('tbody').append(oneServerPrepare)        
+                    
+            }
+        }
+}
+
+onStartRefreshServers()
 
 
 /////////////////////////////////////////////////////////////////////// table sort
