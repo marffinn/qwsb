@@ -5,6 +5,13 @@ const fs = require('fs')
 const { ipcRenderer} = require('electron')
 const remote = require('electron').remote
 
+
+
+const { spawn } = require('child_process');
+
+
+
+
 $('body').on('click', 'tbody tr', function (e) {
     e.preventDefault()
     let svAdress = $(this).attr('href')
@@ -79,11 +86,16 @@ let checkServer = (addre) => {
 }
 
 let refreshMasters = () => {
-    $('tbody').empty()
-    exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -progress -u -sort p -json -of servers.json', function () {
 
+    // $('tbody').empty()
+    // exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -progress -u -sort p -json -of servers.json')
+
+    const ls = spawn('qstat.exe', ["-qwm qwmaster.fodquake.net:27000", "-nh", "-progress", "-u", "-sort p", "-json", "-of servers.json"] )
+    ls.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`)
     })
 }
+
 let refreshServers = () => {
     $('tbody').empty()
     let rawdata = fs.readFileSync('servers.json');
@@ -112,9 +124,9 @@ let refreshServers = () => {
 }
 let onStartRefreshServers = () => {
     $('tbody').empty()
-    let rawdata = fs.readFileSync('servers.json');
+    let rawdata = fs.readFileSync('servers.json'); // make so than when no file present perform master refresh
     let serverList = JSON.parse(rawdata);
-    console.log( serverList );
+    // console.log( serverList );
     
         for (let s in serverList) {
             if( serverList[s].ping >= 55 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
