@@ -13,6 +13,9 @@ body {
     overflow: hidden;
     width: 100%;
     height: 650px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 
 @font-face {
@@ -199,7 +202,7 @@ body {
 
 
 .titleBar {
-    background: rgb(80 80 80);
+    background: rgb(66 66 66);
     width: 100%;
     position: relative;
     -webkit-app-region: drag;
@@ -216,6 +219,7 @@ body {
     -ms-user-select: none;
     user-select: none;
     font-size: .8em;
+    z-index: 100;
 }
 
 .titleBarText {
@@ -254,18 +258,16 @@ body {
     top: 50%;
 }
 
-.verInfo {
-    content: "";
-    width: auto;
-    height: 30px;
-    padding: 0px 10px;
-    display: block;
+.settingsContainer {
     position: relative;
-    float: right;
-    color: rgb(255 255 255 / 90%);
-    line-height: 30px;
-    font-weight: 600;
-    font-size: .8em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    background: blueviolet;
+    z-index: 2;
 }
 
 .closeButton {
@@ -435,7 +437,13 @@ td {
     font-weight: 300;
     font-size: .7em;
     color: #fff;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    border-bottom: solid 1px rgb(0 0 0 / 16%);
+}
+tbody tr:hover{
+    background: #7b7b7b;
+}
+tr:nth-child(even) {
+    background-color: #616161;
 }
 
 
@@ -446,18 +454,18 @@ body {
 
 ::-webkit-scrollbar {
     width: 10px;
-    background: #3e0e0e;
+    background: #696969;
 }
 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    /* -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); */
 }
 
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    background: #deb887;
+    background: #b76aff;
 }
 
 .player_spectacor {
@@ -529,22 +537,18 @@ body {
     height: 30px;
     float: right;
     background: #424242;
-    /* margin: 5px; */
     font-size: .7em;
     line-height: 30px;
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
     font-weight: 600;
-    /* color: #d5d5d5; */
-    padding: 0 .5em;
+    padding: 0 2em;
     -webkit-app-region: no-drag;
-}
-.mainSettings:hover {
-    background-color: coral;
+    box-shadow: 0px 0px 0px 1px #343434;
 }
 .mainSettings:active {
-    background-color: crimson;
+    background-color: blueviolet;
 }
 
 .inAppBtns {
@@ -581,4 +585,20 @@ body {
     line-height: 25px;
     z-index: 1;
     color: rgb(255 255 255 / 90%);
+}
+.settingsWindow {
+    background-color: blueviolet;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.settingsActive {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.settingsBtnActive {
+    background-color: blueviolet;
 }

@@ -14,6 +14,11 @@ $('.modalNav span').on('click', () => {
         'left': '100%'
     })
 })
+let openSettings = $('.mainSettings')
+openSettings.on('click', () => {
+    $('.settingsWindow').toggleClass('settingsActive')
+            openSettings.toggleClass('settingsBtnActive')
+})
 
 let refreshTopMaster = $('.refreshTopMaster')
 refreshTopMaster.on('click', () => {
@@ -57,23 +62,21 @@ let checkServer = (addre) => {
         if (err) {
             console.error(err)
         }
-        let inGameArray = []
         let outInfo = JSON.parse(stdout)
+
+        console.log(outInfo);
 
         $('.modalSvName').append(outInfo[0].name)
         $('.modalMap').append(outInfo[0].map)
         if (outInfo[0].players) {
             for (let i in outInfo[0].players) {
-                if (outInfo[0].players[i].name === '[ServeMe]') {
-                    $('.modalPlayers').append(`<div class="team1"><span class="pName">${outInfo[0].players[i].name}</span><span class="pFragsSpec">SPEC</span></div>`)
+                if (outInfo[0].players[i].score === (-9999) ) {
+                    $('.modalPlayers').append(`<div class="team1"><span class="pName"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec">SPEC</span></div>`)
                     
                 } else {
-                    inGameArray.push(outInfo[0].players[i])
+                    $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team} "><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                 }
             }   
-        }
-        for (let p in inGameArray) {
-            $('.modalPlayers').prepend(`<div class="team1"><span class="pName">${outInfo[0].players[p].name}</span><span class="pFrags">${outInfo[0].players[p].score}</span></div>`)
         }
         $('.modal').css({
             'left': '0'
