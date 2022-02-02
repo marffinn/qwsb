@@ -1,15 +1,7 @@
 const $ = require('jquery')
-const exe = require('child_process').exec
-const qw = require('./data/scripts/quakeworld')
+const { spawn, exec } = require('child_process')
 const fs = require('fs')
-const { ipcRenderer} = require('electron')
-const remote = require('electron').remote
-
-
-
-const { spawn } = require('child_process');
-
-
+const { ipcRenderer } = require('electron')
 
 
 $('body').on('click', 'tbody tr', function (e) {
@@ -22,6 +14,7 @@ $('.modalNav span').on('click', () => {
         'left': '100%'
     })
 })
+
 let refreshTopMaster = $('.refreshTopMaster')
 refreshTopMaster.on('click', () => {
     refreshMasters()
@@ -38,6 +31,7 @@ let minimizeApp = $('.minimizeButton')
 minimizeApp.on('click', () => {
     ipcRenderer.send('minimize-me')
 })
+
 $('.headServerName').on('click', () => {
     sortTable(0)
 })
@@ -48,7 +42,6 @@ $('.headServerPlayers').on('click', () => {
     sortTable(3)
 })
 
-
 $(window).on("load resize ", function () {
     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
     $('.tbl-header').css({
@@ -56,28 +49,31 @@ $(window).on("load resize ", function () {
     })
 })
 
-
 let checkServer = (addre) => {
     $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalStatus').empty()
-    let serverIP = addre.split(':')[0]
-    let serverPort = addre.split(':')[1]
-    qw(serverIP, serverPort, 'status', [31], function (err, data) {
-        console.log(data)
+
+    exec(`qstat -qws ${addre} -nh -P -json"`, (err, stdout) => {
+
+        if (err) {
+            console.error(err)
+        }
         let inGameArray = []
-        if (err) console.log('ERROR: ', err)
-        $('.modalSvName').append(data.hostname)
-        $('.modalMap').append(data.map)
-        if (data.players) {
-            for (let i in data.players) {
-                if (data.players[i].frags === 'S') {
-                    $('.modalPlayers').append(`<div class="team1"><span class="pName">${data.players[i].name}</span><span class="pFrags">${data.players[i].frags}</span></div>`)
+        let outInfo = JSON.parse(stdout)
+
+        $('.modalSvName').append(outInfo[0].name)
+        $('.modalMap').append(outInfo[0].map)
+        if (outInfo[0].players) {
+            for (let i in outInfo[0].players) {
+                if (outInfo[0].players[i].name === '[ServeMe]') {
+                    $('.modalPlayers').append(`<div class="team1"><span class="pName">${outInfo[0].players[i].name}</span><span class="pFragsSpec">SPEC</span></div>`)
+                    
                 } else {
-                    inGameArray.push(data.players[i])
+                    inGameArray.push(outInfo[0].players[i])
                 }
-            }
-            for (let p in inGameArray) {
-                $('.modalPlayers').prepend(`<div class="team1"><span class="pName">${data.players[p].name}</span><span class="pFrags">${data.players[p].frags}</span></div>`)
-            }
+            }   
+        }
+        for (let p in inGameArray) {
+            $('.modalPlayers').prepend(`<div class="team1"><span class="pName">${outInfo[0].players[p].name}</span><span class="pFrags">${outInfo[0].players[p].score}</span></div>`)
         }
         $('.modal').css({
             'left': '0'
@@ -87,13 +83,29 @@ let checkServer = (addre) => {
 
 let refreshMasters = () => {
 
-    // $('tbody').empty()
-    // exe('qstat.exe -qwm qwmaster.fodquake.net:27000 -nh -progress -u -sort p -json -of servers.json')
+    $('.progressBar').animate({
+        height: "25px"
+    }, 'fast' )
 
-    const ls = spawn('qstat.exe', ["-qwm qwmaster.fodquake.net:27000", "-nh", "-progress", "-u", "-sort p", "-json", "-of servers.json"] )
+    $('.progressBar span').css('width','0%')
+    const ls = spawn('qstat.exe', [ "-qwm","qwmaster.fodquake.net:27000", "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
     ls.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`)
+
+        let progress = data.toString()
+        let bar = progress.substring(0, progress.indexOf(' ('))
+
+        var fields = bar.split('/')
+        var currentNum = ( 100 / fields[1] )
+        var barPercent = parseInt( fields[0] * currentNum )
+        $('.progressBar span').css('width', barPercent +'%')
+        $('.progressBar b').html( progress )
     })
+    ls.on('close', () => {
+        $('.progressBar').animate({
+            height: "0px"
+        }, 'fast' )
+    })
+    
 }
 
 let refreshServers = () => {
@@ -101,35 +113,33 @@ let refreshServers = () => {
     let rawdata = fs.readFileSync('servers.json');
     let serverList = JSON.parse(rawdata);
     
-        for (let s in serverList) {
-            if( serverList[s].ping >= 55 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
-            else {
-                exe(`qstat.exe -qws ${serverList[s].address} -nh -json`, function (err, data) {
-                    if (err) console.log('ERROR: ', err)
-                    else {
-
-                        let sep = JSON.parse(data)
-                        let oneServerPrepare =
+    for (let s in serverList) {
+        if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        else {
+            exec(`qstat -qws ${serverList[s].address} -nh -progress -json"`, (err, stdout) => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                let sep = JSON.parse(stdout)
+                let oneServerPrepare =
                                 `<tr href="${sep[0].address}">
-                                    <td class="serverName"><a href="${sep[0].address}">${sep[0].name}</a></td>
-                                    <td class="serverPing">${sep[0].ping}</td>
-                                    <td class="serverMap">${sep[0].map}</td>
-                                    <td class="serverPlayers">${sep[0].numplayers}/${sep[0].maxplayers}</td>
-                                </tr>`
-                        $('tbody').append(oneServerPrepare)
-                    }
-                })
-            }
+                                <td class="serverName"><a href="${sep[0].address}">${sep[0].name}</a></td>
+                                <td class="serverPing">${sep[0].ping}</td>
+                                <td class="serverMap">${sep[0].map}</td>
+                                <td class="serverPlayers">${sep[0].numplayers}/${sep[0].maxplayers}</td>
+                            </tr>`
+                $('tbody').append(oneServerPrepare)
+            })
         }
+    }
 }
 let onStartRefreshServers = () => {
     $('tbody').empty()
     let rawdata = fs.readFileSync('servers.json'); // make so than when no file present perform master refresh
     let serverList = JSON.parse(rawdata);
-    // console.log( serverList );
-    
         for (let s in serverList) {
-            if( serverList[s].ping >= 55 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+            if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
             else {
                 let oneServerPrepare =
                         `<tr href="${serverList[s].address}">
@@ -138,16 +148,12 @@ let onStartRefreshServers = () => {
                             <td class="serverMap">${serverList[s].map}</td>
                             <td class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</td>
                         </tr>`
-                $('tbody').append(oneServerPrepare)        
-                    
+                $('tbody').append(oneServerPrepare)
             }
         }
 }
-
 onStartRefreshServers()
 
-
-/////////////////////////////////////////////////////////////////////// table sort
 function sortTable(n) {
     var table,
         rows,
@@ -192,4 +198,3 @@ function sortTable(n) {
         }
     }
 }
-/////////////////////////////////////////////////////////////////////// end of table sort
