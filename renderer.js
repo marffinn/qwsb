@@ -2,6 +2,8 @@ const $ = require('jquery')
 const { spawn, exec } = require('child_process')
 const fs = require('fs')
 const { ipcRenderer } = require('electron')
+const { webContents } = require('electron/main')
+const { webFrame } = require('electron/renderer')
 
 
 $('body').on('click', 'tbody tr', function (e) {
@@ -60,9 +62,6 @@ let checkServer = (addre) => {
 
         if (err) { console.error(err) }
         let outInfo = JSON.parse(stdout)
-
-        console.log(outInfo);
-
         $('.modalSvName').append(outInfo[0].name)
         $('.modalMap').append(outInfo[0].map)
         $('.modalOther').html(outInfo[0].rules.status)
@@ -84,17 +83,13 @@ let checkServer = (addre) => {
 
 let refreshMasters = () => {
 
-    $('.progressBar').animate({
-        height: "25px"
-    }, 'fast' )
+    $('.progressBar').animate({  height: "25px" }, 'fast' )
 
     $('.progressBar span').css('width','0%')
     const ls = spawn('qstat.exe', [ "-qwm","qwmaster.fodquake.net:27000", "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
     ls.stderr.on('data', (data) => {
-
         let progress = data.toString()
         let bar = progress.substring(0, progress.indexOf(' ('))
-
         var fields = bar.split('/')
         var currentNum = ( 100 / fields[1] )
         var barPercent = parseInt( fields[0] * currentNum )
@@ -117,20 +112,33 @@ let refreshServers = () => {
     for (let s in serverList) {
         if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
-            exec(`qstat -qws ${serverList[s].address} -nh -progress -json"`, (err, stdout) => {
-                if (err) {
-                    console.error(err)
-                    return
-                }
-                let sep = JSON.parse(stdout)
-                let oneServerPrepare =
-                                `<tr href="${sep[0].address}">
-                                <td class="serverName"><a href="${sep[0].address}">${sep[0].name}</a></td>
-                                <td class="serverPing">${sep[0].ping}</td>
-                                <td class="serverMap">${sep[0].map}</td>
-                                <td class="serverPlayers">${sep[0].numplayers}/${sep[0].maxplayers}</td>
-                            </tr>`
-                $('tbody').append(oneServerPrepare)
+            // exec(`qstat -qws ${serverList[s].address} -nh -progress -json"`, (err, stdout) => {
+            //     if (err) {
+            //         console.error(err)
+            //         return
+            //     }
+            //     let sep = JSON.parse(stdout)
+            //     let oneServerPrepare =
+            //                     `<tr href="${sep[0].address}">
+            //                     <td class="serverName"><a href="${sep[0].address}">${sep[0].name}</a></td>
+            //                     <td class="serverPing">${sep[0].ping}</td>
+            //                     <td class="serverMap">${sep[0].map}</td>
+            //                     <td class="serverPlayers">${sep[0].numplayers}/${sep[0].maxplayers}</td>
+            //                 </tr>`
+            //     $('tbody').append(oneServerPrepare)
+            // })
+
+            const ls = spawn('qstat.exe', [ "-qws",`${serverList[s].address}`, "-nh", "-progress", "-json" ])
+            ls.stdout.on('data', (data) => {
+                let we = data.toString()
+                console.log(we);
+            })
+            ls.stderr.on('data', (data) => {
+                let po = data.toString()
+                console.log(po);
+            })
+            ls.on('close', () => {
+                console.log('closed server refresh');
             })
         }
     }
