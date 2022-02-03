@@ -603,12 +603,13 @@ body {
     height: 100%;
 }
 .settingsBtnActive {
-    background-color: blueviolet;
+    background-color: #7631b7;
 }
 .settings_block {
     display: flex;
     width: 100%;
-    background: #7631b7;
+    background: rgb(118,49,183);
+    background: linear-gradient(180deg, rgba(118,49,183,1) 0%, rgb(111 67 202) 100%);
     top: 30px;
     position: absolute;
     justify-content: flex-start;
@@ -616,6 +617,7 @@ body {
     align-items: center;
     padding-top: 1em;
     padding-bottom: 1em;
+    border-bottom: 1px solid #212121;
 }
 .block {
     width: 90%;
@@ -623,7 +625,7 @@ body {
     background: #d9d9d9;
     padding: 5px;
     clear: both;
-    box-shadow: 1px 1px 2px 1px #333;
+    box-shadow: 1px 1px 2px 1px #6f42c9;
     margin-bottom: 1px;
     position: relative;
 }
@@ -675,4 +677,10 @@ body {
         font-size: .6em;
         position: relative;
         text-align: center;
+}
+.pbBox {
+    display: block;
+    float: left;
+    padding: .5em .5em;
+    font-size: .8em;
 }
