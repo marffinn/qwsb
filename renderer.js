@@ -96,6 +96,11 @@ let refreshMasters = () => {
         $('.progressBar span').css('width', barPercent +'%')
         $('.progressBar b').html( progress )
     })
+
+    ls.stdout.on('data', (data) => {
+        console.log(  data.toString() );
+    })
+
     ls.on('close', () => {
         $('.progressBar').animate({
             height: "0px"
@@ -132,6 +137,7 @@ let refreshServers = () => {
             ls.stdout.on('data', (data) => {
                 let we = data.toString()
                 console.log(we);
+                console.log(data);
             })
             ls.stderr.on('data', (data) => {
                 let po = data.toString()
