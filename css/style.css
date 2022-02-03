@@ -13,9 +13,6 @@ body {
     overflow: hidden;
     width: 100%;
     height: 650px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
 }
 
 @font-face {
@@ -62,7 +59,7 @@ body {
 
 .serverPlayers {
     width: 10%;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .headServerName {
@@ -195,9 +192,11 @@ body {
     color: white;
     float: left;
     width: 100%;
-    display: block;
+    display: flex;
     height: auto;
     padding: 1em 0em;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -259,7 +258,7 @@ body {
 }
 
 .settingsContainer {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
@@ -268,6 +267,7 @@ body {
     justify-content: center;
     background: blueviolet;
     z-index: 2;
+    overflow: hidden;
 }
 
 .closeButton {
@@ -437,7 +437,9 @@ td {
     font-weight: 300;
     font-size: .7em;
     color: #fff;
+    padding: .1em 0;
     border-bottom: solid 1px rgb(0 0 0 / 16%);
+    cursor: pointer;
 }
 tbody tr:hover{
     background: #7b7b7b;
@@ -486,10 +488,13 @@ body {
     display: block;
     float: left;
     text-align: center;
-    width: 80%;
-    left: 10%;
+    width: 60%;
+    /* left: 10%; */
     position: relative;
     box-shadow: 0px 0px 0px 1px #161616;
+}
+.modalPlayers .team1:nth-child(even) {
+    background-color: chartreuse;
 }
 
 .pName {
@@ -560,18 +565,16 @@ body {
     display: block;
     height: 0px;
     width: 100%;
-    background: #380d0d;
-    position: absolute;
-    top: 30px;
+    background: #2d5c4e;
+    position: relative;
     float: left;
     overflow: hidden;
 }
 .progressBar span {
     display: block;
-    height: 25px;
-    position: relative;
-    width: 10%;
-    background: #6fab2ead;
+    height: 25px !important;
+    position: relative !important;
+    background: #6fab2ead !important;
     top: 0;
 }
 .progressBar b {
@@ -601,4 +604,75 @@ body {
 }
 .settingsBtnActive {
     background-color: blueviolet;
+}
+.settings_block {
+    display: flex;
+    width: 100%;
+    background: #7631b7;
+    top: 30px;
+    position: absolute;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.block {
+    width: 90%;
+    height: auto;
+    background: #d9d9d9;
+    padding: 5px;
+    clear: both;
+    box-shadow: 1px 1px 2px 1px #333;
+    margin-bottom: 1px;
+    position: relative;
+}
+.block span {
+    background: #dde4eb;
+    font-weight: 600;
+    font-size: .8em;
+    color: #333;
+    height: auto;
+    float: left;
+    clear: both;
+    width: 100%;
+    line-height: 25px;
+    text-indent: 1em;
+    position: relative;
+}
+.settingsBtn {
+    width: auto;
+    height: 25px;
+    line-height: 25px;
+    background: #5db584;
+    display: block;
+    float: right;
+    padding: 0 1em;
+    position: relative;
+    text-transform: uppercase;
+    font-size: .8em;
+    cursor: pointer;
+}
+.settingsBtn:hover {
+    background:antiquewhite
+}
+.pbHolder {
+    display: block;
+    width: 100%;
+    height: auto;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.modalOther {
+        color: rgb(255 255 255);
+        width: 100%;
+        display: block;
+        float: left;
+        background: #26915a;
+        text-transform: uppercase;
+        padding: .2em 0;
+        font-size: .6em;
+        position: relative;
+        text-align: center;
 }

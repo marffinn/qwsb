@@ -56,18 +56,16 @@ $(window).on("load resize ", function () {
 
 let checkServer = (addre) => {
     $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalStatus').empty()
+    exec(`qstat -qws ${addre} -nh -P -R -pa -json"`, (err, stdout) => {
 
-    exec(`qstat -qws ${addre} -nh -P -json"`, (err, stdout) => {
-
-        if (err) {
-            console.error(err)
-        }
+        if (err) { console.error(err) }
         let outInfo = JSON.parse(stdout)
 
         console.log(outInfo);
 
         $('.modalSvName').append(outInfo[0].name)
         $('.modalMap').append(outInfo[0].map)
+        $('.modalOther').html(outInfo[0].rules.status)
         if (outInfo[0].players) {
             for (let i in outInfo[0].players) {
                 if (outInfo[0].players[i].score === (-9999) ) {
@@ -117,7 +115,7 @@ let refreshServers = () => {
     let serverList = JSON.parse(rawdata);
     
     for (let s in serverList) {
-        if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             exec(`qstat -qws ${serverList[s].address} -nh -progress -json"`, (err, stdout) => {
                 if (err) {
