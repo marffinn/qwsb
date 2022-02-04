@@ -19,6 +19,7 @@ function createWindow () {
     }
   })
   win.loadFile('index.html')
+  win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
@@ -26,6 +27,7 @@ app.whenReady().then(() => {
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
+      
     }
   })
 })

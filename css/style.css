@@ -491,18 +491,19 @@ body {
     width: 60%;
     /* left: 10%; */
     position: relative;
+    background: #afaa68;
     box-shadow: 0px 0px 0px 1px #161616;
 }
 .modalPlayers .team1:nth-child(even) {
-    background-color: chartreuse;
+    background-color: #d5d08c;
 }
 
 .pName {
     width: 75%;
-    background: burlywood;
+    /* background: burlywood; */
     display: block;
     float: left;
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: #292929;
     height: 20px;
     font-weight: 600;
@@ -513,8 +514,8 @@ body {
 
 .pFrags {
     width: 25%;
-    background: burlywood;
-    font-size: .8em;
+    /* background: burlywood; */
+    font-size: .7em;
     display: block;
     float: left;
     color: #0a5c00;
@@ -531,7 +532,7 @@ body {
     float: left;
     color: #292929;
     height: 20px;
-    font-weight: 600;
+    /* font-weight: 600; */
     line-height: 20px;
     box-shadow: 0px 0px 0px 1px #000;
 }
@@ -683,4 +684,8 @@ body {
     float: left;
     padding: .5em .5em;
     font-size: .8em;
+}
+.spec {
+    background: #26915a;
+    color: white;
 }

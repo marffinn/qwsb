@@ -1,70 +1,68 @@
 const $ = require('jquery')
-const { spawn, exec } = require('child_process')
-const fs = require('fs')
-const { ipcRenderer } = require('electron')
-const { webContents } = require('electron/main')
-const { webFrame } = require('electron/renderer')
 
+const util = require('util')
+const fs = require('fs')
+const fsp = util.promisify(fs.readFile)
+
+const { spawn, exec }   = require('child_process')
+const { ipcRenderer }   = require('electron')
+const { webContents }   = require('electron/main')
+const { webFrame }      = require('electron/renderer');
+const { parseJSON } = require('jquery');
+
+const qwm_1 = 'qwmaster.ocrana.de:27000'
+const qwm_2 = 'master.quakeservers.net:27000'
+const qwm_3 = 'qwmaster.fodquake.net:27000'
+
+let inRefresh = null
 
 $('body').on('click', 'tbody tr', function (e) {
     e.preventDefault()
     let svAdress = $(this).attr('href')
     checkServer(svAdress)
 })
-$('.modalNav span').on('click', () => {
-    clearInterval(inRefresh);
-    $('.modal').css({
-        'left': '100%'
-    })
-})
-let openSettings = $('.mainSettings')
-openSettings.on('click', () => {
+
+$('.mainSettings').on('click', () => {
     $('.settingsWindow').toggleClass('settingsActive')
-            openSettings.toggleClass('settingsBtnActive')
+    $('.mainSettings').toggleClass('settingsBtnActive')
 })
 
-let refreshTopMaster = $('.refreshTopMaster')
-refreshTopMaster.on('click', () => {
+$('.refreshTopMaster').on('click', () => {
     refreshMasters()
 })
 
-let refreshTopServer = $('.refreshTopServer')
-refreshTopServer.on('click', () => {
+$('.refreshTopServer').on('click', () => {
     refreshServers()
 })
 
-let closeApp = $('.closeButton')
-closeApp.on('click', () => {
+$('.closeButton').on('click', () => {
     ipcRenderer.send('close-me')
 })
 
-let minimizeApp = $('.minimizeButton')
-minimizeApp.on('click', () => {
+$('.minimizeButton').on('click', () => {
     ipcRenderer.send('minimize-me')
 })
 
 $('.headServerName').on('click', () => {
     sortTable(0)
 })
+
 $('.headServerPing').on('click', () => {
     sortTable(1)
 })
+
 $('.headServerPlayers').on('click', () => {
     sortTable(3)
 })
 
-$(window).on("load resize ", function () {
-    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-    $('.tbl-header').css({
-        'padding-right': scrollWidth
-    })
+$('.modalNav span').on('click', () => {
+    clearInterval(inRefresh)
+    $('.modal').css({ 'left': '100%' })
 })
 
 let checkServer = (addre) => {
 
-    $('.modal').css({
-        'left': '0'
-    })
+    $('.modal').css({ 'left': '0' })
 
     let getInfo = function () {
         $('.modalSvName, .modalMap, .modalSvName, .modalPlayers, .modalStatus').empty()
@@ -77,7 +75,7 @@ let checkServer = (addre) => {
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
                     if (outInfo[0].players[i].score === (-9999) ) {
-                        $('.modalPlayers').append(`<div class="team1"><span class="pName"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec">SPEC</span></div>`) 
+                        $('.modalPlayers').append(`<div class="team1"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`)
                     } else {
                         $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team} "><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                     }
@@ -85,22 +83,37 @@ let checkServer = (addre) => {
             }
         })
     }
-    getInfo()
 
-    let inRefresh = setInterval( getInfo, 1000)
+    let getInfoCycler = function () {
+        $('.modalMap, .modalPlayers, .modalStatus').empty()
+        exec(`qstat -qws ${addre} -nh -P -R -pa -json"`, (err, stdout) => {
+            if (err) { console.error(err) }
+            let outInfo = JSON.parse(stdout)
+            $('.modalMap').html(outInfo[0].map)
+            $('.modalOther').html(outInfo[0].rules.status)
+            if (outInfo[0].players) {
+                for (let i in outInfo[0].players) {
+                    if (outInfo[0].players[i].score === (-9999) ) {
+                        $('.modalPlayers').append(`<div class="team1"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
+                    } else {
+                        $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team} "><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
+                    }
+                }   
+            }
+        })
+    }
+
+    getInfo()
+    inRefresh = setInterval( getInfoCycler, 2000)
 
 }
 
-const qwm_1 = 'qwmaster.ocrana.de:27000'
-const qwm_2 = 'master.quakeservers.net:27000'
-const qwm_3 = 'qwmaster.fodquake.net:27000'
-
 let refreshMasters = () => {
 
-    $('.progressBar').animate({  height: "25px" }, 'fast' )
+    $('.progressBar').animate({ height: "25px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
     
-    const ls = spawn('qstat.exe', [ "-qwm", qwm_1 , "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
+    const ls = spawn('qstat.exe', [ "-qwm", qwm_1 , "-retry", "2", "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
     
     ls.stderr.on('data', (data) => {
         let progress = data.toString()
@@ -112,10 +125,6 @@ let refreshMasters = () => {
         $('.progressBar b').html( progress )
     })
 
-    ls.stdout.on('data', (data) => {
-        console.log(  data.toString() );
-    })
-
     ls.on('close', () => {
         $('.progressBar').animate({
             height: "0px"
@@ -124,34 +133,36 @@ let refreshMasters = () => {
     
 }
 
+let getStuff = function() {
+    return fsp('servers.json');
+}
+
 let refreshServers = () => {
 
-    $('tbody').empty()
-    let rawdata = fs.readFileSync('servers.json');
-    let serverList = JSON.parse(rawdata);
-
-    for (let s in serverList) {
-
-        if( serverList[s].ping >= 110 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
-        
-        else {
-            const ls = spawn('qstat', [ "-qws", `${serverList[s].address}`, "-nh", "-progress", "-json" ])
-            ls.stdout.on('data', (data) => {
-                let we = JSON.parse( data.toString() )
-                let oneServerPrepare =
-                    // HTML START
-                    `<tr href="${we[0].address}">
-                        <td class="serverName"><a href="${we[0].address}">${we[0].name}</a></td>
-                        <td class="serverPing">${we[0].ping}</td>
-                        <td class="serverMap">${we[0].map}</td>
-                        <td class="serverPlayers">${we[0].numplayers}/${we[0].maxplayers}</td>
-                    </tr>`
-                    // HTML END
-                $('tbody').append(oneServerPrepare)
-            })
+    getStuff().then( data => {
+        $('tbody').empty()
+        let serverList = JSON.parse( data.toString() )
+        for (let s in serverList) {
+            if( serverList[s].ping >= 110 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+            else {
+                const ls = spawn('qstat', [ "-qws", `${serverList[s].address}`, "-nh", "-progress", "-json" ])
+                ls.stdout.on('data', (data) => {
+                    let we = JSON.parse( data.toString() )
+                    let oneServerPrepare =
+                    // HTML START ////////////////////////////////////////////////////////////////////
+                        `<tr href="${we[0].address}">
+                            <td class="serverName"><a href="${we[0].address}">${we[0].name}</a></td>
+                            <td class="serverPing">${we[0].ping}</td>
+                            <td class="serverMap">${we[0].map}</td>
+                            <td class="serverPlayers">${we[0].numplayers}/${we[0].maxplayers}</td>
+                        </tr>`
+                    // HTML END //////////////////////////////////////////////////////////////////////
+                    $('tbody').append(oneServerPrepare)
+                })
+            }
         }
-        
-    }
+    })
+
 
 }
 
@@ -159,23 +170,22 @@ let onStartRefreshServers = () => {
     $('tbody').empty()
     let rawdata = fs.readFileSync('servers.json'); // make so than when no file present perform master refresh
     let serverList = JSON.parse(rawdata);
-        for (let s in serverList) {
-            if( serverList[s].ping >= 65 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
-            else {
-                let oneServerPrepare =
-                        `<tr href="${serverList[s].address}">
-                            <td class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></td>
-                            <td class="serverPing">${serverList[s].ping}</td>
-                            <td class="serverMap">${serverList[s].map}</td>
-                            <td class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</td>
-                        </tr>`
-                $('tbody').append(oneServerPrepare)
-            }
+    for (let s in serverList) {
+        if( serverList[s].ping >= 65 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        else {
+            let oneServerPrepare =
+                    `<tr href="${serverList[s].address}">
+                        <td class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></td>
+                        <td class="serverPing">${serverList[s].ping}</td>
+                        <td class="serverMap">${serverList[s].map}</td>
+                        <td class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</td>
+                    </tr>`
+            $('tbody').append(oneServerPrepare)
         }
+    }
 }
-onStartRefreshServers()
 
-function sortTable(n) {
+let sortTable =  function (n) {
     var table,
         rows,
         switching,
@@ -219,3 +229,12 @@ function sortTable(n) {
         }
     }
 }
+
+$(window).on("load resize ", function () {
+    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    $('.tbl-header').css({
+        'padding-right': scrollWidth
+    })
+})
+
+onStartRefreshServers()
