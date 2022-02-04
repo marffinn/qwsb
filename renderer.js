@@ -75,9 +75,9 @@ let checkServer = (addre) => {
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
                     if (outInfo[0].players[i].score === (-9999) ) {
-                        $('.modalPlayers').append(`<div class="team1"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`)
+                        $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="0" ><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`)
                     } else {
-                        $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team} "><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
+                        $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="${outInfo[0].players[i].score}" ><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                     }
                 }   
             }
@@ -94,13 +94,22 @@ let checkServer = (addre) => {
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
                     if (outInfo[0].players[i].score === (-9999) ) {
-                        $('.modalPlayers').append(`<div class="team1"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
+                        $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="0" ><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
                     } else {
-                        $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team} "><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
+                        $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="${outInfo[0].players[i].score}" ><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                     }
                 }   
             }
         })
+
+        var $wrapper = $('.modalPlayers');
+
+        $wrapper.find('.team1').sort(function (a, b) {
+            return +a.dataset.score - +b.dataset.score;
+        })
+        .appendTo( $wrapper );
+
+
     }
 
     getInfo()
@@ -128,7 +137,7 @@ let refreshMasters = () => {
     ls.on('close', () => {
         $('.progressBar').animate({
             height: "0px"
-        }, 'fast' )
+        }, 'fast', refreshServers )
     })
     
 }
