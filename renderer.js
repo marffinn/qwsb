@@ -1,18 +1,21 @@
-const $ = require('jquery')
+const $                 = require('jquery')
 
-const util = require('util')
-const fs = require('fs')
-const fsp = util.promisify(fs.readFile)
+const util              = require('util')
+const fs                = require('fs')
+const fsp               = util.promisify(fs.readFile)
 
 const { spawn, exec }   = require('child_process')
 const { ipcRenderer }   = require('electron')
 const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer');
-const { parseJSON } = require('jquery');
+const { parseJSON }     = require('jquery');
 
 const qwm_1 = 'qwmaster.ocrana.de:27000'
 const qwm_2 = 'master.quakeservers.net:27000'
 const qwm_3 = 'qwmaster.fodquake.net:27000'
+
+const masterServers = [qwm_1, qwm_2, qwm_3]
+
 
 let inRefresh = null
 
@@ -33,14 +36,6 @@ $('.refreshTopMaster').on('click', () => {
 
 $('.refreshTopServer').on('click', () => {
     refreshServers()
-})
-
-$('.closeButton').on('click', () => {
-    ipcRenderer.send('close-me')
-})
-
-$('.minimizeButton').on('click', () => {
-    ipcRenderer.send('minimize-me')
 })
 
 $('.headServerName').on('click', () => {
@@ -69,8 +64,8 @@ let checkServer = (addre) => {
         exec(`qstat -qws ${addre} -nh -P -R -pa -json"`, (err, stdout) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout)
-            $('.modalSvName').append(outInfo[0].name)
-            $('.modalMap').append(outInfo[0].map)
+            $('.modalSvName').html(outInfo[0].name)
+            $('.modalMap').htmml(outInfo[0].map)
             $('.modalOther').html(outInfo[0].rules.status)
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
@@ -86,34 +81,25 @@ let checkServer = (addre) => {
 
     let getInfoCycler = function () {
         $('.modalMap, .modalPlayers, .modalStatus').empty()
-        exec(`qstat -qws ${addre} -nh -P -R -pa -json"`, (err, stdout) => {
+        exec(`qstat -qws ${addre} -retry 1 -nh -P -R -pa -json"`, (err, stdout) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout)
+            $('.modalSvName').html(outInfo[0].name)
             $('.modalMap').html(outInfo[0].map)
             $('.modalOther').html(outInfo[0].rules.status)
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
                     if (outInfo[0].players[i].score === (-9999) ) {
-                        $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="0" ><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
+                        $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="0" ><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">SPEC</span></div>`) 
                     } else {
                         $('.modalPlayers').prepend(`<div class="team1" data-team="${outInfo[0].players[i].team}" data-score="${outInfo[0].players[i].score}" ><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                     }
                 }   
             }
         })
-
-        var $wrapper = $('.modalPlayers');
-
-        $wrapper.find('.team1').sort(function (a, b) {
-            return +a.dataset.score - +b.dataset.score;
-        })
-        .appendTo( $wrapper );
-
-
     }
-
-    getInfo()
-    inRefresh = setInterval( getInfoCycler, 2000)
+    getInfoCycler()
+    inRefresh = setInterval( getInfoCycler, 3000)
 
 }
 
@@ -122,7 +108,7 @@ let refreshMasters = () => {
     $('.progressBar').animate({ height: "25px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
     
-    const ls = spawn('qstat.exe', [ "-qwm", qwm_1 , "-retry", "2", "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
+    const ls = spawn('qstat.exe', [ "-qwm", masterServers[0] , "-retry", "1", "-nh", "-progress", "-u", "-sort", "p", "-json", "-of", "servers.json" ])
     
     ls.stderr.on('data', (data) => {
         let progress = data.toString()
@@ -177,7 +163,7 @@ let refreshServers = () => {
 
 let onStartRefreshServers = () => {
     $('tbody').empty()
-    let rawdata = fs.readFileSync('servers.json'); // make so than when no file present perform master refresh
+    let rawdata = fs.readFileSync('servers.json');
     let serverList = JSON.parse(rawdata);
     for (let s in serverList) {
         if( serverList[s].ping >= 65 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
@@ -244,6 +230,14 @@ $(window).on("load resize ", function () {
     $('.tbl-header').css({
         'padding-right': scrollWidth
     })
+})
+
+$('.closeButton').on('click', () => {
+    ipcRenderer.send('close-me')
+})
+
+$('.minimizeButton').on('click', () => {
+    ipcRenderer.send('minimize-me')
 })
 
 onStartRefreshServers()
