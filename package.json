@@ -5,17 +5,14 @@
   "main": "main.js",
   "dependencies": {
     "core-util-is": "^1.0.3",
-    "datatables.net-dt": "^1.11.3",
     "electron": "^16.0.5",
     "electron-modal-window": "^1.0.0",
     "end-of-stream": "^1.4.4",
     "jquery": "^3.6.0",
-    "overlayscrollbars": "^1.13.1",
     "prepend-http": "^2.0.0",
     "process-nextick-args": "^2.0.1",
     "safe-buffer": "^5.1.2",
-    "serialize-error": "^7.0.1",
-    "xml2json": "^0.12.0"
+    "serialize-error": "^7.0.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -35,6 +32,6 @@
     "SB",
     "sb"
   ],
-  "author": "Tomasz (marffinn)",
+  "author": "Tomasz (marffinn) Drozdowski",
   "license": "MIT"
 }
