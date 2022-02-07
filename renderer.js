@@ -60,7 +60,7 @@ let checkServer = (addre) => {
             console.log(outInfo);
 
             $('.modalSvName').html(outInfo[0].name)
-            $('.modalMap').html(`<span>map:</span>/${outInfo[0].map}`)
+            $('.modalMap').html(`<span>map:</span>/ ${outInfo[0].map}`)
             $('.modalOther').html(outInfo[0].rules.status)
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
