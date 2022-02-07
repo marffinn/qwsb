@@ -15,7 +15,7 @@ const qwm_3             = 'qwmaster.fodquake.net:27000'
 const masterServers     = [qwm_1, qwm_2, qwm_3]
 
 let inRefresh           = null  // interval For in server updates/
-let cycleEvery          = 3000
+let cycleEvery          = 5000
 
 $('body').on('click', 'tbody tr', function (e) {
     e.preventDefault()
@@ -40,6 +40,10 @@ $('.headServerPlayers').on('click', () => {
 $('.refreshTopServer').on('click', () => {
     refreshMasters()
 })
+$('.refreshTopPlayer').on('click', () => {
+    readPlayers()
+    $('.appPlayers').toggleClass('activeTab')
+})
 $('.modalNav span').on('click', () => {
     clearInterval(inRefresh)
     $('.modal').css({ 'left': '100%' })
@@ -53,15 +57,15 @@ let checkServer = (addre) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout)
 
-            // console.log(outInfo);
+            console.log(outInfo);
 
             $('.modalSvName').html(outInfo[0].name)
-            $('.modalMap').html(outInfo[0].map)
+            $('.modalMap').html(`<span>map:</span>/${outInfo[0].map}`)
             $('.modalOther').html(outInfo[0].rules.status)
             if (outInfo[0].players) {
                 for (let i in outInfo[0].players) {
                     if (outInfo[0].players[i].score === (-9999) ) {
-                        $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">SPEC</span></div>`) 
+                        $('.modalPlayers').append(`<div class="teamSpec" data-team="${outInfo[0].players[i].team}"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">SPEC</span></div>`) 
                     } else {
                         $('.modalPlayers').append(`<div class="team1" data-team="${outInfo[0].players[i].team}"><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                     }
@@ -97,7 +101,7 @@ let readServers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
     for (let s in serverList) {
-        if( serverList[s].ping >= 65 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 120 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             let oneServerPrepare =
                 `<tr href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
@@ -107,6 +111,22 @@ let readServers = () => {
                     <td class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</td>
                 </tr>`
             $('tbody').append(oneServerPrepare)
+        }
+    }
+}
+let readPlayers = () => {
+    $('.appPlayers').empty()
+    let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
+    let serverList = JSON.parse(rawdata);
+
+
+    let playerArray= []
+    for (let s in serverList) {
+        if( serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
+        else {
+            let player =
+                `<li data-spectacors="${ serverList[s].numspectacors }" data-address="${serverList[s].address}" >${ serverList[s].numplayers } / ${ serverList[s].maxplayers }  - ${serverList[s].address} / ${serverList[s].name} </li>`
+            $('.appPlayers').append(player)
         }
     }
 }
@@ -150,15 +170,6 @@ function sort_by_ping() {
     sorted.forEach( e => document.querySelector(".row_results").appendChild(e) )
 }
 
-function comparator_playerno(a, b) {
-    if (a.dataset.playerno < b.dataset.playerno) return -1
-    if (a.dataset.playerno > b.dataset.playerno) return 1
-    return 0;
-}
 function sort_by_players() {
-    let subjects = document.querySelectorAll("[data-playerno]")
-    let subjectsArray = Array.from(subjects)
-    let sorted = subjectsArray.sort(comparator_playerno)
-    $(".row_results").empty()
-    sorted.forEach( e => document.querySelector(".row_results").appendChild(e) )
+    readServers()
 }
