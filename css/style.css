@@ -8,11 +8,16 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    float: left;
+    /* float: left; */
     justify-content: center;
     overflow: hidden;
     width: 100%;
-    height: 650px;
+    /* height: 305px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
 }
 
 @font-face {
@@ -118,30 +123,37 @@ body {
 .refreshBtn {
     width: auto;
     float: left;
-    height: auto;
-    padding: 0.4em 0.5em;
+    height: 20px;
     cursor: pointer;
     text-transform: uppercase;
     font-size: 0.6em;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    background: #16a505;
-    font-weight: 600;
-    margin-right: 1px;
+    background: #3c3c3c;
+    color: white;
+    line-height: 20px;
+    padding: 0 .8em;
+    position: relative;
+}
+.refreshBtn::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background: #484848;
+    height: 100%;
+    width: 1px;
+    top: 0;
+    right: 0;
 }
 
 .refreshBtn:hover {
-    background: #56ff00;
+    /* background: #26915a; */
 }
 
 .appMain {
     content: "";
     display: block;
     float: left;
+    height: 305px;
 }
 
 .modalSvName {
@@ -149,12 +161,13 @@ body {
     width: 100%;
     display: block;
     float: left;
-    background: #165836;
+    background: #323232;
     text-transform: uppercase;
     padding: .5em 0;
     font-size: .6em;
     position: relative;
     text-align: center;
+    /* border-top: 1px solid #333; */
 }
 
 .modalMap {
@@ -169,10 +182,8 @@ body {
     position: absolute;
     text-align: center;
     padding: 0.5em 1em;
-}
-.modalMap span {
-    margin-right: 5px;
-    padding: .3em .5em;
+    z-index: 1;
+    border-radius: 0 5px 0 0;
 }
 
 .modalSvPicture {
@@ -195,20 +206,15 @@ body {
 
 
 .titleBar {
-    background: rgb(66 66 66);
+    background: #42346a;
     width: 100%;
     position: relative;
     -webkit-app-region: drag;
     overflow: hidden;
     display: block;
     float: left;
-    color: rgb(255 255 255 / 90%);
+    color: white;
     line-height: 30px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     font-size: .8em;
     z-index: 100;
@@ -231,7 +237,7 @@ body {
     display: block;
     position: relative;
     float: right;
-    background-color: #212121;
+    /* background-color: #212121; */
     color: white;
     -webkit-app-region: no-drag;
 }
@@ -269,7 +275,7 @@ body {
     display: block;
     position: relative;
     float: right;
-    background-color: #212121;
+    /* background-color: #212121; */
     color: white;
     -webkit-app-region: no-drag;
 }
@@ -303,7 +309,7 @@ body {
 }
 
 .closeButton:hover {
-    background-color: #323232;
+    background-color: #951313;
 }
 
 .minimizeButton:hover {
@@ -326,26 +332,28 @@ body {
 .content {
     width: 100%;
     display: flex;
-    float: left;
-    height: auto;
     flex-direction: column;
+    border-top: 2px solid #323232;
+    align-items: center;
 }
 
 .modal {
-    display: block;
-    background: #3e0e0ef0;
+    background: #42346a;
     position: absolute;
     z-index: 1;
     margin: 0 auto;
     left: 100%;
-    top: 30px;
+    bottom: 0;
     width: 100%;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 
 .modalNav {
     position: absolute;
     left: 50%;
-    bottom: 0px;
+    top: -25px;
     display: flex;
     justify-content: center;
     align-content: flex-start;
@@ -353,15 +361,14 @@ body {
 
 .modalNav span {
     width: 30px;
-    height: 30px;
+    height: 25px;
     cursor: pointer;
     position: absolute;
-    background: #3e0e0e;
+    background: #323232;
+    border-radius: 12px 12px 0px 0px;
 }
 
-.modalNav span:hover {
-    background: #870000;
-}
+.modalNav span:hover {background: linear-gradient(0deg, rgba(50,50,50,1) 0%, rgba(183,49,49,1) 100%);/* background: blanchedalmond; */}
 
 .modalNav span::before {
     content: '';
@@ -392,6 +399,20 @@ body {
 .modalNav content {
     color: white;
 }
+.modalNavJoin {
+    width: 20%;
+    height: auto;
+    background: #2d7216;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: .7em;
+    padding: 0.4em 0;
+    color: white;
+    cursor: pointer;
+}
+.modalNavJoin:hover {
+    background: #1d520b;
+}
 
 .os-content {
     padding: 0 !important
@@ -407,7 +428,7 @@ table {
 }
 
 .tbl-content {
-    height: 565px;
+    height: 575px;
     overflow-x: auto;
     margin-top: 0px;
 }
@@ -492,10 +513,10 @@ body {
     height: auto;
     display: block;
     float: left;
-    text-align: center;
     width: 60%;
     position: relative;
     background: #6a6a6a;
+    padding: .1em 0;
 }
 .modalPlayers .teamSpec:fisrt-child {
     background:aqua
@@ -518,7 +539,7 @@ body {
     font-weight: 600;
     text-align: left;
     text-indent: 10px;
-    padding: .1em 0;
+    /* padding: .1em 0; */
 }
 
 .pFrags {
@@ -546,6 +567,7 @@ body {
     display: block;
     float: left;
     line-height: inherit;
+    text-align: center;
 }
 
 .mainSettings {
@@ -553,7 +575,7 @@ body {
     width: auto;
     height: 30px;
     float: right;
-    background: #424242;
+    background: #7632b8;
     font-size: .7em;
     line-height: 30px;
     text-transform: uppercase;
@@ -562,16 +584,17 @@ body {
     font-weight: 600;
     padding: 0 2em;
     -webkit-app-region: no-drag;
-    box-shadow: 0px 0px 0px 1px #343434;
+    /* box-shadow: 0px 0px 0px 1px #343434; */
 }
 .mainSettings:active {
     background-color: blueviolet;
 }
 
 .inAppBtns {
-    width: auto;
+    width: 100%;
     display: block;
     float: left;
+    /* border-bottom: 1px solid #dbdbdb; */
 }
 .progressBar {
     display: block;
@@ -603,33 +626,31 @@ body {
 }
 .settingsWindow {
     background-color: blueviolet;
-    position: relative;
+    position: absolute;
     display: flex;
-    align-content: center;
     align-items: center;
-    justify-content: center;
+    top: 30px;
+    flex-direction: column;
 }
 .settingsActive {
-    display: block;
     width: 100%;
     height: 100%;
 }
 .settingsBtnActive {
-    background-color: #7631b7;
+    background-color: #7632b8;
 }
 .settings_block {
     display: flex;
     width: 100%;
-    background: rgb(118,49,183);
     background: linear-gradient(180deg, rgba(118,49,183,1) 0%, rgb(111 67 202) 100%);
-    top: 30px;
+    top: 0;
     position: absolute;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
     padding-top: 1em;
     padding-bottom: 1em;
-    border-bottom: 1px solid #212121;
+    border-bottom: 1px solid #42346a;
 }
 .block {
     width: 90%;
@@ -687,13 +708,15 @@ body {
         width: auto;
         display: block;
         right: 0;
-        background: #26915a;
+        background: #42346a;
         text-transform: uppercase;
         padding: .2em 0;
         font-size: .6em;
         position: absolute;
         text-align: center;
         padding: 0.5em 1em;
+        z-index: 1;
+        border-radius: 5px 0 0 0;
 }
 .pbBox {
     display: block;
@@ -721,4 +744,10 @@ body {
 }
 .activeTab {
     left: 0%;
+}
+li {
+    list-style: none;
+    background: aliceblue;
+    border-bottom: 1px solid #ccc;
+    font-size: .8em;
 }

@@ -8,7 +8,7 @@ function createWindow () {
     width: 520,
     minWidth:520,
     height: 400,
-    minHeight: 400,
+    minHeight: 305,
     maxHeight: 645,
     frame: false,
     icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
@@ -19,7 +19,7 @@ function createWindow () {
     }
   })
   win.loadFile('index.html')
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
