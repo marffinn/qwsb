@@ -20,7 +20,7 @@ let cycleEvery          = 2000
 
 
 let refreshMasters = () => {
-    $('.progressBar').animate({ height: "25px" }, 'fast' )
+    $('.progressBar').animate({ height: "15px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
     const ls = spawn('qstat.exe', [ "-qwm", masterServers[0] , "-retry", "1", "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of", "servers.json" ])
     ls.stderr.on('data', (data) => {
@@ -55,14 +55,12 @@ let checkServer = (addre) => {
             let svother = $('.modalOther').html(outInfo[0].rules.status)
             let closebtn = "<div class='modalNav'><span></span></div>"
             let joinbtn = "<div class='modalNavJoin'>join</div>"
-
-
             let updatedInfo = () => {
                 let $div = $("<div>", {"class": "modalPlayers"})
                 if (outInfo[0].players) {
                     for (let i in outInfo[0].players) {
                         if (outInfo[0].players[i].score === (-9999) ) {
-                            $div.append(`<div class="teamSpec" data-team="${outInfo[0].players[i].team}"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">SPEC</span></div>`) 
+                            $div.append(`<div class="teamSpec" data-team="${outInfo[0].players[i].team}"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
                         } else {
                             $div.append(`<div class="team1" data-team="${outInfo[0].players[i].team}"><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                         }
@@ -152,6 +150,13 @@ $(window).on("load resize", function () {
     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
     $('.tbl-header').css({
         'padding-right': scrollWidth
+    })
+
+    $('.appMain').css({
+        'height': window.innerHeight - 80
+    })
+    $('.tbl-content').css({
+        'height': window.innerHeight - 103
     })
 })
 
