@@ -100,7 +100,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {
@@ -108,7 +108,7 @@ let readServers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
     for (let s in serverList) {
-        if( serverList[s].ping >= 200 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             let oneServerPrepare =
                 `<tr href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
