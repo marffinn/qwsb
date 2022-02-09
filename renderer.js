@@ -15,7 +15,8 @@ const qwm_3             = 'qwmaster.fodquake.net:27000'
 const masterServers     = [qwm_1, qwm_2, qwm_3]
 
 let inRefresh           = null  // interval For in server updates/
-let cycleEvery          = 2000
+let secToMilis          = 1.5
+let cycleEvery          = secToMilis * 1000
 
 
 
@@ -34,10 +35,32 @@ let refreshMasters = () => {
     })
     ls.on('close', () => {  
         readServers()
-        $('.progressBar').animate({
-            height: "0px"
-        }, 'fast')
     })
+}
+
+let in_server_status = (data) => {
+    let status = data
+    if(status === 'Standby'){
+        status = `<div class="modalOther orange_txt">${status}</div>`
+    } else if (status === undefined) {
+        status = `<div class="modalOther red_txt">no status</div>`
+    } else {
+        status = `<div class="modalOther green_txt">${status}</div>`
+    }
+    return status
+}
+let in_server_team = (team, score) => {
+
+    let teams = team
+    let scrbd = score
+    console.log( teams +' = = '+ scrbd );
+
+    if (teams && scrbd !== (-9999)) {
+        teams = `<span class="pTeam">${teams}</span>`
+    } else{
+        teams = `<span class="pTeamSpec">${teams}</span>`
+    }
+    return teams
 }
 
 let checkServer = (addre) => {
@@ -45,14 +68,13 @@ let checkServer = (addre) => {
     
     let getInfoUpdate = function () {
         exec(`qstat -qws ${addre} -retry 1 -nh -P -R -sort F -noconsole  -json"`, (err, stdout) => {
+
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout) 
 
-            console.log(outInfo[0]);
-
             let svname = $('.modalSvName').html(outInfo[0].name)
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
-            let svother = $('.modalOther').html(outInfo[0].rules.status)
+            let svother = in_server_status(outInfo[0].rules.status)
             let closebtn = "<div class='modalNav'><span></span></div>"
             let joinbtn = "<div class='modalNavJoin'>join</div>"
             let updatedInfo = () => {
@@ -60,14 +82,15 @@ let checkServer = (addre) => {
                 if (outInfo[0].players) {
                     for (let i in outInfo[0].players) {
                         if (outInfo[0].players[i].score === (-9999) ) {
-                            $div.append(`<div class="teamSpec" data-team="${outInfo[0].players[i].team}"><span class="pName spec"> ${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
+                            $div.append(`<div class="teamSpec" data-team="${outInfo[0].players[i].team}">${in_server_team (outInfo[0].players[i].team, outInfo[0].players[i].score )}<span class="pName spec">${outInfo[0].players[i].name}</span><span class="pFragsSpec spec">${outInfo[0].players[i].score}</span></div>`) 
                         } else {
-                            $div.append(`<div class="team1" data-team="${outInfo[0].players[i].team}"><span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
+                            $div.append(`<div class="team1" data-team="${outInfo[0].players[i].team}">${in_server_team (outInfo[0].players[i].team, outInfo[0].players[i].score )}<span class="pName">${outInfo[0].players[i].name}</span><span class="pFrags">${outInfo[0].players[i].score}</span></div>`)
                         }
                     }   
                 }
                 return $div
             }
+
             $('.content').html(updatedInfo)
             $('.content').prepend(svname)
             $('.content').prepend(svmap)
@@ -77,7 +100,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {
@@ -85,7 +108,7 @@ let readServers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
     for (let s in serverList) {
-        if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 200 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             let oneServerPrepare =
                 `<tr href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">

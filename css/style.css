@@ -118,7 +118,7 @@ body {
     display: block;
     height: auto;
     float: left;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .refreshBtn {
@@ -170,22 +170,18 @@ body {
     font-size: .6em;
     position: relative;
     text-align: center;
-    /* border-top: 1px solid #333; */
 }
 
 .modalMap {
-    color: rgb(255 255 255);
-    width: auto;
-    display: block;
+    color: white;
+    text-transform: uppercase;
     left: 0;
-    background: linear-gradient(180deg, rgb(52 39 91) 0%, rgba(66,52,106,1) 100%);
-    letter-spacing: 1px;
     font-size: .6em;
     position: absolute;
     text-align: center;
     padding: 0.5em 1em;
     z-index: 1;
-    border-radius: 0 5px 0 0;
+    background: #42346a;
 }
 
 .modalSvPicture {
@@ -197,11 +193,10 @@ body {
 }
 
 .modalPlayers {
-    float: left;
     width: 100%;
     display: flex;
     height: auto;
-    padding: 1em 0em;
+    padding: 0.5em 0em;
     flex-direction: column;
     align-items: center;
 }
@@ -339,7 +334,7 @@ body {
 }
 
 .modal {
-    background: #42346a;
+    background: #42346af7;
     position: absolute;
     z-index: 1;
     margin: 0 auto;
@@ -481,7 +476,7 @@ body {
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    background: #b76aff;
+    background: #ff6356;
 }
 
 .player_spectacor {
@@ -504,8 +499,8 @@ body {
     text-align: center;
     width: 60%;
     position: relative;
-    background: #a77935;
-    padding: 0.1em 0;
+    background: #c5c5c5;
+    /* padding: 0.1em 0; */
 }
 .team1::after {
     content:"";
@@ -513,7 +508,7 @@ body {
     position: absolute;
     height: 1px;
     background: #0000007a;
-    display: block;
+    display: none;
     bottom: 0;
 }
 .teamSpec {
@@ -523,7 +518,6 @@ body {
     width: 60%;
     position: relative;
     background: #6a6a6a;
-    padding: .1em 0;
 }
 .modalPlayers .teamSpec:fisrt-child {
     background:aqua
@@ -535,29 +529,47 @@ body {
     display: block;
 }
 .modalPlayers .team1:nth-child(even) {
-    background-color: #aea53b;
+    background-color: #a7a7a7;
 }
 
 .pName {
-    width: 75%;
+    width: 65%;
+    font-weight: 600;
     display: block;
     float: left;
     font-size: 0.7em;
-    font-weight: 600;
     text-align: left;
+    height: auto;
     text-indent: 10px;
-    /* padding: .1em 0; */
+}
+.pTeam {
+    width: 10%;
+    display: block;
+    float: left;
+    font-size: 0.7em;
+    text-align: center;
+    height: auto;
+    padding: 0.1em 0;
+    background: aquamarine;
+}
+.pTeamSpec {
+    width: 10%;
+    display: block;
+    float: left;
+    font-size: 0.7em;
+    text-align: center;
+    height: auto;
+    padding: 0.1em 0;
 }
 
 .pFrags {
     width: 25%;
-    font-size: .7em;
     display: block;
     float: left;
-    color: #000000;
+    font-size: 0.7em;
+    text-align: center;
     height: auto;
-    font-weight: 600;
-    align-content: center;
+    padding: 0.1em 0;
 }
 .pFrags::before {
     content: "";
@@ -625,7 +637,6 @@ body {
     text-align: center;
     width: 100%;
     line-height: 15px;
-    z-index: 1;
     color: rgb(255 255 255 / 90%);
 }
 .settingsWindow {
@@ -712,13 +723,12 @@ body {
         width: auto;
         display: block;
         right: 0;
-        background: linear-gradient(180deg, rgb(52 39 91) 0%, rgba(66,52,106,1) 100%);
+        background: #42346a;
         font-size: .6em;
         position: absolute;
         text-align: center;
         padding: 0.5em 1em;
         z-index: 1;
-        border-radius: 5px 0 0 0;
 }
 .pbBox {
     display: block;
@@ -762,4 +772,20 @@ li {
     width: 97%;
     color: white;
     text-align: right;
+}
+
+.orange_txt {
+    color: tomato;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.green_txt {
+    color: #4bc921;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.red_txt {
+    color: #21c9aa;
+    text-transform: uppercase;
+    font-weight: 600;
 }
