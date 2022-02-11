@@ -8,22 +8,15 @@ const { ipcRenderer }   = require('electron')
 const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
 
-const qwm_1             = 'qwmaster.ocrana.de:27000'
-const qwm_2             = 'master.quakeservers.net:27000'
-const qwm_3             = 'qwmaster.fodquake.net:27000'
+const main_setup        = require('./settings.json')
 
-const masterServers     = [qwm_1, qwm_2, qwm_3]
-
-let inRefresh           = null  // interval For in server updates/
-let secToMilis          = 1.5
-let cycleEvery          = secToMilis * 1000
-
-
+let inRefresh           = null  // timeInterval function
+let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
 
 let refreshMasters = () => {
     $('.progressBar').animate({ height: "15px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
-    const ls = spawn('qstat.exe', [ "-qwm", masterServers[0] , "-retry", "1", "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of", "servers.json" ])
+    const ls = spawn('qstat.exe', [ "-qwm", main_setup.masters.ocrana , "-retry", main_setup.retries , "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of", "servers.json" ])
     ls.stderr.on('data', (data) => {
         let progress = data.toString()
         let bar = progress.substring(0, progress.indexOf(' ('))
@@ -35,6 +28,8 @@ let refreshMasters = () => {
     })
     ls.on('close', () => {  
         readServers()
+        let lastRefresh = new Date()
+        $('.progressBar b').html( `Last refresh: ${lastRefresh.getHours()}:${lastRefresh.getMinutes()}` )
     })
 }
 
@@ -53,7 +48,6 @@ let in_server_team = (team, score) => {
 
     let teams = team
     let scrbd = score
-    console.log( teams +' = = '+ scrbd );
 
     if (teams && scrbd !== (-9999)) {
         teams = `<span class="pTeam">${teams}</span>`
@@ -196,6 +190,9 @@ $('.mainSettings').on('click', () => {
 })
 
 $('.refreshTopServer').on('click', () => {
+    refreshMasters()
+})
+$('.progressBar').on('click', () => {
     refreshMasters()
 })
 

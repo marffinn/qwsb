@@ -336,7 +336,7 @@ body {
 .modal {
     background: #42346af7;
     position: absolute;
-    z-index: 1;
+    z-index: 5;
     margin: 0 auto;
     left: 100%;
     bottom: 0;
@@ -620,22 +620,25 @@ body {
     float: left;
     overflow: hidden;
     /* height: 15px; */
+    cursor: pointer;
     bottom: 4px;
 }
 .progressBar span {
     display: block;
-    position: relative !important;
+    position: absolute !important;
     background: #6fab2ead !important;
     top: 0;
     height: 15px;
+    z-index: 1;
 }
 .progressBar b {
     display: block;
-    position: absolute;
+    position: relative;
     top: 0;
     font-size: .6em;
     text-align: center;
     width: 100%;
+    z-index: 2;
     line-height: 15px;
     color: rgb(255 255 255 / 90%);
 }

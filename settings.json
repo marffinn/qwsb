@@ -1,0 +1,22 @@
+{
+    
+    "masters": {
+        "ocrana": "qwmaster.ocrana.de:27000",
+        "quakeservers": "master.quakeservers.net:27000",
+        "fodquake": "qwmaster.fodquake.net:27000"
+    },
+    "favourite_servers": {
+        "ziewa1": "35.185.44.174:27500",
+        "greg": "35.13.44.174:27500",
+        "dm6_uk": "10.185.76.133:27500"
+    },
+    "sb": {
+        "inServerRefreshRate": 1.5,
+        "inServerSortPlayers": {
+            "ping": "srtByPing",
+            "frag": "srtByFrag",
+            "team": "srtByTeam"
+        }
+    },
+    "retries": 1
+}
