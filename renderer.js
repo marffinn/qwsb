@@ -1,21 +1,15 @@
 const $                 = require('jquery')
-
 const fs                = require('fs')
 const path              = require('path')
-
 const { spawn, exec }   = require('child_process')
 const { ipcRenderer }   = require('electron')
 const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
-
 const main_setup        = require('./settings.json')
 
 let inRefresh           = null  // timeInterval function
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
-
-// String
-
 
 let refreshMasters = () => {
     $('.progressBar').animate({ height: "15px" }, 'fast' )
@@ -41,7 +35,6 @@ let refreshMasters = () => {
           });
     })
 }
-
 let in_server_status = (data) => {
     let status = data
     if(status === 'Standby'){
@@ -54,10 +47,8 @@ let in_server_status = (data) => {
     return status
 }
 let in_server_team = (team, score) => {
-
     let teams = team
     let scrbd = score
-
     if (teams && scrbd !== (-9999)) {
         teams = `<span class="pTeam">${teams}</span>`
     } else{
@@ -65,16 +56,12 @@ let in_server_team = (team, score) => {
     }
     return teams
 }
-
 let checkServer = (addre) => {
     $('.modal').css({ 'left': '0' })
-    
     let getInfoUpdate = function () {
         exec(`qstat -qws ${addre} -retry 1 -nh -P -R -sort F -noconsole  -json"`, (err, stdout) => {
-
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout) 
-
             let svname = $('.modalSvName').html(outInfo[0].name)
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
@@ -93,7 +80,6 @@ let checkServer = (addre) => {
                 }
                 return $div
             }
-
             $('.content').html(updatedInfo)
             $('.content').prepend(svname)
             $('.content').prepend(svmap)
@@ -105,7 +91,6 @@ let checkServer = (addre) => {
     getInfoUpdate()
     inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
-
 let readServers = () => {
     $('tbody').empty()
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
@@ -124,7 +109,6 @@ let readServers = () => {
         }
     }
 }
-
 let readPlayers = () => {
     $('.appPlayers').empty()
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
@@ -139,13 +123,11 @@ let readPlayers = () => {
         }
     }
 }
-
 function comparator_name(a, b) {
     if (a.dataset.name < b.dataset.name) return -1
     if (a.dataset.name > b.dataset.name) return 1
     return 0;
 }
-
 function sort_by_name() {
     let subjects = document.querySelectorAll("[data-name]")
     let subjectsArray = Array.from(subjects)
@@ -153,13 +135,11 @@ function sort_by_name() {
     $(".row_results").empty()
     sorted.forEach( e => document.querySelector(".row_results").appendChild(e) )
 }
-
 function comparator_ping(a, b) {
     if (a.dataset.ping < b.dataset.ping) return -1
     if (a.dataset.ping > b.dataset.ping) return 1
     return 0;
 }
-
 function sort_by_ping() {
     let subjects = document.querySelectorAll("[data-ping]")
     let subjectsArray = Array.from(subjects)
@@ -167,11 +147,9 @@ function sort_by_ping() {
     $(".row_results").empty()
     sorted.forEach( e => document.querySelector(".row_results").appendChild(e) )
 }
-
 function sort_by_players() {
     readServers()
 }
-
 $(window).on("load resize", function () {
     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
     $('.tbl-header').css({
@@ -185,58 +163,47 @@ $(window).on("load resize", function () {
         'height': window.innerHeight - 103
     })
 })
-
 $('body').on('click', 'tbody tr', function (e) {
     e.preventDefault()
     clearInterval(inRefresh)
     let svAdress = $(this).attr('href')
     checkServer(svAdress)
 })
-
 $('.mainSettings').on('click', () => {
     $('.settingsWindow').toggleClass('settingsActive')
     $('.mainSettings').toggleClass('settingsBtnActive')
 })
-
 $('.refreshTopServer').on('click', () => {
     refreshMasters()
 })
 $('.progressBar').on('click', () => {
     refreshMasters()
 })
-
 $('.refreshTopPlayer').on('click', () => {
     readPlayers()
     $('.appPlayers').toggleClass('activeTab')
 })
-
 $('body').on('click', '.modalNav span', function (e) {
     clearInterval(inRefresh)
     $('.modal').css({ 'left': '100%' })
 })
-
 // WINDOW Mainframe buttons ////////////////////////////
 $('.closeButton').on('click', () => {
     ipcRenderer.send('close-me')
 })
-
 $('.minimizeButton').on('click', () => {
     ipcRenderer.send('minimize-me')
 })
 ///////////////////////////////////////////////////////
-
 // SORTING FUNCTIONS ////////////////////////////////////
 $('.headServerName').on('click', () => {
     sort_by_name()
 })
-
 $('.headServerPing').on('click', () => {
     sort_by_ping()
 })
-
 $('.headServerPlayers').on('click', () => {
     sort_by_players()
 })
 /////////////////////////////////////////////////////////
-
 readServers()
