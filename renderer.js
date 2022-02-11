@@ -7,11 +7,15 @@ const { spawn, exec }   = require('child_process')
 const { ipcRenderer }   = require('electron')
 const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
+const notifier          = require('node-notifier')
 
 const main_setup        = require('./settings.json')
 
 let inRefresh           = null  // timeInterval function
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
+
+// String
+
 
 let refreshMasters = () => {
     $('.progressBar').animate({ height: "15px" }, 'fast' )
@@ -30,6 +34,11 @@ let refreshMasters = () => {
         readServers()
         let lastRefresh = new Date()
         $('.progressBar b').html( `Last refresh: ${lastRefresh.getHours()}:${lastRefresh.getMinutes()}` )
+
+        notifier.notify({
+            title: 'Server refresh',
+            message: `Last refresh: ${lastRefresh.getHours()}:${lastRefresh.getMinutes()}`
+          });
     })
 }
 

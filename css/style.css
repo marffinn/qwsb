@@ -234,7 +234,6 @@ body {
     display: block;
     position: relative;
     float: right;
-    /* background-color: #212121; */
     color: white;
     -webkit-app-region: no-drag;
 }
@@ -261,7 +260,7 @@ body {
     align-items: center;
     justify-content: center;
     background: blueviolet;
-    z-index: 2;
+    z-index: 3;
     overflow: hidden;
 }
 
@@ -272,7 +271,6 @@ body {
     display: block;
     position: relative;
     float: right;
-    /* background-color: #212121; */
     color: white;
     -webkit-app-region: no-drag;
 }

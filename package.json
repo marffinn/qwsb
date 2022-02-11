@@ -9,6 +9,7 @@
     "electron-modal-window": "^1.0.0",
     "end-of-stream": "^1.4.4",
     "jquery": "^3.6.0",
+    "node-notifier": "^10.0.1",
     "prepend-http": "^2.0.0",
     "process-nextick-args": "^2.0.1",
     "safe-buffer": "^5.1.2",
