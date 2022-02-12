@@ -8,7 +8,7 @@ const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
 const main_setup        = require('./settings.json')
 
-let inRefresh           = null  // timeInterval function
+let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
 
 let refreshMasters = () => {
