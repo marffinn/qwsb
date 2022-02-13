@@ -6,10 +6,16 @@ const { ipcRenderer }   = require('electron')
 const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
+
 const main_setup        = require('./settings.json')
 
 let inRefresh           = null
-let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
+let cycleEvery = main_setup.sb.inServerRefreshRate * 1000
+
+function addZero(i) {
+    if (i < 10) {i = "0" + i}
+    return i
+}
 
 let refreshMasters = () => {
     $('.progressBar').animate({ height: "15px" }, 'fast' )
@@ -26,13 +32,35 @@ let refreshMasters = () => {
     })
     ls.on('close', () => {  
         readServers()
-        let lastRefresh = new Date()
-        $('.progressBar b').html( `Last refresh: ${lastRefresh.getHours()}:${lastRefresh.getMinutes()}` )
+        let d = new Date()
+        let h = addZero(d.getHours())
+        let m = addZero(d.getMinutes())
+        let resultInfo = `Last refresh: ${h}:${m}`
+        $('.progressBar b').html(resultInfo)
 
-        notifier.notify({
-            title: 'Server refresh',
-            message: `Last refresh: ${lastRefresh.getHours()}:${lastRefresh.getMinutes()}`
+        notifier.notify(
+            {
+                title: 'Server refresh',
+                message: resultInfo,
+                icon: path.join(__dirname, './data/icons/Quake-icon.png'), // Absolute path (doesn't work on balloons)
+                sound: 'Funk', // Only Notification Center or Windows Toasters
+                wait: true, // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+                appID: "QW-SB"
+            },
+            function (err, response, metadata) {
+              // Response is response from notification
+              // Metadata contains activationType, activationAt, deliveredAt
+            }
+          );
+          
+          notifier.on('click', function (notifierObject, options, event) {
+            // Triggers if `wait: true` and user clicks notification
           });
+          
+          notifier.on('timeout', function (notifierObject, options) {
+            // Triggers if `wait: true` and notification closes
+          });
+
     })
 }
 let in_server_status = (data) => {

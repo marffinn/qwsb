@@ -129,7 +129,7 @@ body {
     text-transform: uppercase;
     font-size: 0.6em;
     user-select: none;
-    background: #3c3c3c;
+    background: #7632b8;
     color: white;
     line-height: 20px;
     padding: 0 .8em;
@@ -139,7 +139,7 @@ body {
     content: "";
     display: block;
     position: absolute;
-    background: #484848;
+    background: #36285b;
     height: 100%;
     width: 1px;
     top: 0;
@@ -459,7 +459,7 @@ tr:nth-child(even) {
     background-color: #616161;
 }
 body {
-    background: dimgray;
+    background: #36285b;
 }
 
 ::-webkit-scrollbar {
@@ -474,7 +474,7 @@ body {
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    background: #ff6356;
+    background: #ecd00a;
 }
 
 .player_spectacor {
@@ -621,6 +621,9 @@ body {
     cursor: pointer;
     bottom: 4px;
 }
+.progressBar:hover {
+    background: #d2b909;
+}
 .progressBar span {
     display: block;
     position: absolute !important;
@@ -748,15 +751,16 @@ body {
 }
 .appPlayers {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 87%;
     float: left;
     position: absolute;
-    background: #424242;
+    background: #462a2a;
     left: 100%;
+    z-index: 3;
 }
 .activeTab {
-    left: 0%;
+    left: 1%;
 }
 li {
     list-style: none;
