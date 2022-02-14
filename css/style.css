@@ -455,14 +455,13 @@ body {
 }
 
 .team1 {
-    height: auto;
+    height: 15px;
     display: block;
     float: left;
     text-align: center;
     width: 60%;
     position: relative;
     background: #c5c5c5;
-    /* padding: 0.1em 0; */
 }
 
 .team1::after {
@@ -500,25 +499,24 @@ body {
 }
 
 .pName {
-    width: 65%;
-    font-weight: 600;
+    width: 60%;
     display: block;
     float: left;
-    font-size: 0.7em;
-    text-align: left;
-    height: auto;
-    text-indent: 10px;
+    text-align: center;
+    height: 15px;
+    font-size: .7em;
+    line-height: 15px;
 }
 
 .pTeam {
     width: 10%;
     display: block;
     float: left;
-    font-size: 0.7em;
     text-align: center;
-    height: auto;
-    padding: 0.1em 0;
-    background: aquamarine;
+    height: 15px;
+    line-height: 15px;
+    background: aliceblue;
+    font-size: .7em;
 }
 
 .pTeamSpec {
@@ -527,22 +525,24 @@ body {
     float: left;
     font-size: 0.7em;
     text-align: center;
-    height: auto;
-    padding: 0.1em 0;
+    height: 15px;
+    line-height: 15px;
 }
 
 .pFrags {
-    width: 25%;
+    width: 30%;
     display: block;
     float: left;
     font-size: 0.7em;
     text-align: center;
-    height: auto;
-    padding: 0.1em 0;
+    height: 15px;
+    line-height: 15px;
+    margin: 0;
+    padding: 0;
 }
 
 .pFrags::before {
-    content: "";
+    /* content: ""; */
     height: 100%;
     width: 1px;
     background: #0000007a;
@@ -552,12 +552,14 @@ body {
 }
 
 .pFragsSpec {
-    width: 25%;
+    width: 30%;
     font-size: .7em;
     display: block;
     float: left;
     line-height: inherit;
     text-align: center;
+    height: 15px;
+    line-height: 15px;
 }
 
 .mainSettings {

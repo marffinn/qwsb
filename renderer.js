@@ -98,9 +98,9 @@ let checkServer = (addre) => {
             let joinbtn = 
             `
             <div class="servBtnHolder">
-                <div class="modalNavJoin">join</div>
-                <div class="modalNavSpec">spectate</div>
-                <div class="modalNavSpecQtv">QTV</div>
+                <div class="modalNavJoin" data-address="qw://${addre}/join">join</div>
+                <div class="modalNavSpec" data-address="qw://${addre}/observe">spectate</div>
+                <div class="modalNavSpecQtv" data-address="qw://2@${addre}/qtvplay">QTV</div>
             </div>
             `
 
@@ -126,7 +126,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 let readServers = () => {
     $('#properTable').empty()
@@ -223,6 +223,16 @@ $('.refreshTopPlayer').on('click', () => {
 $('body').on('click', '.modalNav span', function (e) {
     clearInterval(inRefresh)
     $('.modal').css({ 'left': '100%' })
+})
+
+$('body').on('click', '.modalNavSpecQtv', function (e) {
+    window.location = $(this).attr('data-address')
+})
+$('body').on('click', '.modalNavSpec', function (e) {
+    window.location = $(this).attr('data-address')
+})
+$('body').on('click', '.modalNavJoin', function (e) {
+    window.location = $(this).attr('data-address')
 })
 // WINDOW Mainframe buttons ////////////////////////////
 $('.closeButton').on('click', () => {
