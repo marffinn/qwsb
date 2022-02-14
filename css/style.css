@@ -166,7 +166,7 @@ body {
     width: 100%;
     display: block;
     float: left;
-    background: #c55151;
+    background: #c5515182;
     text-transform: uppercase;
     padding: .5em 0;
     font-size: .6em;
@@ -335,7 +335,7 @@ body {
 }
 
 .modal {
-    background: #1c1714;
+    background: #1c1714f0;
     position: absolute;
     z-index: 5;
     margin: 0 auto;
@@ -506,6 +506,7 @@ body {
     height: 15px;
     font-size: .7em;
     line-height: 15px;
+    font-weight: 600;
 }
 
 .pTeam {
@@ -518,6 +519,12 @@ body {
     background: aliceblue;
     font-size: .7em;
 }
+.pTeam::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+    display: block;
+}
 
 .pTeamSpec {
     width: 10%;
@@ -527,6 +534,7 @@ body {
     text-align: center;
     height: 15px;
     line-height: 15px;
+    /* background: beige; */
 }
 
 .pFrags {
@@ -539,10 +547,11 @@ body {
     line-height: 15px;
     margin: 0;
     padding: 0;
+    background: #f0ffff3b;
 }
 
 .pFrags::before {
-    /* content: ""; */
+    content: "";
     height: 100%;
     width: 1px;
     background: #0000007a;
@@ -774,19 +783,16 @@ li {
 .orange_txt {
     color: #ff9900;
     text-transform: uppercase;
-    font-weight: 600;
 }
 
 .green_txt {
     color: #4bc921;
     text-transform: uppercase;
-    font-weight: 600;
 }
 
 .red_txt {
     color: #21c9aa;
     text-transform: uppercase;
-    font-weight: 600;
 }
 
 
