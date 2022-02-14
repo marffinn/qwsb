@@ -8,11 +8,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    /* float: left; */
     justify-content: center;
     overflow: hidden;
     width: 100%;
-    /* height: 305px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,53 +42,60 @@ body {
 .serverName {
     width: 60%;
     text-indent: 5px;
-    font-size: .55em;
+    /* font-size: .8em; */
+    float: left;
+    height: 100%;
 }
 
 .serverName a {
     color: white;
     text-decoration: none;
-    text-transform: uppercase;
-    text-decoration: dashed !important;
+    /* font-size: 1.5em; */
+    height: 100%;
+    width: auto;
+    float: left;
 }
 
 .serverPing {
     width: 10%;
+    float: left;
 }
 
 .serverMap {
     width: 20%;
+    float: left;
 }
 
 .serverPlayers {
     width: 10%;
+    float: left;
 }
 
 .headServerName {
     width: 60%;
-    font-size: .7em;
     text-align: left;
     cursor: pointer;
     text-indent: 5px;
+    float: left;
 }
 
 .headServerPing {
     width: 10%;
-    font-size: .7em;
     text-align: left;
+    float: left;
     cursor: pointer;
 }
 
 .headServerMap {
     width: 20%;
-    font-size: .7em;
     text-align: left;
+    float: left;
 }
 
 .headServerPlayers {
     width: 10%;
-    font-size: 0.7em;
     text-align: left;
+    float: left;
     cursor: pointer;
 }
 
@@ -109,10 +114,6 @@ body {
     font-weight: 600;
 }
 
-.headSpace {
-    width: 10px;
-}
-
 .appBtns {
     width: 98%;
     display: block;
@@ -129,12 +130,13 @@ body {
     text-transform: uppercase;
     font-size: 0.6em;
     user-select: none;
-    background: #7632b8;
+    background: #5e4b3f;
     color: white;
     line-height: 20px;
     padding: 0 .8em;
     position: relative;
 }
+
 .refreshBtn::after {
     content: "";
     display: block;
@@ -160,20 +162,21 @@ body {
 }
 
 .modalSvName {
-    color: burlywood;
+    color: white;
     width: 100%;
     display: block;
     float: left;
-    background: #323232;
+    background: #362e29;
     text-transform: uppercase;
     padding: .5em 0;
     font-size: .6em;
     position: relative;
+    font-weight: 600;
     text-align: center;
 }
 
 .modalMap {
-    color: white;
+    color: #c7b011;
     text-transform: uppercase;
     left: 0;
     font-size: .6em;
@@ -181,7 +184,7 @@ body {
     text-align: center;
     padding: 0.5em 1em;
     z-index: 1;
-    background: #42346a;
+    background: #1c1714;
 }
 
 .modalSvPicture {
@@ -203,7 +206,7 @@ body {
 
 
 .titleBar {
-    background: #42346a;
+    background: #1c1714;
     width: 100%;
     position: relative;
     -webkit-app-region: drag;
@@ -332,7 +335,7 @@ body {
 }
 
 .modal {
-    background: #42346af7;
+    background: #1c1714;
     position: absolute;
     z-index: 5;
     margin: 0 auto;
@@ -358,18 +361,21 @@ body {
     height: 25px;
     cursor: pointer;
     position: absolute;
-    background: #323232;
+    background: #362e29;
     border-radius: 12px 12px 0px 0px;
 }
 
-.modalNav span:hover {background: linear-gradient(0deg, rgba(50,50,50,1) 0%, rgba(183,49,49,1) 100%);/* background: blanchedalmond; */}
+.modalNav span:hover {
+    background: linear-gradient(0deg, #36285b, rgb(118 50 184) 100%);
+    /* background: blanchedalmond; */
+}
 
 .modalNav span::before {
     content: '';
     width: 14px;
     height: 2px;
     display: block;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(197 197 197);
     transform: rotate(45deg) scale(.8);
     position: relative;
     margin: 0 auto;
@@ -382,7 +388,7 @@ body {
     width: 14px;
     height: 2px;
     display: block;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(197 197 197);
     transform: rotate(-45deg) scale(.8);
     position: relative;
     margin: 0 auto;
@@ -393,6 +399,7 @@ body {
 .modalNav content {
     color: white;
 }
+
 .modalNavJoin {
     width: 20%;
     height: auto;
@@ -406,20 +413,17 @@ body {
     margin-bottom: 1em;
     border-radius: 2px;
 }
+
 .modalNavJoin:hover {
     background: #338b14;
 }
+
 .modalNavJoin:active {
     background: #3c991c;
 }
 
 .os-content {
     padding: 0 !important
-}
-
-table {
-    width: 100%;
-    table-layout: fixed;
 }
 
 .tbl-header {
@@ -430,36 +434,20 @@ table {
 .tbl-content {
     height: 480px;
     overflow-x: auto;
+    float: left;
     margin-top: 0px;
 }
 
-th {
-    padding: 5px 0px;
-    text-align: left;
-    font-weight: 500;
-    font-size: 12px;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-td {
-    text-align: left;
-    vertical-align: middle;
-    font-weight: 300;
-    font-size: .7em;
-    color: #fff;
-    padding: .1em 0;
-    border-bottom: solid 1px rgb(0 0 0 / 16%);
-    cursor: pointer;
-}
-tbody tr:hover{
+li:hover {
     background: #7b7b7b;
 }
-tr:nth-child(even) {
-    background-color: #616161;
+
+li:nth-child(even) {
+    background-color: #4c4c4c;
 }
+
 body {
-    background: #36285b;
+    background: #362e29;
 }
 
 ::-webkit-scrollbar {
@@ -500,8 +488,9 @@ body {
     background: #c5c5c5;
     /* padding: 0.1em 0; */
 }
+
 .team1::after {
-    content:"";
+    content: "";
     width: 100%;
     position: absolute;
     height: 1px;
@@ -509,6 +498,7 @@ body {
     display: none;
     bottom: 0;
 }
+
 .teamSpec {
     height: auto;
     display: block;
@@ -517,15 +507,18 @@ body {
     position: relative;
     background: #6a6a6a;
 }
+
 .modalPlayers .teamSpec:fisrt-child {
-    background:aqua
+    background: aqua
 }
+
 .teamSpec::after {
-    content:"";
+    content: "";
     width: 100%;
     position: absolute;
     display: block;
 }
+
 .modalPlayers .team1:nth-child(even) {
     background-color: #a7a7a7;
 }
@@ -540,6 +533,7 @@ body {
     height: auto;
     text-indent: 10px;
 }
+
 .pTeam {
     width: 10%;
     display: block;
@@ -550,6 +544,7 @@ body {
     padding: 0.1em 0;
     background: aquamarine;
 }
+
 .pTeamSpec {
     width: 10%;
     display: block;
@@ -569,6 +564,7 @@ body {
     height: auto;
     padding: 0.1em 0;
 }
+
 .pFrags::before {
     content: "";
     height: 100%;
@@ -578,6 +574,7 @@ body {
     display: block;
     top: 0;
 }
+
 .pFragsSpec {
     width: 25%;
     font-size: .7em;
@@ -602,6 +599,7 @@ body {
     padding: 0 2em;
     -webkit-app-region: no-drag;
 }
+
 .mainSettings:active {
     background-color: blueviolet;
 }
@@ -610,6 +608,7 @@ body {
     display: block;
     float: left;
 }
+
 .progressBar {
     display: block;
     width: 98%;
@@ -617,13 +616,14 @@ body {
     position: absolute;
     float: left;
     overflow: hidden;
-    /* height: 15px; */
     cursor: pointer;
     bottom: 4px;
 }
+
 .progressBar:hover {
     background: #d2b909;
 }
+
 .progressBar span {
     display: block;
     position: absolute !important;
@@ -632,6 +632,7 @@ body {
     height: 15px;
     z-index: 1;
 }
+
 .progressBar b {
     display: block;
     position: relative;
@@ -643,6 +644,7 @@ body {
     line-height: 15px;
     color: rgb(255 255 255 / 90%);
 }
+
 .settingsWindow {
     background-color: blueviolet;
     position: absolute;
@@ -651,17 +653,20 @@ body {
     top: 30px;
     flex-direction: column;
 }
+
 .settingsActive {
     width: 100%;
     height: 100%;
 }
+
 .settingsBtnActive {
     background-color: #7632b8;
 }
+
 .settings_block {
     display: flex;
     width: 100%;
-    background: linear-gradient(180deg, rgba(118,49,183,1) 0%, rgb(111 67 202) 100%);
+    background: linear-gradient(180deg, rgba(118, 49, 183, 1) 0%, rgb(111 67 202) 100%);
     top: 0;
     position: absolute;
     justify-content: flex-start;
@@ -671,6 +676,7 @@ body {
     padding-bottom: 1em;
     border-bottom: 1px solid #42346a;
 }
+
 .block {
     width: 90%;
     height: auto;
@@ -682,6 +688,7 @@ body {
     position: relative;
     border-radius: 2px;
 }
+
 .block span {
     background: #dde4eb;
     font-weight: 600;
@@ -695,6 +702,7 @@ body {
     text-indent: 1em;
     position: relative;
 }
+
 .settingsBtn {
     width: auto;
     height: 25px;
@@ -708,12 +716,15 @@ body {
     font-size: .8em;
     cursor: pointer;
 }
+
 .settingsBtn:hover {
     background: #15b6ae;
 }
+
 .settingsBtn:active {
     background: #ff0707;
 }
+
 .pbHolder {
     display: block;
     width: 100%;
@@ -722,24 +733,27 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .modalOther {
-        color: rgb(255 255 255);
-        width: auto;
-        display: block;
-        right: 0;
-        background: #42346a;
-        font-size: .6em;
-        position: absolute;
-        text-align: center;
-        padding: 0.5em 1em;
-        z-index: 1;
+    color: rgb(255 255 255);
+    width: auto;
+    display: block;
+    right: 0;
+    background: #1c1714;
+    font-size: .6em;
+    position: absolute;
+    text-align: center;
+    padding: 0.5em 1em;
+    z-index: 1;
 }
+
 .pbBox {
     display: block;
     float: left;
     padding: .5em .5em;
     font-size: .8em;
 }
+
 .pFragsSpec::before {
     content: "";
     background: #0000007a;
@@ -749,6 +763,7 @@ body {
     position: absolute;
     top: 0;
 }
+
 .appPlayers {
     display: block;
     width: 98%;
@@ -759,24 +774,23 @@ body {
     left: 100%;
     z-index: 3;
 }
+
 .activeTab {
     left: 1%;
 }
+
 li {
     list-style: none;
-    background: aliceblue;
-    border-bottom: 1px solid #ccc;
+    background: #424242;
+    border-bottom: 1px solid #242424;
     font-size: .8em;
-}
-.versionInfo {
+    float: left;
+    width: 100%;
     display: block;
-    position: absolute;
-    bottom: 0;
-    padding: 0.3em;
-    font-size: .6em;
-    width: 97%;
+    height: 17px;
+    line-height: 18px;
+    cursor: pointer;
     color: white;
-    text-align: right;
 }
 
 .orange_txt {
@@ -784,13 +798,49 @@ li {
     text-transform: uppercase;
     font-weight: 600;
 }
+
 .green_txt {
     color: #4bc921;
     text-transform: uppercase;
     font-weight: 600;
 }
+
 .red_txt {
     color: #21c9aa;
     text-transform: uppercase;
     font-weight: 600;
+}
+
+
+#properTable {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+#myTable {
+    padding: 0;
+    margin: 0;
+}
+
+#myTable li {
+background: #1c1714;
+height: 22px;
+line-height: 22px;
+color: white;
+text-transform: uppercase;
+font-size: .7em;
+}
+
+.headSpace {
+
+    padding-right: 10px;
+
+    display: block;
+
+    float: left;
+
+    width: 98%;
 }
