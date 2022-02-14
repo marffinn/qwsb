@@ -94,7 +94,16 @@ let checkServer = (addre) => {
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
             let closebtn = "<div class='modalNav'><span></span></div>"
-            let joinbtn = "<div class='modalNavJoin'>join</div>"
+
+            let joinbtn = 
+            `
+            <div class="servBtnHolder">
+                <div class="modalNavJoin">join</div>
+                <div class="modalNavSpec">spectate</div>
+                <div class="modalNavSpecQtv">QTV</div>
+            </div>
+            `
+
             let updatedInfo = () => {
                 let $div = $("<div>", {"class": "modalPlayers"})
                 if (outInfo[0].players) {
@@ -117,7 +126,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 let readServers = () => {
     $('#properTable').empty()

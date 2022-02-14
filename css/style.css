@@ -166,7 +166,7 @@ body {
     width: 100%;
     display: block;
     float: left;
-    background: #362e29;
+    background: #c55151;
     text-transform: uppercase;
     padding: .5em 0;
     font-size: .6em;
@@ -176,7 +176,7 @@ body {
 }
 
 .modalMap {
-    color: #c7b011;
+    color: #c55151;
     text-transform: uppercase;
     left: 0;
     font-size: .6em;
@@ -361,12 +361,12 @@ body {
     height: 25px;
     cursor: pointer;
     position: absolute;
-    background: #362e29;
+    background: #c55151;
     border-radius: 12px 12px 0px 0px;
 }
 
 .modalNav span:hover {
-    background: linear-gradient(0deg, #36285b, rgb(118 50 184) 100%);
+    background: linear-gradient(0deg, #c55151, rgb(255 11 11) 100%);
     /* background: blanchedalmond; */
 }
 
@@ -375,7 +375,7 @@ body {
     width: 14px;
     height: 2px;
     display: block;
-    background-color: rgb(197 197 197);
+    background-color: WHITE;
     transform: rotate(45deg) scale(.8);
     position: relative;
     margin: 0 auto;
@@ -388,7 +388,7 @@ body {
     width: 14px;
     height: 2px;
     display: block;
-    background-color: rgb(197 197 197);
+    background-color: WHITE;
     transform: rotate(-45deg) scale(.8);
     position: relative;
     margin: 0 auto;
@@ -400,27 +400,7 @@ body {
     color: white;
 }
 
-.modalNavJoin {
-    width: 20%;
-    height: auto;
-    background: #2d7216;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: .7em;
-    padding: 0.4em 0;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 1em;
-    border-radius: 2px;
-}
 
-.modalNavJoin:hover {
-    background: #338b14;
-}
-
-.modalNavJoin:active {
-    background: #3c991c;
-}
 
 .os-content {
     padding: 0 !important
@@ -439,11 +419,7 @@ body {
 }
 
 li:hover {
-    background: #7b7b7b;
-}
-
-li:nth-child(even) {
-    background-color: #4c4c4c;
+    background: #b96713;
 }
 
 body {
@@ -456,13 +432,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    /* box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); */
 }
 
 ::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    background: #ecd00a;
+    /* -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); */
+    background: #c55151;
 }
 
 .player_spectacor {
@@ -794,7 +770,7 @@ li {
 }
 
 .orange_txt {
-    color: tomato;
+    color: #ff9900;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -826,12 +802,18 @@ li {
 }
 
 #myTable li {
-background: #1c1714;
-height: 22px;
-line-height: 22px;
-color: white;
-text-transform: uppercase;
-font-size: .7em;
+
+background: #1c1714;
+
+height: 22px;
+
+line-height: 22px;
+
+color: white;
+
+text-transform: uppercase;
+
+font-size: .7em;
 }
 
 .headSpace {
@@ -843,4 +825,60 @@ li {
     float: left;
 
     width: 98%;
+}
+.servBtnHolder {
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.modalNavSpec {
+    width: auto;
+    height: auto;
+    background: #b96713;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: .7em;
+    padding: 0.4em 0.5em;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 1em;
+    /* border-radius: 2px; */
+    float: left;
+}
+
+.modalNavSpecQtv {
+    width: auto;
+    height: auto;
+    background: #7632b8;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    float: right;
+    font-size: .7em;
+    padding: 0.4em 0.5em;
+    border-radius: 0 5px 5px 0;
+}
+.modalNavJoin {
+    width: auto;
+    height: auto;
+    background: #2d7216;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: .7em;
+    padding: 0.4em 0.5em;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 1em;
+    border-radius: 5px 0 0 5px;
+    float: left;
+}
+
+.modalNavJoin:hover {
+    background: #338b14;
+}
+
+.modalNavJoin:active {
+    background: #3c991c;
 }
