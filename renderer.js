@@ -10,7 +10,7 @@ const notifier          = require('node-notifier')
 const main_setup        = require('./settings.json')
 
 let inRefresh           = null
-let cycleEvery = main_setup.sb.inServerRefreshRate * 1000
+let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
 
 function addZero(i) {
     if (i < 10) {i = "0" + i}
@@ -43,7 +43,6 @@ let refreshMasters = () => {
                 title: 'Server refresh',
                 message: resultInfo,
                 icon: path.join(__dirname, './data/icons/Quake-icon.png'), // Absolute path (doesn't work on balloons)
-                sound: 'Funk', // Only Notification Center or Windows Toasters
                 wait: true, // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
                 appID: "QW-SB"
             },
@@ -133,7 +132,7 @@ let readServers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata)
     for (let s in serverList) {
-        if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 150 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             let oneServerPrepare =
                 `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
@@ -152,13 +151,11 @@ let listPlayers = ( data ) => {
     exec(`qstat -qws ${data} -retry 1 -nh -P -R -noconsole  -json"`, (err, stdout) => {
         if (err) { console.error(err) }
         let playerInfo = JSON.parse(stdout)
-
         for(let p in playerInfo){
             for( let i in playerInfo[p].players ){
                 if( playerInfo[p].players[i].name === "[ServeMe]" ) continue
                 else {
-                    console.log( playerInfo[p].players[i].name )
-                    let player = `<li data-spectacors="${ playerInfo[p].numspectacors }" data-address="${playerInfo[p].address}" ><span class="playerName">${ playerInfo[p].players[i].name }</span><span class="playerServer">${playerInfo[p].name}</span></li>`
+                    let player = `<li data-spectacors="${ playerInfo[p].numspectacors }" data-address="${playerInfo[p].address}" ><span class="playerName">${ playerInfo[p].players[i].name }</span><span class="playerPing">${playerInfo[p].ping}</span><span class="playerServer">${playerInfo[p].name}</span></li>`
                     $('#playerList').append(player)
                 }
             }
@@ -179,8 +176,6 @@ let readPlayers = () => {
         }
     }
 }
-
-
 
 //  SORTING
 function comparator_name(a, b) {
@@ -212,56 +207,23 @@ function sort_by_players() {
 }
 // END OF SORTING
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(window).on("load resize", function () {
+
     var scrollServers = $('.tbl-content').width() - $('.tbl-content .properTable').width();
     $('.tbl-header').css({
         'padding-right': scrollServers
     })
-
     $('.appMain').css({
         'height': window.innerHeight - 80
     })
     $('.tbl-content').css({
         'height': window.innerHeight - 103
     })
-
-    var scrollPlayers = $('.tbl-content').width() - $('.tbl-content .playerList').width();
-    $('.tbl-header').css({
-        'padding-right': scrollPlayers
-    })
-
-    $('.appMain').css({
-        'height': window.innerHeight - 80
-    })
-    $('.tbl-content').css({
+    $('#playerList').css({
         'height': window.innerHeight - 103
     })
 
 })
-
-
-
-
-
-
-
-
-
-
 
 $('body').on('click', '#properTable li', function (e) {
     e.preventDefault()
@@ -269,12 +231,21 @@ $('body').on('click', '#properTable li', function (e) {
     let svAdress = $(this).attr('href')
     checkServer(svAdress)
 })
+$('body').on('click', '#playerList li', function (e) {
+    e.preventDefault()
+    clearInterval(inRefresh)
+    let svAdress = $(this).attr('data-address')
+    checkServer(svAdress)
+})
+
+
 $('.mainSettings').on('click', () => {
     $('.settingsWindow').toggleClass('settingsActive')
     $('.mainSettings').toggleClass('settingsBtnActive')
 })
 $('.refreshTopServer').on('click', () => {
-    // refreshMasters()
+    $('.appPlayers').removeClass('activeTab')
+    $(this).addClass("topTabActive")
 })
 $('.progressBar').on('click', () => {
     refreshMasters()

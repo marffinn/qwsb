@@ -750,7 +750,7 @@ body {
 	height: 87%;
 	float: left;
 	position: absolute;
-	background: #462a2a;
+	/* background: #462a2a; */
 	left: 100%;
 	z-index: 3;
 }
@@ -915,7 +915,13 @@ li {
 }
 
 .playerServer {
-	width: 75%;
+	width: 65%;
+	text-indent: 5px;
+	float: left;
+	height: 100%;
+}
+.playerPing {
+	width: 10%;
 	text-indent: 5px;
 	float: left;
 	height: 100%;
@@ -924,6 +930,9 @@ li {
 #playerList {
 	padding: 0;
 	margin: 0;
+	overflow-y: scroll;
+	width: 100%;
+	background: #1c1714;
 }
 
 .headPlayer {
@@ -933,11 +942,21 @@ li {
 	text-indent: 5px;
 	float: left;
 }
+.headPing {
+    width: 10%;
+    text-align: left;
+    cursor: pointer;
+    text-indent: 5px;
+    float: left;
+}
 
 .headPlayerServer {
-    width: 75%;
-	text-align: left;
-	cursor: pointer;
-	text-indent: 5px;
-	float: left;
+    width: 65%;
+    text-align: left;
+    cursor: pointer;
+    text-indent: 5px;
+    float: left;
+}
+.topTabActive {
+	background: #15b6ae;
 }
