@@ -146,20 +146,43 @@ let readServers = () => {
         }
     }
 }
+
+let listPlayers = ( data ) => {
+
+    exec(`qstat -qws ${data} -retry 1 -nh -P -R -noconsole  -json"`, (err, stdout) => {
+        if (err) { console.error(err) }
+        let playerInfo = JSON.parse(stdout)
+
+        for(let p in playerInfo){
+            for( let i in playerInfo[p].players ){
+                if( playerInfo[p].players[i].name === "[ServeMe]" ) continue
+                else {
+                    console.log( playerInfo[p].players[i].name )
+                    let player = `<li data-spectacors="${ playerInfo[p].numspectacors }" data-address="${playerInfo[p].address}" ><span class="playerName">${ playerInfo[p].players[i].name }</span><span class="playerServer">${playerInfo[p].name}</span></li>`
+                    $('#playerList').append(player)
+                }
+            }
+        }
+
+    })
+}
+
 let readPlayers = () => {
-    $('.appPlayers').empty()
+    $('#playerList').empty()
+
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
-
-    for (let s in serverList) {
+    for( let s in serverList ) {
         if( serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
         else {
-            let player =
-                `<li data-spectacors="${ serverList[s].numspectacors }" data-address="${serverList[s].address}" >${ serverList[s].numplayers } / ${ serverList[s].maxplayers }  - ${serverList[s].address} / ${serverList[s].name} </li>`
-            $('.appPlayers ul').append(player)
+            listPlayers( serverList[s].address )      
         }
     }
 }
+
+
+
+//  SORTING
 function comparator_name(a, b) {
     if (a.dataset.name < b.dataset.name) return -1
     if (a.dataset.name > b.dataset.name) return 1
@@ -187,10 +210,26 @@ function sort_by_ping() {
 function sort_by_players() {
     readServers()
 }
+// END OF SORTING
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(window).on("load resize", function () {
-    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    var scrollServers = $('.tbl-content').width() - $('.tbl-content .properTable').width();
     $('.tbl-header').css({
-        'padding-right': scrollWidth
+        'padding-right': scrollServers
     })
 
     $('.appMain').css({
@@ -199,7 +238,31 @@ $(window).on("load resize", function () {
     $('.tbl-content').css({
         'height': window.innerHeight - 103
     })
+
+    var scrollPlayers = $('.tbl-content').width() - $('.tbl-content .playerList').width();
+    $('.tbl-header').css({
+        'padding-right': scrollPlayers
+    })
+
+    $('.appMain').css({
+        'height': window.innerHeight - 80
+    })
+    $('.tbl-content').css({
+        'height': window.innerHeight - 103
+    })
+
 })
+
+
+
+
+
+
+
+
+
+
+
 $('body').on('click', '#properTable li', function (e) {
     e.preventDefault()
     clearInterval(inRefresh)
@@ -211,7 +274,7 @@ $('.mainSettings').on('click', () => {
     $('.mainSettings').toggleClass('settingsBtnActive')
 })
 $('.refreshTopServer').on('click', () => {
-    refreshMasters()
+    // refreshMasters()
 })
 $('.progressBar').on('click', () => {
     refreshMasters()
