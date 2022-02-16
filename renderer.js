@@ -44,24 +44,31 @@ let refreshMasters = () => {
                 message: resultInfo,
                 icon: path.join(__dirname, './data/icons/Quake-icon.png'), // Absolute path (doesn't work on balloons)
                 wait: true, // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-                appID: "QW-SB"
+                appID: "QW-SB",
+                actions: ['ok', 'cancel']
             },
             function (err, response, metadata) {
-              // Response is response from notification
-              // Metadata contains activationType, activationAt, deliveredAt
+              console.log(response);
+              console.log(metadata);
             }
           );
           
           notifier.on('click', function (notifierObject, options, event) {
-            // Triggers if `wait: true` and user clicks notification
+            console.log('clicked popup');
           });
-          
           notifier.on('timeout', function (notifierObject, options) {
-            // Triggers if `wait: true` and notification closes
+            console.log("timeout status");
+          });
+          notifier.on('ok', () => {
+            console.log('"Ok" was pressed');
+          });
+          notifier.on('cancel', () => {
+            console.log('"Cancel" was pressed');
           });
 
     })
 }
+
 let in_server_status = (data) => {
     let status = data
     if(status === 'Standby'){
@@ -73,6 +80,7 @@ let in_server_status = (data) => {
     }
     return status
 }
+
 let in_server_team = (team, score) => {
     let teams = team
     let scrbd = score
@@ -83,6 +91,7 @@ let in_server_team = (team, score) => {
     }
     return teams
 }
+
 let checkServer = (addre) => {
     $('.modal').css({ 'left': '0' })
     let getInfoUpdate = function () {
@@ -93,7 +102,6 @@ let checkServer = (addre) => {
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
             let closebtn = "<div class='modalNav'><span></span></div>"
-
             let joinbtn = 
             `
             <div class="servBtnHolder">
@@ -102,7 +110,6 @@ let checkServer = (addre) => {
                 <div class="modalNavSpecQtv" data-address="qw://2@${addre}/qtvplay">QTV</div>
             </div>
             `
-
             let updatedInfo = () => {
                 let $div = $("<div>", {"class": "modalPlayers"})
                 if (outInfo[0].players) {
@@ -127,6 +134,7 @@ let checkServer = (addre) => {
     getInfoUpdate()
     inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
+
 let readServers = () => {
     $('#properTable').empty()
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
@@ -147,7 +155,6 @@ let readServers = () => {
 }
 
 let listPlayers = ( data ) => {
-
     exec(`qstat -qws ${data} -retry 1 -nh -P -R -noconsole  -json"`, (err, stdout) => {
         if (err) { console.error(err) }
         let playerInfo = JSON.parse(stdout)
@@ -166,7 +173,6 @@ let listPlayers = ( data ) => {
 
 let readPlayers = () => {
     $('#playerList').empty()
-
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
     for( let s in serverList ) {
@@ -176,8 +182,6 @@ let readPlayers = () => {
         }
     }
 }
-
-//  SORTING
 function comparator_name(a, b) {
     if (a.dataset.name < b.dataset.name) return -1
     if (a.dataset.name > b.dataset.name) return 1
@@ -205,78 +209,7 @@ function sort_by_ping() {
 function sort_by_players() {
     readServers()
 }
-// END OF SORTING
 
-$(window).on("load resize", function () {
-
-    var scrollServers = $('.tbl-content').width() - $('.tbl-content .properTable').width();
-    $('.tbl-header').css({
-        'padding-right': scrollServers
-    })
-    $('.appMain').css({
-        'height': window.innerHeight - 80
-    })
-    $('.tbl-content').css({
-        'height': window.innerHeight - 103
-    })
-    $('#playerList').css({
-        'height': window.innerHeight - 103
-    })
-
-})
-
-$('body').on('click', '#properTable li', function (e) {
-    e.preventDefault()
-    clearInterval(inRefresh)
-    let svAdress = $(this).attr('href')
-    checkServer(svAdress)
-})
-$('body').on('click', '#playerList li', function (e) {
-    e.preventDefault()
-    clearInterval(inRefresh)
-    let svAdress = $(this).attr('data-address')
-    checkServer(svAdress)
-})
-
-
-$('.mainSettings').on('click', () => {
-    $('.settingsWindow').toggleClass('settingsActive')
-    $('.mainSettings').toggleClass('settingsBtnActive')
-})
-$('.refreshTopServer').on('click', () => {
-    $('.appPlayers').removeClass('activeTab')
-    $(this).addClass("topTabActive")
-})
-$('.progressBar').on('click', () => {
-    refreshMasters()
-})
-$('.refreshTopPlayer').on('click', () => {
-    readPlayers()
-    $('.appPlayers').toggleClass('activeTab')
-})
-$('body').on('click', '.modalNav span', function (e) {
-    clearInterval(inRefresh)
-    $('.modal').css({ 'left': '100%' })
-})
-
-$('body').on('click', '.modalNavSpecQtv', function (e) {
-    window.location = $(this).attr('data-address')
-})
-$('body').on('click', '.modalNavSpec', function (e) {
-    window.location = $(this).attr('data-address')
-})
-$('body').on('click', '.modalNavJoin', function (e) {
-    window.location = $(this).attr('data-address')
-})
-// WINDOW Mainframe buttons ////////////////////////////
-$('.closeButton').on('click', () => {
-    ipcRenderer.send('close-me')
-})
-$('.minimizeButton').on('click', () => {
-    ipcRenderer.send('minimize-me')
-})
-///////////////////////////////////////////////////////
-// SORTING FUNCTIONS ////////////////////////////////////
 $('.headServerName').on('click', () => {
     sort_by_name()
 })
@@ -286,5 +219,5 @@ $('.headServerPing').on('click', () => {
 $('.headServerPlayers').on('click', () => {
     sort_by_players()
 })
-/////////////////////////////////////////////////////////
+
 readServers()

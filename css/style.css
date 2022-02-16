@@ -156,29 +156,28 @@ body {
 	height: 505px;
 	width: 98%;
 	background: #4b4b4b;
-	/* position: absolute; */
 	top: 57px;
 	overflow: hidden;
 }
 
 .modalSvName {
-	color: white;
+	color: #1a1a1a;
 	width: 100%;
 	display: block;
 	float: left;
-	background: #c55151;
+	background: #ff9900;
 	/*     text-transform: uppercase; */
 	padding: .5em 0;
-	font-size: .6em;
+	font-size: .7em;
 	position: relative;
 	text-align: center;
 }
 
 .modalMap {
-	color: #c55151;
+	color: #ff9900;
 	text-transform: uppercase;
 	left: 0;
-	font-size: .6em;
+	font-size: .7em;
 	position: absolute;
 	text-align: center;
 	padding: 0.5em 1em;
@@ -201,8 +200,15 @@ body {
 	padding: 0.5em 0em;
 	flex-direction: column;
 	align-items: center;
+	
+	position:relative;
 }
-
+.modalPlayers::first-child {
+	border-radius: 2px;
+}
+.modalPlayers:last-child {
+	border-radius: 2px;
+}
 .titleBar {
 	background: #1c1714;
 	width: 100%;
@@ -260,7 +266,7 @@ body {
 	align-content: center;
 	align-items: center;
 	justify-content: center;
-	background: blueviolet;
+	background: #404040;
 	z-index: 3;
 	overflow: hidden;
 }
@@ -313,7 +319,7 @@ body {
 }
 
 .closeButton:active {
-	background-color: #060606;
+	background-color: #d93c3c;
 }
 
 .minimizeButton:active {
@@ -332,7 +338,7 @@ body {
 }
 
 .modal {
-	background: #1c1714f0;
+	background: #1c1714;
 	position: absolute;
 	z-index: 5;
 	margin: 0 auto;
@@ -342,6 +348,8 @@ body {
 	flex-direction: column;
 	align-content: center;
 	align-items: center;
+	border-radius: 5px 5px 0 0;
+	/* overflow: hidden; */
 }
 
 .modalNav {
@@ -350,6 +358,7 @@ body {
 	top: -25px;
 	display: flex;
 	justify-content: center;
+	z-index: 20;
 	align-content: flex-start;
 }
 
@@ -358,7 +367,7 @@ body {
 	height: 25px;
 	cursor: pointer;
 	position: absolute;
-	background: #c55151;
+	background: #ff9900;
 	border-radius: 12px 12px 0px 0px;
 }
 
@@ -456,6 +465,14 @@ body {
 	position: relative;
 	background: #c5c5c5;
 }
+.team1:first-child {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+}
+.team1:last-child {
+	border-radius: 0 0 5px 5px;
+	overflow: hidden;
+}
 
 .team1::after {
 	content: "";
@@ -474,6 +491,10 @@ body {
 	width: 60%;
 	position: relative;
 	background: #6a6a6a;
+}
+.teamSpec:last-child {
+	border-radius: 0 0 5px 5px;
+	overflow: hidden;
 }
 
 .modalPlayers .teamSpec:fisrt-child {
@@ -503,7 +524,7 @@ body {
 }
 
 .pTeam {
-	width: 10%;
+	width: 20%;
 	display: block;
 	float: left;
 	text-align: center;
@@ -511,27 +532,43 @@ body {
 	line-height: 15px;
 	background: aliceblue;
 	font-size: .7em;
+	position: relative;
 }
 
 .pTeam::after {
 	content: "";
-	width: 100%;
+	width: 1px;
 	position: absolute;
 	display: block;
+	top: 0;
+	background: black;
+	height: 100%;
+	right: 0;
 }
 
 .pTeamSpec {
-	width: 10%;
+	width: 20%;
 	display: block;
 	float: left;
 	font-size: 0.7em;
 	text-align: center;
 	height: 15px;
 	line-height: 15px;
+	position: relative;
+}
+.pTeamSpec::after {
+	content:"";
+	display:block;
+	position:absolute;
+	background: #362e29;
+	height:100%;
+	width: 1px;
+	right: 0;
+	top: 0;
 }
 
 .pFrags {
-	width: 30%;
+	width: 20%;
 	display: block;
 	float: left;
 	font-size: 0.7em;
@@ -554,7 +591,7 @@ body {
 }
 
 .pFragsSpec {
-	width: 30%;
+	width: 20%;
 	font-size: .7em;
 	display: block;
 	float: left;
@@ -569,7 +606,7 @@ body {
 	width: auto;
 	height: 30px;
 	float: right;
-	background: #7632b8;
+	background: #24201d;
 	font-size: .7em;
 	line-height: 30px;
 	text-transform: uppercase;
@@ -581,7 +618,10 @@ body {
 }
 
 .mainSettings:active {
-	background-color: blueviolet;
+	background-color: #1c1714;
+}
+.mainSettings:hover {
+	background-color: #726b16;
 }
 
 .inAppBtns {
@@ -626,7 +666,7 @@ body {
 }
 
 .settingsWindow {
-	background-color: blueviolet;
+	background-color: #404040;
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -640,13 +680,13 @@ body {
 }
 
 .settingsBtnActive {
-	background-color: #7632b8;
+	background-color: #404040;
 }
 
 .settings_block {
 	display: flex;
 	width: 100%;
-	background: linear-gradient(180deg, rgba(118, 49, 183, 1) 0%, rgb(111 67 202) 100%);
+	background: #404040;
 	top: 0;
 	position: absolute;
 	justify-content: flex-start;
@@ -654,7 +694,7 @@ body {
 	align-items: center;
 	padding-top: 1em;
 	padding-bottom: 1em;
-	border-bottom: 1px solid #42346a;
+	/* border-bottom: 1px solid #42346a; */
 }
 
 .block {
@@ -664,9 +704,9 @@ body {
 	padding: 5px;
 	clear: both;
 	box-shadow: 1px 1px 0px 1px #484848;
-	margin-bottom: 8px;
+	margin-bottom: .1em;
 	position: relative;
-	border-radius: 2px;
+	/* border-radius: 2px; */
 }
 
 .block span {
@@ -720,7 +760,7 @@ body {
 	display: block;
 	right: 0;
 	background: #1c1714;
-	font-size: .6em;
+	font-size: .7em;
 	position: absolute;
 	text-align: center;
 	padding: 0.5em 1em;
@@ -763,7 +803,7 @@ li {
 	list-style: none;
 	background: #424242;
 	border-bottom: 1px solid #242424;
-	font-size: .8em;
+	font-size: .7em;
 	float: left;
 	width: 100%;
 	display: block;
@@ -796,17 +836,6 @@ li {
 	float: left;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 #myTable {
 	padding: 0;
 	margin: 0;
@@ -832,17 +861,6 @@ li {
 	padding: 0;
 	margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
 .headSpace {
 	padding-right: 10px;
 	display: block;
@@ -854,26 +872,34 @@ li {
 	width: auto;
 	height: auto;
 	display: block;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: .5em;
+	background: #362e29;
+	/* padding: .2em; */
+	border: 1px solid #1c1714;
 }
 
 .modalNavSpec {
 	width: auto;
 	height: auto;
-	background: #b96713;
+	background: #404040;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: .7em;
 	padding: 0.4em 0.5em;
 	color: white;
 	cursor: pointer;
-	margin-bottom: 1em;
 	float: left;
+}
+.modalNavSpec:hover {
+	background: #362e29;
 }
 
 .modalNavSpecQtv {
 	width: auto;
 	height: auto;
-	background: #7632b8;
+	background: #850c0c;
 	text-align: center;
 	text-transform: uppercase;
 	color: white;
@@ -881,7 +907,9 @@ li {
 	float: right;
 	font-size: .7em;
 	padding: 0.4em 0.5em;
-	border-radius: 0 5px 5px 0;
+}
+.modalNavSpecQtv:hover {
+	background: #585858;
 }
 
 .modalNavJoin {
@@ -894,8 +922,6 @@ li {
 	padding: 0.4em 0.5em;
 	color: white;
 	cursor: pointer;
-	margin-bottom: 1em;
-	border-radius: 5px 0 0 5px;
 	float: left;
 }
 
