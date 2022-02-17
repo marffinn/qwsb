@@ -48,19 +48,19 @@ let refreshMasters = () => {
                 actions: ['ok', 'cancel']
             },
             function (err, response, metadata) {
-              console.log(response);
-              console.log(metadata);
+              console.log(response)
+              console.log(metadata)
             }
           );
           
           notifier.on('click', function (notifierObject, options, event) {
-            console.log('clicked popup');
+            console.log('clicked popup')
           });
           notifier.on('timeout', function (notifierObject, options) {
-            console.log("timeout status");
+            console.log("timeout status")
           });
           notifier.on('ok', () => {
-            console.log('"Ok" was pressed');
+            console.log('"Ok" was pressed')
           });
           notifier.on('cancel', () => {
             console.log('"Cancel" was pressed');
@@ -140,7 +140,7 @@ let readServers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata)
     for (let s in serverList) {
-        if( serverList[s].ping >= 150 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
             let oneServerPrepare =
                 `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
@@ -176,7 +176,7 @@ let readPlayers = () => {
     let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
     let serverList = JSON.parse(rawdata);
     for( let s in serverList ) {
-        if( serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
+        if( serverList[s].ping >= 80 ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
         else {
             listPlayers( serverList[s].address )      
         }
