@@ -15,21 +15,28 @@
     "safe-buffer": "^5.1.2",
     "serialize-error": "^7.0.1"
   },
+
+  "build": {
+    "extraResources": ["./data/qstat.exe"]
+    },
+
   "devDependencies": {},
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/marffinn/qwsb"
   },
   "keywords": [
     "quakeworld",
     "qw",
     "quake",
+    "quake one",
     "quake1",
     "server",
     "browser",
+    "server browser",
     "SB",
     "sb"
   ],
