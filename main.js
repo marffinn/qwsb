@@ -11,7 +11,7 @@ function createWindow () {
     minHeight: 305,
     maxHeight: 645,
     frame: false,
-    icon: path.join(__dirname, 'data/icons/Quake-icon.png '),
+    icon: path.join(`${ process.resourcesPath }/Quake-icon.png`),
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
