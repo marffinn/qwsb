@@ -7,7 +7,7 @@ const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
 
-const main_setup        = require('./settings.json')
+const main_setup        = require('./data/scripts/settings.json')
 
 let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
@@ -20,7 +20,7 @@ function addZero(i) {
 let refreshMasters = () => {
     $('.progressBar').animate({ height: "15px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
-    const ls = spawn('qstat.exe', [ "-qwm", main_setup.masters.ocrana , "-retry", main_setup.retries , "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of", "servers.json" ])
+    const ls = spawn('data/qstat.exe', [ "-qwm", main_setup.masters.ocrana , "-retry", main_setup.retries , "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of", "data/scripts/servers.json" ])
     ls.stderr.on('data', (data) => {
         let progress = data.toString()
         let bar = progress.substring(0, progress.indexOf(' ('))
@@ -93,9 +93,10 @@ let in_server_team = (team, score) => {
 }
 
 let checkServer = (addre) => {
+    console.log( __dirname );
     $('.modal').css({ 'left': '0' })
     let getInfoUpdate = function () {
-        exec(`qstat -qws ${addre} -retry 1 -nh -P -R -sort F -noconsole  -json"`, (err, stdout) => {
+        exec( __dirname + `/data/qstat.exe -qws ${addre} -retry 1 -nh -P -R -sort F -noconsole  -json"`, (err, stdout) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout) 
             let svname = $('.modalSvName').html(outInfo[0].name)
@@ -137,7 +138,7 @@ let checkServer = (addre) => {
 
 let readServers = () => {
     $('#properTable').empty()
-    let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
+    let rawdata = fs.readFileSync( path.join(__dirname, 'data/scripts/servers.json') )
     let serverList = JSON.parse(rawdata)
     for (let s in serverList) {
         if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
@@ -155,7 +156,7 @@ let readServers = () => {
 }
 
 let listPlayers = ( data ) => {
-    exec(`qstat -qws ${data} -retry 1 -nh -P -R -noconsole  -json"`, (err, stdout) => {
+    exec(__dirname + `/data/qstat.exe -qws ${data} -retry 1 -nh -P -R -noconsole  -json"`, (err, stdout) => {
         if (err) { console.error(err) }
         let playerInfo = JSON.parse(stdout)
         for(let p in playerInfo){
@@ -173,7 +174,7 @@ let listPlayers = ( data ) => {
 
 let readPlayers = () => {
     $('#playerList').empty()
-    let rawdata = fs.readFileSync( path.join(__dirname, 'servers.json') )
+    let rawdata = fs.readFileSync( path.join(__dirname, 'data/scripts/servers.json') )
     let serverList = JSON.parse(rawdata);
     for( let s in serverList ) {
         if( serverList[s].ping >= 80 ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue

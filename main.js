@@ -15,7 +15,7 @@ function createWindow () {
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        preload: path.join(__dirname, 'preload.js')
+        preload: path.join(__dirname, 'data/scripts/preload.js')
     }
   })
   win.loadFile('index.html')
