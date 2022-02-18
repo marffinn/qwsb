@@ -7,7 +7,8 @@ const { webContents }   = require('electron/main')
 const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
 
-const main_setup        = require('./data/scripts/settings.json')
+const main_setup        = require(`${ process.resourcesPath }/settings.json`)
+const appIcon            = `${ process.resourcesPath }/qwsb.ico`
 
 let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
@@ -42,7 +43,7 @@ let refreshMasters = () => {
             {
                 title: 'Server refresh',
                 message: resultInfo,
-                icon: path.join(__dirname, './data/icons/Quake-icon.png'), // Absolute path (doesn't work on balloons)
+                icon: path.join(`${ process.resourcesPath }/qwsb.ico`), // Absolute path (doesn't work on balloons)
                 wait: true, // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
                 appID: "QW-SB",
                 actions: ['ok', 'cancel']
@@ -94,8 +95,6 @@ let in_server_team = (team, score) => {
 
 let checkServer = (addre) => {
 
-    console.log( process.resourcesPath )
-
     $('.modal').css({ 'left': '0' })
     let getInfoUpdate = function () {
         exec( `${ process.resourcesPath }/qstat.exe -qws ${addre} -retry 1 -nh -P -R -sort F -noconsole  -json"`, (err, stdout) => {
@@ -135,7 +134,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {
@@ -223,4 +222,6 @@ $('.headServerPlayers').on('click', () => {
     sort_by_players()
 })
 
+
+$('.titleBarText').append( `<img src="${appIcon}" alt="QW-SB" ></img>`)
 readServers()

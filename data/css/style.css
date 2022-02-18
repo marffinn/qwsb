@@ -42,7 +42,6 @@ body {
 .serverName {
 	width: 60%;
 	text-indent: 5px;
-	/* font-size: .8em; */
 	float: left;
 	height: 100%;
 }
@@ -155,7 +154,7 @@ body {
 .appMain {
 	height: 505px;
 	width: 98%;
-	background: #4b4b4b;
+	background: #585858;
 	top: 57px;
 	overflow: hidden;
 }
@@ -182,7 +181,7 @@ body {
 	text-align: center;
 	padding: 0.5em 1em;
 	z-index: 1;
-	background: #1c1714;
+	background: #362e29;
 }
 
 .modalSvPicture {
@@ -231,7 +230,7 @@ body {
 	float: left;
 	position: relative;
 	line-height: 30px;
-	left: .8em;
+	left: 5px;
 }
 
 .minimizeButton {
@@ -338,7 +337,7 @@ body {
 }
 
 .modal {
-	background: #1c1714;
+	background: #362e29;
 	position: absolute;
 	z-index: 5;
 	margin: 0 auto;
@@ -376,7 +375,7 @@ body {
 	width: 14px;
 	height: 2px;
 	display: block;
-	background-color: WHITE;
+	background-color: #1c1714;
 	transform: rotate(45deg) scale(.8);
 	position: relative;
 	margin: 0 auto;
@@ -385,7 +384,7 @@ body {
 }
 
 .modalNav span:hover::before {
-	background: #060606
+	background: #ff0000
 }
 
 .modalNav span::after {
@@ -393,7 +392,7 @@ body {
 	width: 14px;
 	height: 2px;
 	display: block;
-	background-color: WHITE;
+	background-color: #1c1714;
 	transform: rotate(-45deg) scale(.8);
 	position: relative;
 	margin: 0 auto;
@@ -402,7 +401,7 @@ body {
 }
 
 .modalNav span:hover::after {
-	background: #060606
+	background: #ff0000
 }
 
 .modalNav content {
@@ -490,7 +489,8 @@ body {
 	float: left;
 	width: 60%;
 	position: relative;
-	background: #6a6a6a;
+	background: #222222;
+	color: #ababab;
 }
 .teamSpec:last-child {
 	border-radius: 0 0 5px 5px;
@@ -506,6 +506,9 @@ body {
 	width: 100%;
 	position: absolute;
 	display: block;
+	background-color: #362e29;
+	height: 1px;
+	bottom: 0;
 }
 
 .modalPlayers .team1:nth-child(even) {
@@ -530,7 +533,7 @@ body {
 	text-align: center;
 	height: 15px;
 	line-height: 15px;
-	background: aliceblue;
+	/* background: aliceblue; */
 	font-size: .7em;
 	position: relative;
 }
@@ -541,7 +544,7 @@ body {
 	position: absolute;
 	display: block;
 	top: 0;
-	background: black;
+	background: #606262;
 	height: 100%;
 	right: 0;
 }
@@ -672,6 +675,7 @@ body {
 	align-items: center;
 	top: 30px;
 	flex-direction: column;
+	z-index: 4;
 }
 
 .settingsActive {
@@ -759,7 +763,7 @@ body {
 	width: auto;
 	display: block;
 	right: 0;
-	background: #1c1714;
+	background: #362e29;
 	font-size: .7em;
 	position: absolute;
 	text-align: center;
@@ -776,7 +780,7 @@ body {
 
 .pFragsSpec::before {
 	content: "";
-	background: #0000007a;
+	background: #362e29;
 	height: 100%;
 	width: 1px;
 	display: block;
@@ -790,7 +794,6 @@ body {
 	height: 87%;
 	float: left;
 	position: absolute;
-	/* background: #462a2a; */
 	left: 100%;
 	z-index: 3;
 }
@@ -801,17 +804,21 @@ body {
 
 li {
 	list-style: none;
-	background: #424242;
-	border-bottom: 1px solid #242424;
+	border-bottom: 1px solid #362e29;
 	font-size: .7em;
 	float: left;
 	width: 100%;
 	display: block;
-	height: 17px;
-	line-height: 18px;
 	cursor: pointer;
 	color: white;
 }
+li:nth-child(even) {
+	background: dimgrey;
+}
+li:hover:nth-child(even) {
+	background: #b96713;
+}
+
 
 .orange_txt {
 	color: #ff9900;
@@ -834,6 +841,7 @@ li {
 	width: 100%;
 	height: auto;
 	float: left;
+	background: #585858;
 }
 
 #myTable {
@@ -846,7 +854,6 @@ li {
 	line-height: 22px;
 	color: white;
 	text-transform: uppercase;
-	font-size: .7em;
 }
 #myPlayers li {
 	background: #1c1714;
@@ -866,6 +873,7 @@ li {
 	display: block;
 	float: left;
 	width: 98%;
+	font-size: .8em !important;
 }
 
 .servBtnHolder {
@@ -893,7 +901,7 @@ li {
 	float: left;
 }
 .modalNavSpec:hover {
-	background: #362e29;
+	background: #819320;
 }
 
 .modalNavSpecQtv {
@@ -909,7 +917,7 @@ li {
 	padding: 0.4em 0.5em;
 }
 .modalNavSpecQtv:hover {
-	background: #585858;
+	background: #f93900;
 }
 
 .modalNavJoin {
@@ -958,7 +966,7 @@ li {
 	margin: 0;
 	overflow-y: scroll;
 	width: 100%;
-	background: #1c1714;
+	background: #585858;
 }
 
 .headPlayer {
@@ -984,5 +992,13 @@ li {
     float: left;
 }
 .topTabActive {
-	background: #15b6ae;
+	background: #1c1714;
+}
+.titleBarText img {
+	height: 24px;
+	display: block;
+	float: left;
+	position: relative;
+	top: 3px;
+	left: 0px;
 }

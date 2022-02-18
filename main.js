@@ -11,7 +11,7 @@ function createWindow () {
     minHeight: 305,
     maxHeight: 645,
     frame: false,
-    icon: path.join(`${ process.resourcesPath }/Quake-icon.png`),
+    icon: path.join(`${ process.resourcesPath }/qwsb.ico`),
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -45,3 +45,7 @@ ipcMain.on('close-me', (evt, arg) => {
 ipcMain.on('minimize-me', (evt, arg) => {
   win.minimize()
 })
+
+
+// electron-packager qwsb --platform=win32 --arch=x64 --asar=true --prune --overwrite --extra-resource=./qwsb/data/qstat.exe --extra-resource=./qwsb/data/scripts/servers.json --extra-resource=./qwsb/data/scripts/settings.json 
+// --icon=data/Quake-icon.png
