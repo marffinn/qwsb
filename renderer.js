@@ -134,7 +134,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {
