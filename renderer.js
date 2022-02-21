@@ -39,34 +39,23 @@ let refreshMasters = () => {
         let resultInfo = `Last refresh: ${h}:${m}`
         $('.progressBar b').html(resultInfo)
 
+
         notifier.notify(
             {
                 title: 'Server refresh',
                 message: resultInfo,
                 icon: path.join(`${ process.resourcesPath }/qwsb.ico`), // Absolute path (doesn't work on balloons)
-                wait: true, // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-                appID: "QW-SB",
-                actions: ['ok', 'cancel']
-            },
-            function (err, response, metadata) {
-              console.log(response)
-              console.log(metadata)
+                wait: true,
+                timeout: false,
+                actions: ['Join', 'Dismiss'],
             }
-          );
-          
-          notifier.on('click', function (notifierObject, options, event) {
-            console.log('clicked popup')
-          });
-          notifier.on('timeout', function (notifierObject, options) {
-            console.log("timeout status")
-          });
-          notifier.on('ok', () => {
-            console.log('"Ok" was pressed')
-          });
-          notifier.on('cancel', () => {
-            console.log('"Cancel" was pressed');
-          });
-
+        )
+        notifier.on('join', () => {
+            console.log('"join" was pressed');
+        })
+        notifier.on('dismiss', () => {
+            console.log('"dismiss" was pressed');
+        })
     })
 }
 
@@ -109,7 +98,8 @@ let checkServer = (addre) => {
             <div class="servBtnHolder">
                 <div class="modalNavJoin" data-address="qw://${addre}/join">join</div>
                 <div class="modalNavSpec" data-address="qw://${addre}/observe">spectate</div>
-                <div class="modalNavSpecQtv" data-address="qw://2@${addre}/qtvplay">QTV</div>
+                <div class="modalNavSpecQtv" data-address="qw://2@${addre}/qtvplay">QTv</div>
+                <div class="modalNavSpecAlert" data-address="${addre}">queue</div>
             </div>
             `
             let updatedInfo = () => {
@@ -134,7 +124,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {

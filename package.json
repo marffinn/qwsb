@@ -6,20 +6,15 @@
   "dependencies": {
     "core-util-is": "^1.0.3",
     "electron": "^16.0.5",
-    "electron-modal-window": "^1.0.0",
     "end-of-stream": "^1.4.4",
     "jquery": "^3.6.0",
     "node-notifier": "^10.0.1",
+    "powertoast": "^2.1.0",
     "prepend-http": "^2.0.0",
     "process-nextick-args": "^2.0.1",
     "safe-buffer": "^5.1.2",
     "serialize-error": "^7.0.1"
   },
-
-  "build": {
-    "extraResources": ["./data/qstat.exe"]
-    },
-
   "devDependencies": {},
   "scripts": {
     "start": "electron ."

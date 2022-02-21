@@ -74,6 +74,9 @@ $('body').on('click', '.modalNav span', function (e) {
 $('body').on('click', '.modalNavSpecQtv', function (e) {
   window.location = $(this).attr('data-address')
 })
+$('body').on('click', '.modalNavSpecAlert', function (e) {
+  alert( $(this).attr('data-address') ) 
+})
 
 $('body').on('click', '.modalNavSpec', function (e) {
   window.location = $(this).attr('data-address')
