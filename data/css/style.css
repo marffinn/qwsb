@@ -814,6 +814,7 @@ li {
 	display: block;
 	cursor: pointer;
 	color: white;
+	padding: .2em 0;
 }
 li:nth-child(even) {
 	background: dimgrey;
