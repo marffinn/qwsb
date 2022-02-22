@@ -13,6 +13,8 @@ const appIcon            = `${ process.resourcesPath }/qwsb.ico`
 let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
 
+
+
 function addZero(i) {
     if (i < 10) {i = "0" + i}
     return i
@@ -44,7 +46,7 @@ let refreshMasters = () => {
             {
                 title: 'Server refresh',
                 message: resultInfo,
-                icon: path.join(`${ process.resourcesPath }/qwsb.ico`), // Absolute path (doesn't work on balloons)
+                icon: path.join(`${ process.resourcesPath }/qwsb.ico`),
                 wait: true,
                 timeout: false,
                 actions: ['Join', 'Dismiss'],
@@ -82,6 +84,67 @@ let in_server_team = (team, score) => {
     return teams
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let awaitingSpec = false // variable that determines whether reminder for match is triggered !!!
+let queeStatus = null
+let queed = ( data ) => {
+    if( awaitingSpec == true ){
+        queeStatus = '<div class="modalNavSpecAlert quee" data-address="'+data+'">queue</div>'
+    } else {
+        queeStatus = '<div class="modalNavSpecAlert" data-address="'+data+'">queue</div>'
+    }
+    return queeStatus
+}
+
 let checkServer = (addre) => {
 
     $('.modal').css({ 'left': '0' })
@@ -93,13 +156,14 @@ let checkServer = (addre) => {
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
             let closebtn = "<div class='modalNav'><span></span></div>"
+
             let joinbtn = 
             `
             <div class="servBtnHolder">
                 <div class="modalNavJoin" data-address="qw://${addre}/join">join</div>
                 <div class="modalNavSpec" data-address="qw://${addre}/observe">spectate</div>
                 <div class="modalNavSpecQtv" data-address="qw://2@${addre}/qtvplay">QTv</div>
-                <div class="modalNavSpecAlert" data-address="${addre}">queue</div>
+                ${ queed(addre) }
             </div>
             `
             let updatedInfo = () => {
@@ -124,8 +188,51 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let readServers = () => {
     $('#properTable').empty()

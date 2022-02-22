@@ -133,7 +133,7 @@ body {
 	text-transform: uppercase;
 	font-size: 0.6em;
 	user-select: none;
-	background: #483b32;
+	background: #24201d;
 	color: rgb(255 255 255 / 90%);
 	line-height: 20px;
 	padding: 0 .8em;
@@ -852,7 +852,7 @@ li:hover:nth-child(even) {
 	margin: 0;
 }
 #myTable li {
-	background: #b04949;
+	background: #3c3c3c;
 	height: 22px;
 	line-height: 22px;
 	color: white;
@@ -860,13 +860,20 @@ li:hover:nth-child(even) {
 	font-weight: 600;
 }
 #myPlayers li {
-	background: #b04949;
-	height: 22px;
-	line-height: 22px;
-	color: white;
-	text-transform: uppercase;
-	font-size: .7em;
-	font-weight: 600;
+	
+background: #3c3c3c;
+	
+height: 22px;
+	
+line-height: 22px;
+	
+color: white;
+	
+text-transform: uppercase;
+	
+font-size: .7em;
+	
+font-weight: 600;
 }
 
 #myPlayers {
@@ -897,7 +904,7 @@ li:hover:nth-child(even) {
 .modalNavSpec {
 	width: auto;
 	height: auto;
-	background: #779323;
+	background: #3c3c3c;
 	text-align: center;
 	font-size: .7em;
 	padding: 0.4em 0.5em;
@@ -912,7 +919,7 @@ li:hover:nth-child(even) {
 .modalNavSpecQtv {
 	width: auto;
 	height: auto;
-	background: #850c0c;
+	background: #3c3c3c;
 	text-align: center;
 	color: white;
 	cursor: pointer;
@@ -927,7 +934,7 @@ li:hover:nth-child(even) {
 .modalNavJoin {
 	width: auto;
 	height: auto;
-	background: #2d7216;
+	background: #3c3c3c;
 	text-align: center;
 	font-size: .7em;
 	padding: 0.4em 0.5em;
@@ -943,20 +950,30 @@ li:hover:nth-child(even) {
 .modalNavJoin:active {
 	background: #3c991c;
 }
-
+.quee {
+	background: #878bff !important;
+}
 .modalNavSpecAlert {
 	width: auto;
-	height: auto;
-	background: #640266;
+	height: 22px;
+	background: #3c3c3c;
 	text-align: center;
 	color: white;
 	cursor: pointer;
-	float: right;
 	font-size: .7em;
-	padding: 0.4em 0.5em;
+	padding: 1em;
+	line-height: 22px;
 }
 .modalNavSpecAlert:hover {
 	background: #338b14;
+}
+.modalNavSpecAlert:active {
+	background: #ff9900;
+}
+.modalNavSpecAlert:after {
+	content: "";
+	background: #ff0000;
+	display:block
 }
 
 .playerName {
@@ -1010,7 +1027,7 @@ li:hover:nth-child(even) {
     float: left;
 }
 .topTabActive {
-	background: #b04949;
+	background: #3c3c3c;
 	position: relative;
 	margin: 0;
 }
