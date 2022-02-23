@@ -151,7 +151,7 @@ body {
 }
 
 .refreshBtn:hover {
-	background: #9f0000;
+	background: #8b3737;
 }
 
 .appMain {
@@ -437,7 +437,7 @@ body {
 
 ::-webkit-scrollbar {
 	width: 10px;
-	background: #696969;
+	background: #24201d;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -638,7 +638,7 @@ body {
 .progressBar {
 	display: block;
 	width: 98%;
-	background: #2d5c4e;
+	background: #24201d;
 	position: absolute;
 	float: left;
 	overflow: hidden;
@@ -647,13 +647,13 @@ body {
 }
 
 .progressBar:hover {
-	background: #d2b909;
+	background: #b44a4a;
 }
 
 .progressBar span {
 	display: block;
-	position: absolute !important;
-	background: #6fab2ead !important;
+	position: absolute;
+	background: #6fab2ead;
 	top: 0;
 	height: 15px;
 	z-index: 1;
@@ -668,7 +668,7 @@ body {
 	width: 100%;
 	z-index: 2;
 	line-height: 15px;
-	color: rgb(255 255 255 / 90%);
+	color: white;
 }
 
 .settingsWindow {
@@ -819,6 +819,9 @@ li {
 li:nth-child(even) {
 	background: dimgrey;
 }
+li:last-child {
+	border-bottom: none;
+}
 li:hover:nth-child(even) {
 	background: #b96713;
 }
@@ -963,6 +966,8 @@ font-weight: 600;
 	cursor: pointer;
 	font-size: .7em;
 	padding: 1em;
+	position: a;
+	/* float: left; */
 	line-height: 22px;
 }
 .modalNavSpecAlert:hover {
@@ -973,8 +978,12 @@ font-weight: 600;
 }
 .modalNavSpecAlert:after {
 	content: "";
-	background: #ff0000;
-	display:block
+	background: #222222;
+	display:block;
+	width: 100%;
+	height: 1px;
+	top: -22px;
+	position: relative;
 }
 
 .playerName {
@@ -1034,7 +1043,7 @@ font-weight: 600;
 }
 .topTabActive:after {
 	content: "";
-	background: #1e0303;
+	background: #b14949;
 	width: 100%;
 	height: 1px;
 	bottom: 0;

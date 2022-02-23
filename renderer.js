@@ -58,6 +58,8 @@ let refreshMasters = () => {
         notifier.on('dismiss', () => {
             console.log('"dismiss" was pressed');
         })
+
+
     })
 }
 
@@ -188,7 +190,7 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 

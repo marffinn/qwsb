@@ -20,7 +20,7 @@ $(window)
       })
     $('.appMain')
       .css({
-        'height': window.innerHeight - 78
+        'height': window.innerHeight - 73
       })
     $('.tbl-content')
       .css({
