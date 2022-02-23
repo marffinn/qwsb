@@ -86,56 +86,6 @@ let in_server_team = (team, score) => {
     return teams
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let awaitingSpec = false // variable that determines whether reminder for match is triggered !!!
 let queeStatus = null
 let queed = ( data ) => {
@@ -190,51 +140,8 @@ let checkServer = (addre) => {
         })
     }
     getInfoUpdate()
-    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 let readServers = () => {
     $('#properTable').empty()
@@ -243,6 +150,12 @@ let readServers = () => {
     for (let s in serverList) {
         if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
+
+
+            // here a request to all servers that meet criteria
+
+
+
             let oneServerPrepare =
                 `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
                     <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
@@ -251,6 +164,13 @@ let readServers = () => {
                     <span class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</span>
                 </li>`
             $('#properTable').append(oneServerPrepare)
+
+
+
+
+
+
+
         }
     }
 }
@@ -283,11 +203,13 @@ let readPlayers = () => {
         }
     }
 }
+
 function comparator_name(a, b) {
     if (a.dataset.name < b.dataset.name) return -1
     if (a.dataset.name > b.dataset.name) return 1
     return 0;
 }
+
 function sort_by_name() {
     let subjects = document.querySelectorAll("[data-name]")
     let subjectsArray = Array.from(subjects)
@@ -295,11 +217,13 @@ function sort_by_name() {
     $("#properTable").empty()
     sorted.forEach( e => document.querySelector("#properTable").appendChild(e) )
 }
+
 function comparator_ping(a, b) {
     if (a.dataset.ping < b.dataset.ping) return -1
     if (a.dataset.ping > b.dataset.ping) return 1
     return 0;
 }
+
 function sort_by_ping() {
     let subjects = document.querySelectorAll("[data-ping]")
     let subjectsArray = Array.from(subjects)
@@ -307,6 +231,7 @@ function sort_by_ping() {
     $("#properTable").empty()
     sorted.forEach( e => document.querySelector("#properTable").appendChild(e) )
 }
+
 function sort_by_players() {
     readServers()
 }
@@ -320,7 +245,6 @@ $('.headServerPing').on('click', () => {
 $('.headServerPlayers').on('click', () => {
     sort_by_players()
 })
-
 
 $('.titleBarText').append( `<img src="${appIcon}" alt="QW-SB" ></img>`)
 readServers()
