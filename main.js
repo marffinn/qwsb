@@ -19,7 +19,7 @@ function createWindow () {
     }
   })
   win.loadFile('index.html')
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
@@ -47,4 +47,4 @@ ipcMain.on('minimize-me', (evt, arg) => {
 })
 
 
-// electron-packager qwsb --platform=win32 --arch=x64 --asar=true --prune --overwrite --extra-resource=./qwsb/data/qstat.exe --extra-resource=./qwsb/data/scripts/servers.json --extra-resource=./qwsb/data/scripts/settings.json --extra-resource=./qwsb/data/icons/qwsb.ico --icon=./qwsb/data/icons/qwsb.ico
+// electron-packager qwsb --platform=win32 --arch=x64 --asar=true --prune --overwrite --extra-resource=./qwsb/data/qstat.exe --extra-resource=./qwsb/data/scripts/servers.json --extra-resource=./qwsb/data/scripts/settings.json --extra-resource=./qwsb/data/icons/qwsb.ico --icon=./qwsb/data/qwsb.ico
