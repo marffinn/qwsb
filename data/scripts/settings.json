@@ -11,6 +11,7 @@
         "dm6_uk": "10.185.76.133:27500"
     },
     "sb": {
+        "maxPing": 60,
         "inServerRefreshRate": 1.5,
         "inServerSortPlayers": {
             "ping": "srtByPing",

@@ -8,7 +8,7 @@ const { webFrame }      = require('electron/renderer')
 const notifier          = require('node-notifier')
 
 const main_setup        = require(`${ process.resourcesPath }/settings.json`)
-const appIcon            = `${ process.resourcesPath }/qwsb.ico`
+const appIcon           = `${ process.resourcesPath }/qwsb.ico`
 
 let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
@@ -151,12 +151,19 @@ let checkServer = (addre) => {
 }
 
 let readServers = () => {
+
     $('#properTable').empty()
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata)
     for (let s in serverList) {
+<<<<<<< HEAD
         if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
+=======
+        if( serverList[s].ping >= main_setup.sb.maxPing || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        else {
+
+>>>>>>> f4df9aa44af02e831d41ce47e0c0092fe49074ba
             let oneServerPrepare =
                 `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
                     <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
@@ -165,6 +172,10 @@ let readServers = () => {
                     <span class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</span>
                 </li>`
             $('#properTable').append(oneServerPrepare)
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4df9aa44af02e831d41ce47e0c0092fe49074ba
         }
     }
 }
@@ -191,7 +202,11 @@ let readPlayers = () => {
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata);
     for( let s in serverList ) {
+<<<<<<< HEAD
         if( serverList[s].ping >= 60 ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
+=======
+        if( serverList[s].ping >= main_setup.sb.maxPing ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
+>>>>>>> f4df9aa44af02e831d41ce47e0c0092fe49074ba
         else {
             listPlayers( serverList[s].address )      
         }
