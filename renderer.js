@@ -105,8 +105,10 @@ let checkServer = (addre) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout) 
             let svname = $('.modalSvName').html(outInfo[0].name)
+
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
+            
             let closebtn = "<div class='modalNav'><span></span></div>"
 
             let joinbtn = 
@@ -137,10 +139,15 @@ let checkServer = (addre) => {
             $('.content').prepend(svother)
             $('.content').append(closebtn)
             $('.content').append(joinbtn)
+
+
+            $('.modalSvName').append('<span class="addFav"></span>')
+
+
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {
@@ -148,14 +155,8 @@ let readServers = () => {
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata)
     for (let s in serverList) {
-        if( serverList[s].ping >= 80 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
+        if( serverList[s].ping >= 60 || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
-
-
-            // here a request to all servers that meet criteria
-
-
-
             let oneServerPrepare =
                 `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
                     <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
@@ -164,13 +165,6 @@ let readServers = () => {
                     <span class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</span>
                 </li>`
             $('#properTable').append(oneServerPrepare)
-
-
-
-
-
-
-
         }
     }
 }
@@ -197,7 +191,7 @@ let readPlayers = () => {
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata);
     for( let s in serverList ) {
-        if( serverList[s].ping >= 80 ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
+        if( serverList[s].ping >= 60 ||  serverList[s].map === undefined || serverList[s].map === "?" || serverList[s].numplayers == 0 || serverList[s].numspectacors === "undefined" ) continue
         else {
             listPlayers( serverList[s].address )      
         }
