@@ -24,11 +24,11 @@ $(window)
       })
     $('.tbl-content')
       .css({
-        'height': window.innerHeight - 101
+        'height': window.innerHeight - 104
       })
     $('#playerList')
       .css({
-        'height': window.innerHeight - 101
+        'height': window.innerHeight - 104
       })
   })
 

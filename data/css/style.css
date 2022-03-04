@@ -157,7 +157,7 @@ body {
 .appMain {
 	height: 505px;
 	width: 98%;
-	background: #ce2a2a;
+	background: #4c4c4c;
 	top: 57px;
 	overflow: hidden;
 }
@@ -432,7 +432,7 @@ li:hover {
 }
 
 body {
-	background: #24201d;
+	background: #4c4c4c;
 }
 
 ::-webkit-scrollbar {
@@ -638,7 +638,7 @@ body {
 .progressBar {
 	display: block;
 	width: 98%;
-	background: #24201d;
+	/* background: #24201d; */
 	position: absolute;
 	float: left;
 	overflow: hidden;
@@ -647,7 +647,7 @@ body {
 }
 
 .progressBar:hover {
-	background: #b44a4a;
+	background: #0a3407;
 }
 
 .progressBar span {
@@ -656,7 +656,7 @@ body {
 	background: #6fab2ead;
 	top: 0;
 	height: 15px;
-	z-index: 1;
+	z-index: 2;
 }
 
 .progressBar b {
@@ -666,9 +666,9 @@ body {
 	font-size: .6em;
 	text-align: center;
 	width: 100%;
-	z-index: 2;
+	z-index: 3;
 	line-height: 15px;
-	color: white;
+	color: black;
 }
 
 .settingsWindow {
