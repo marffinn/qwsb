@@ -340,7 +340,7 @@ body {
 }
 
 .modal {
-	background: #362e29;
+	background: #362e29f5;
 	position: absolute;
 	z-index: 5;
 	margin: 0 auto;
@@ -437,12 +437,12 @@ body {
 
 ::-webkit-scrollbar {
 	width: 10px;
-	background: #6c2424;
+	background: #1e1e1e;
 }
 
 ::-webkit-scrollbar-thumb {
-	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-	background: #c55151;
+	/* box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); */
+	background: #ff5722;
 }
 
 .player_spectacor {
@@ -638,7 +638,7 @@ body {
 .progressBar {
 	display: block;
 	width: 98%;
-	/* background: #24201d; */
+	background: #24201d;
 	position: absolute;
 	float: left;
 	overflow: hidden;
@@ -668,7 +668,7 @@ body {
 	width: 100%;
 	z-index: 3;
 	line-height: 15px;
-	color: black;
+	color: white;
 }
 
 .settingsWindow {
@@ -1056,4 +1056,16 @@ font-weight: 600;
 	position: relative;
 	top: 3px;
 	left: 0px;
+}
+.addFav {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: blueviolet;
+    position: absolute;
+    margin-left: -10px;
+    left: 50%;
+    cursor: pointer;
+    z-index: 11;
 }

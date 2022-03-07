@@ -70,6 +70,9 @@ $('body').on('click', '.modalNav span', function (e) {
     'left': '100%'
   })
 })
+$('body').on('click', '.addFav', function (e) {
+  console.log("fav added");
+})
 
 $('body').on('click', '.modalNavSpecQtv', function (e) {
   window.location = $(this).attr('data-address')
