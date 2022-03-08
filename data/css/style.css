@@ -58,6 +58,7 @@ body {
 .serverPing {
 	width: 10%;
 	float: left;
+	font-weight: 900;
 }
 
 .serverMap {
@@ -814,7 +815,7 @@ li {
 	display: block;
 	cursor: pointer;
 	color: white;
-	padding: .2em 0;
+	padding: 0.5em 0;
 }
 li:nth-child(even) {
 	background: dimgrey;
