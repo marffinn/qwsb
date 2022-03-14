@@ -42,22 +42,22 @@ let refreshMasters = () => {
         $('.progressBar b').html(resultInfo)
 
 
-        notifier.notify(
-            {
-                title: 'Server refresh',
-                message: resultInfo,
-                icon: path.join(`${ process.resourcesPath }/qwsb.ico`),
-                wait: true,
-                timeout: false,
-                actions: ['Join', 'Dismiss'],
-            }
-        )
-        notifier.on('join', () => {
-            console.log('"join" was pressed');
-        })
-        notifier.on('dismiss', () => {
-            console.log('"dismiss" was pressed');
-        })
+        // notifier.notify(
+        //     {
+        //         title: 'Server refresh',
+        //         message: resultInfo,
+        //         icon: path.join(`${ process.resourcesPath }/qwsb.ico`),
+        //         wait: true,
+        //         timeout: false,
+        //         actions: ['Join', 'Dismiss'],
+        //     }
+        // )
+        // notifier.on('join', () => {
+        //     console.log('"join" was pressed');
+        // })
+        // notifier.on('dismiss', () => {
+        //     console.log('"dismiss" was pressed');
+        // })
 
 
     })
@@ -141,7 +141,7 @@ let checkServer = (addre) => {
             $('.content').append(joinbtn)
 
 
-            // $('.modalSvName').append('<span class="addFav"></span>')
+            $('.modalSvName').append('<span class="addFav"></span>')
 
 
         })
@@ -151,7 +151,6 @@ let checkServer = (addre) => {
 }
 
 let readServers = () => {
-
     $('#properTable').empty()
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata)

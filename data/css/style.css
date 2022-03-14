@@ -645,6 +645,7 @@ body {
 	overflow: hidden;
 	cursor: pointer;
 	bottom: 4px;
+	border-radius: 10px;
 }
 
 .progressBar:hover {
@@ -815,7 +816,7 @@ li {
 	display: block;
 	cursor: pointer;
 	color: white;
-	padding: 0.5em 0;
+	padding: 0.2em 0;
 }
 li:nth-child(even) {
 	background: dimgrey;
