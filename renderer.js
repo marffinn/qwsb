@@ -141,13 +141,13 @@ let checkServer = (addre) => {
             $('.content').append(joinbtn)
 
 
-            $('.modalSvName').append('<span class="addFav"></span>')
+            $('.modalSvName').append(`<span class="addFav" data-addr="${addre}"></span>`)
 
 
         })
     }
     getInfoUpdate()
-    inRefresh = setInterval( getInfoUpdate, cycleEvery)
+    // inRefresh = setInterval( getInfoUpdate, cycleEvery)
 }
 
 let readServers = () => {

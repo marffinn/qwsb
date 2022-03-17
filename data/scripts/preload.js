@@ -70,9 +70,27 @@ $('body').on('click', '.modalNav span', function (e) {
     'left': '100%'
   })
 })
+
+
+
 $('body').on('click', '.addFav', function (e) {
-  console.log("fav added");
+  
+  let addressIP = $(this).attr('data-addr')
+// read json file
+
+// check if server already on the list
+
+// append to existing json file
+  fs.appendFile("favourites.json", addressIP+'\r\n', function(err) {
+    if (err) {
+      console.log(err);
+    }
+  })
+  console.log("fav added:" + addressIP)
 })
+
+
+
 
 $('body').on('click', '.modalNavSpecQtv', function (e) {
   window.location = $(this).attr('data-address')
