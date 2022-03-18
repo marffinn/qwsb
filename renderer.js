@@ -141,7 +141,7 @@ let checkServer = (addre) => {
             $('.content').append(joinbtn)
 
 
-            $('.modalSvName').append(`<span class="addFav" data-addr="${addre}"></span>`)
+            $('.modalSvName').append(`<span class="addFav" data-addr="${addre}" data-name="${outInfo[0].name}"></span>`)
 
 
         })

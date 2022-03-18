@@ -73,21 +73,67 @@ $('body').on('click', '.modalNav span', function (e) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FAVOURITES ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 $('body').on('click', '.addFav', function (e) {
+
+// declare variables for append operation
+  let addressIp = $(this).attr('data-addr')
+  let serverName = $(this).attr('data-name')
+  let arrayToJSON = []
+
+  let objectNew = {"name": serverName, 'address': addressIp}
+
+
+
+
+  // read json file
+  // let rawdata = fs.readFileSync( 'favourites.json' )
+  // let favList = JSON.parse(rawdata)
+
+  arrayToJSON.push(objectNew)
   
-  let addressIP = $(this).attr('data-addr')
-// read json file
+  console.log( arrayToJSON )
+  
+
+  let jsonToWrite = JSON.stringify( arrayToJSON )
+  
+
+// convert to array from JSON
 
 // check if server already on the list
-
+  
 // append to existing json file
-  fs.appendFile("favourites.json", addressIP+'\r\n', function(err) {
+  fs.writeFile("favourites.json", jsonToWrite, function(err) {
     if (err) {
       console.log(err);
     }
   })
-  console.log("fav added:" + addressIP)
+  // console.log( jsonToWrite )
 })
+
+// END OF FAVOURITES //////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
