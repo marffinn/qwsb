@@ -121,8 +121,9 @@ $('body').on('click', '.addFav', function (e) {
   }
   
 
+  
   // convert to array from JSON
-  let jsonToWrite = JSON.stringify( favList )
+  let jsonToWrite = JSON.stringify( favList, null, 2)
 
 // append to existing json file
   fs.writeFile("favourites.json", jsonToWrite, function(err) {

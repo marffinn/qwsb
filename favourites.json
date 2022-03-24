@@ -1,1 +1,18 @@
-[{"name":"BESE Team Server","address":"185.187.72.51:27500"},{"name":"troopers.fi:28003","address":"95.216.18.118:28003"},{"name":"WGW FFA","address":"192.166.218.37:28501"},{"name":"play.quake1.pl - duel #1","address":"137.74.7.185:27500"},{"name":"play.quake1.pl - ffa","address":"137.74.7.185:27510"},{"name":"ziewa.pl:28503 Antilag","address":"51.83.128.107:28503"},{"name":"troopers.fi:28003","address":"95.216.18.118:28003"},{"name":"[FR] ANTILAG - BaseQ Deimos - KTX Server #666","address":"193.168.147.161:29501"},{"name":"QW.0F.SE #1","address":"193.11.31.124:27501"}]
+[
+  {
+    "name": "WGW 1on1",
+    "address": "192.166.218.37:28502"
+  },
+  {
+    "name": "Silent Crescent:28501",
+    "address": "51.210.10.181:28501"
+  },
+  {
+    "name": "WGW 2on2",
+    "address": "192.166.218.37:28504"
+  },
+  {
+    "name": "Dragon QW KTX",
+    "address": "82.141.152.3:27500"
+  }
+]
