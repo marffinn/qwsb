@@ -101,36 +101,37 @@ $('body').on('click', '.addFav', function (e) {
 // declare variables for append operation
   let addressIp = $(this).attr('data-addr')
   let serverName = $(this).attr('data-name')
-  let arrayToJSON = []
-
   let objectNew = {"name": serverName, 'address': addressIp}
 
-
-
-
   // read json file
-  // let rawdata = fs.readFileSync( 'favourites.json' )
-  // let favList = JSON.parse(rawdata)
+  let rawdata = fs.readFileSync( 'favourites.json' )
+  let favList = JSON.parse(rawdata)
 
-  arrayToJSON.push(objectNew)
-  
-  console.log( arrayToJSON )
+  if( favList ) {
+    // check if server already on the list / if not push to array, else .continue
+    for( f in favList ){
+      console.log( favList[f].name + ' - '+ favList[f].address )
+    }
+    // push new server to list
+    favList.push(objectNew)  
+  }
+  else {
+    // push new server to list
+    favList.push(objectNew)
+  }
   
 
-  let jsonToWrite = JSON.stringify( arrayToJSON )
-  
+  // convert to array from JSON
+  let jsonToWrite = JSON.stringify( favList )
 
-// convert to array from JSON
-
-// check if server already on the list
-  
 // append to existing json file
   fs.writeFile("favourites.json", jsonToWrite, function(err) {
     if (err) {
-      console.log(err);
+      console.log(err)
     }
+    console.log(favList)
   })
-  // console.log( jsonToWrite )
+
 })
 
 // END OF FAVOURITES //////////////////////////////////////////////////////////////////////////////////////////////
