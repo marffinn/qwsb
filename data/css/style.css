@@ -852,6 +852,14 @@ li:hover:nth-child(even) {
 	float: left;
 	background: #585858;
 }
+#favouritesTable {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: auto;
+	float: left;
+	background: #585858;
+}
 
 #myTable {
 	padding: 0;

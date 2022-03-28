@@ -47,9 +47,15 @@ $('.refreshTopServer').on('click', () => {
 })
 
 $('.refreshTopFavs').on('click', () => {
+  readFavourites()
   $(".topTabActive").removeClass("topTabActive");
   $('.refreshTopFavs').toggleClass("topTabActive")
+
+
+  $('#myFavourites').toggleClass('activeTab')
 })
+
+
 
 $('.progressBar').on('click', () => {
   refreshMasters()
@@ -70,25 +76,6 @@ $('body').on('click', '.modalNav span', function (e) {
     'left': '100%'
   })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -144,17 +131,6 @@ $('body').on('click', '.modalNavSpecQtv', function (e) {
   window.location = $(this).attr('data-address')
 })
 
-
-
-
-
-
-
-
-
-
-
-
 $('body').on('click', '.modalNavSpecAlert', function (e) {
   
   if ( awaitingSpec == false ) {
@@ -170,16 +146,6 @@ $('body').on('click', '.modalNavSpecAlert', function (e) {
   console.log( $(this).attr('data-address') + `  [${awaitingSpec}]` ) 
 })
 
-
-
-
-
-
-
-
-
-
-
 $('body').on('click', '.modalNavSpec', function (e) {
   window.location = $(this).attr('data-address')
 })
@@ -187,6 +153,11 @@ $('body').on('click', '.modalNavSpec', function (e) {
 $('body').on('click', '.modalNavJoin', function (e) {
   window.location = $(this).attr('data-address')
 })
+
+
+
+
+
 
 $('body').on('click', '#properTable li', function (e) {
   e.preventDefault()
@@ -196,6 +167,13 @@ $('body').on('click', '#properTable li', function (e) {
 })
 
 $('body').on('click', '#playerList li', function (e) {
+  e.preventDefault()
+  clearInterval(inRefresh)
+  let svAdress = $(this).attr('data-address')
+  checkServer(svAdress)
+})
+
+$('body').on('click', '#favouritesTable li', function (e) {
   e.preventDefault()
   clearInterval(inRefresh)
   let svAdress = $(this).attr('data-address')
