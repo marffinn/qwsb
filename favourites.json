@@ -14,5 +14,13 @@
   {
     "name": "Dragon QW KTX",
     "address": "82.141.152.3:27500"
+  },
+  {
+    "name": "Gladius SPB KTX #27506",
+    "address": "91.206.14.17:27506"
+  },
+  {
+    "name": "LinuxGSM",
+    "address": "155.4.69.157:27500"
   }
 ]

@@ -170,25 +170,21 @@ let readServers = () => {
     }
 }
 let readFavourites = () => {
+    //  favouritesTable
     $('#favouritesTable').empty()
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/favourites.json` )
     let serverList = JSON.parse(rawdata)
 
     console.log( serverList )
-    // for (let s in serverList) {
-    //     if( serverList[s].ping >= main_setup.sb.maxPing || serverList[s].map === undefined || serverList[s].map === "?" ) continue
-    //     else {
+    for (let s in serverList) {
 
-    //         let oneServerPrepare =
-    //             `<li href="${serverList[s].address}" data-name="${serverList[s].name}" data-ping="${serverList[s].ping}" data-playerno="${serverList[s].numplayers}">
-    //                 <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
-    //                 <span class="serverPing">${serverList[s].ping}</span>
-    //                 <span class="serverMap">${serverList[s].map}</span>
-    //                 <span class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</span>
-    //             </li>`
-            $('#favouritesTable').append(serverList[1])
-    //     }
-    // }
+        let oneServerPrepare =
+            `<li href="${serverList[s].address}" data-name="${serverList[s].name}">
+                <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
+            </li>`
+        $('#favouritesTable').append(oneServerPrepare)
+        
+    }
 }
 
 let listPlayers = ( data ) => {
