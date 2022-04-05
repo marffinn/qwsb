@@ -13,15 +13,12 @@ const appIcon           = `${ process.resourcesPath }/qwsb.ico`
 let inRefresh           = null
 let cycleEvery          = main_setup.sb.inServerRefreshRate * 1000
 
-
-
 function addZero(i) {
     if (i < 10) {i = "0" + i}
     return i
 }
 
 let refreshMasters = () => {
-    $('.progressBar').animate({ height: "15px" }, 'fast' )
     $('.progressBar span').css('width', '0%')
     const ls = spawn(`${ process.resourcesPath }/qstat.exe`, [ "-qwm", main_setup.masters.ocrana , "-retry", main_setup.retries , "-nh", "-R", "-progress", "-u", "-sort", "n", "-json", "-of",  `${process.resourcesPath}/servers.json` ])
     ls.stderr.on('data', (data) => {
@@ -105,12 +102,9 @@ let checkServer = (addre) => {
             if (err) { console.error(err) }
             let outInfo = JSON.parse(stdout) 
             let svname = $('.modalSvName').html(outInfo[0].name)
-
             let svmap = $('.modalMap').html(`<span>${outInfo[0].map}</span>`)
             let svother = in_server_status(outInfo[0].rules.status)
-            
             let closebtn = "<div class='modalNav'><span></span></div>"
-
             let joinbtn = 
             `
             <div class="servBtnHolder">
@@ -139,11 +133,7 @@ let checkServer = (addre) => {
             $('.content').prepend(svother)
             $('.content').append(closebtn)
             $('.content').append(joinbtn)
-
-
             $('.modalSvName').append(`<span class="addFav" data-addr="${addre}" data-name="${outInfo[0].name}"></span>`)
-
-
         })
     }
     getInfoUpdate()
@@ -151,9 +141,12 @@ let checkServer = (addre) => {
 }
 
 let readServers = () => {
-    $('#properTable').empty()
+
     let rawdata = fs.readFileSync( `${ process.resourcesPath }/servers.json` )
     let serverList = JSON.parse(rawdata)
+
+    console.log(serverList);
+
     for (let s in serverList) {
         if( serverList[s].ping >= main_setup.sb.maxPing || serverList[s].map === undefined || serverList[s].map === "?" ) continue
         else {
@@ -165,28 +158,11 @@ let readServers = () => {
                     <span class="serverMap">${serverList[s].map}</span>
                     <span class="serverPlayers">${serverList[s].numplayers}/${serverList[s].maxplayers}</span>
                 </li>`
-            $('#properTable').append(oneServerPrepare)
+            $('#appServers .tbl-content').append(oneServerPrepare)
+            console.log( `${serverList[s].name}` );
         }
     }
 }
-let readFavourites = () => {
-    //  favouritesTable
-    $('#favouritesTable').empty()
-    let rawdata = fs.readFileSync( `${ process.resourcesPath }/favourites.json` )
-    let serverList = JSON.parse(rawdata)
-
-    console.log( serverList )
-    for (let s in serverList) {
-
-        let oneServerPrepare =
-            `<li href="${serverList[s].address}" data-name="${serverList[s].name}">
-                <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
-            </li>`
-        $('#favouritesTable').append(oneServerPrepare)
-        
-    }
-}
-
 let listPlayers = ( data ) => {
     exec(`${ process.resourcesPath }/qstat.exe -qws ${data} -retry 1 -nh -P -R -noconsole  -json`, (err, stdout) => {
         if (err) { console.error(err) }
@@ -196,11 +172,10 @@ let listPlayers = ( data ) => {
                 if( playerInfo[p].players[i].name === "[ServeMe]" ) continue
                 else {
                     let player = `<li data-spectacors="${ playerInfo[p].numspectacors }" data-address="${playerInfo[p].address}" ><span class="playerName">${ playerInfo[p].players[i].name }</span><span class="playerPing">${playerInfo[p].ping}</span><span class="playerServer">${playerInfo[p].name}</span></li>`
-                    $('#playerList').append(player)
+                    $('#appPlayers .tbl-content ul').append(player)
                 }
             }
         }
-
     })
 }
 
@@ -216,47 +191,19 @@ let readPlayers = () => {
     }
 }
 
-function comparator_name(a, b) {
-    if (a.dataset.name < b.dataset.name) return -1
-    if (a.dataset.name > b.dataset.name) return 1
-    return 0;
+let readFavourites = () => {
+    $('#favouritesTable').empty()
+    let rawdata = fs.readFileSync( `${ process.resourcesPath }/favourites.json` )
+    let serverList = JSON.parse(rawdata)
+    for (let s in serverList) {
+
+        let oneServerPrepare =
+            `<li href="${serverList[s].address}" data-name="${serverList[s].name}">
+                <span class="serverName"><a href="${serverList[s].address}">${serverList[s].name}</a></span>
+            </li>`
+            $('#appFavourites .tbl-content ul').append(oneServerPrepare)
+        
+    }
 }
 
-function sort_by_name() {
-    let subjects = document.querySelectorAll("[data-name]")
-    let subjectsArray = Array.from(subjects)
-    let sorted = subjectsArray.sort(comparator_name)
-    $("#properTable").empty()
-    sorted.forEach( e => document.querySelector("#properTable").appendChild(e) )
-}
-
-function comparator_ping(a, b) {
-    if (a.dataset.ping < b.dataset.ping) return -1
-    if (a.dataset.ping > b.dataset.ping) return 1
-    return 0;
-}
-
-function sort_by_ping() {
-    let subjects = document.querySelectorAll("[data-ping]")
-    let subjectsArray = Array.from(subjects)
-    let sorted = subjectsArray.sort(comparator_ping)
-    $("#properTable").empty()
-    sorted.forEach( e => document.querySelector("#properTable").appendChild(e) )
-}
-
-function sort_by_players() {
-    readServers()
-}
-
-$('.headServerName').on('click', () => {
-    sort_by_name()
-})
-$('.headServerPing').on('click', () => {
-    sort_by_ping()
-})
-$('.headServerPlayers').on('click', () => {
-    sort_by_players()
-})
-
-$('.titleBarText').append( `<img src="${appIcon}" alt="QW-SB" ></img>`)
 readServers()

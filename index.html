@@ -11,8 +11,7 @@
 <body>
 
     <div class="titleBar">
-        <div class="titleBarText">
-        </div>
+        <div class="titleBarText">QuakeWorld</div>
         <div class="closeButton"></div>
         <div class="minimizeButton"></div>
         <div class="mainSettings">settings</div>
@@ -54,70 +53,60 @@
     </div>
 
     <div class="appBtns">
-        <div class="progressBar"><b> Refresh servers... </b> <span></span> </div>
+        
         <div class="inAppBtns">
             <div class="refreshBtn refreshTopServer topTabActive">Server list</div>
             <div class="refreshBtn refreshTopPlayer">Player list</div>
             <div class="refreshBtn refreshTopFavs">Favourites</div>
         </div>
+
+        <div class="progressBar"><b> Refresh servers... </b> <span></span> </div>
+
     </div>
 
 
 
 
-
+<!-- APP MAIN -->
     <div class="appMain">
 
-        <div class="appPlayers">
-            <div class="tbl-header">
-                <ul id="myPlayers">
-                    <li>
-                        <span class="headSpace">
-                            <span class="headPlayer">player</span>
-                            <span class="headPing">ping</span>
-                            <span class="headPlayerServer">@ server</span>
-                        </span>
-                    </li>
-                </ul>
-            </div>
+        <div class="appServers appActiveTab">
+            <ul class="myHeader">
+                <span class="headServerName">Name</span>
+                <span class="headServerPing">Ping</span>
+                <span class="headServerMap">Map</span>
+                <span class="headServerPlayers">Players</span>
+            </ul>
             <div class="tbl-content">
                 <ul></ul> 
             </div>
         </div>
 
-        <div class="appServers">
-            <ul id="myServers">
-                <li>
-                    <span class="headSpace">
-                        <span class="headServerName">Name</span>
-                        <span class="headServerPing">Ping</span>
-                        <span class="headServerMap">Map</span>
-                        <span class="headServerPlayers">Players</span>
-                    </span>
-                </li>
-            </ul>
+        <div class="appPlayers">
+            <div class="myHeader">
+                <span class="headPlayer">player</span>
+                <span class="headPing">ping</span>
+                <span class="headPlayerServer">@ server</span>
+            </div>
             <div class="tbl-content">
                 <ul></ul> 
             </div>
         </div>
 
         <div class="appFavourites">
-            <ul id="myFavourites">
-                <li>
-                    <span class="headSpace">
-                        <span class="headServerName">Name</span>
-                        <span class="headServerPing">Ping</span>
-                        <span class="headServerMap">Map</span>
-                        <span class="headServerPlayers">Players</span>
-                    </span>
-                </li>
+            <ul class="myHeader">
+                <span class="headServerName">Name</span>
+                <span class="headServerPing">Ping</span>
+                <span class="headServerMap">Map</span>
+                <span class="headServerPlayers">Players</span>
             </ul>
             <div class="tbl-content">
                 <ul></ul> 
             </div>
         </div>
 
-    </div>  <!-- APP MAIN -->
+    </div>  
+<!-- APP MAIN -->
 
 
 

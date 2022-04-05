@@ -123,6 +123,7 @@ body {
 	display: block;
 	height: auto;
 	float: left;
+	position: relative;
 	margin-top: 5px;
 }
 
@@ -433,7 +434,7 @@ li:hover {
 }
 
 body {
-	background: #4c4c4c;
+	background: #051252;
 }
 
 ::-webkit-scrollbar {
@@ -638,14 +639,15 @@ body {
 
 .progressBar {
 	display: block;
-	width: 98%;
-	background: #24201d;
+	width: 50%;
+	background: #744db3;
 	position: absolute;
 	float: left;
 	overflow: hidden;
 	cursor: pointer;
-	bottom: 4px;
-	border-radius: 10px;
+	right: 0;
+	line-height: 20px;
+	height: 20px;
 }
 
 .progressBar:hover {
@@ -657,7 +659,7 @@ body {
 	position: absolute;
 	background: #6fab2ead;
 	top: 0;
-	height: 15px;
+	height: 20px;
 	z-index: 2;
 }
 
@@ -669,8 +671,9 @@ body {
 	text-align: center;
 	width: 100%;
 	z-index: 3;
-	line-height: 15px;
 	color: white;
+	height: 20px;
+	line-height: 20px;
 }
 
 .settingsWindow {
@@ -1078,4 +1081,15 @@ font-weight: 600;
     left: 50%;
     cursor: pointer;
     z-index: 11;
+}
+
+
+
+/*  */
+
+.appFavourites {
+    display: none;
+}
+.appPlayers {
+    display: none;
 }
