@@ -1,0 +1,1095 @@
+p {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	overflow: hidden;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	flex-wrap: nowrap;
+}
+
+@font-face {
+	font-family: "DroidSerif";
+	src: url("/data/fonts/OpenSans-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "DroidSerif";
+	src: url("/data/fonts/OpenSans-Medium.ttf") format("truetype");
+	font-weight: medium;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "DroidSerif";
+	src: url("/data/fonts//OpenSans-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.serverName {
+	width: 60%;
+	text-indent: 5px;
+	float: left;
+	height: 100%;
+}
+
+.serverName a {
+	color: white;
+	text-decoration: none;
+	/* font-size: 1.5em; */
+	height: 100%;
+	width: auto;
+	float: left;
+}
+
+.serverPing {
+	width: 10%;
+	float: left;
+	font-weight: 900;
+}
+
+.serverMap {
+	width: 20%;
+	float: left;
+}
+
+.serverPlayers {
+	width: 10%;
+	float: left;
+}
+
+.headServerName {
+	width: 60%;
+	text-align: left;
+	cursor: pointer;
+	text-indent: 5px;
+	float: left;
+	position: relative;
+}
+
+.headServerPing {
+	width: 10%;
+	text-align: left;
+	float: left;
+	cursor: pointer;
+	position: relative;
+}
+
+.headServerMap {
+	width: 20%;
+	position: relative;
+	text-align: left;
+	float: left;
+}
+
+.headServerPlayers {
+	width: 10%;
+	text-align: left;
+	float: left;
+	cursor: pointer;
+	position: relative;
+}
+
+.onePlayer {
+	background: #7c7c7c;
+	font-size: .7em;
+	box-shadow: 1px 1px 0px 1px #3a3a3a;
+	display: block;
+	float: left;
+	width: 80%;
+	height: 20px;
+	line-height: 20px;
+	left: 10%;
+	position: relative;
+	text-indent: 10px;
+	font-weight: 600;
+}
+
+.appBtns {
+	width: 96%;
+	display: block;
+	height: auto;
+	float: left;
+	position: relative;
+	margin-top: 5px;
+}
+
+.refreshBtn {
+	width: auto;
+	float: left;
+	height: 20px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	user-select: none;
+	background: #24201d;
+	color: rgb(255 255 255 / 90%);
+	line-height: 20px;
+	padding: 0 .8em;
+}
+
+.refreshBtn::after {
+	content: "";
+	display: block;
+	position: absolute;
+	background: #382f29;
+	height: 100%;
+	width: 1px;
+	top: 0;
+	right: 0;
+}
+
+.refreshBtn:hover {
+	background: #8b3737;
+}
+
+.appMain {
+	height: auto;
+	width: 96%;
+	background: #4c4c4c;
+	/* top: 57px; */
+	overflow: hidden;
+}
+
+.modalSvName {
+	color: #1a1a1a;
+	width: 100%;
+	display: block;
+	float: left;
+	background: #ff9900;
+	/*     text-transform: uppercase; */
+	padding: .5em 0;
+	font-size: .7em;
+	position: relative;
+	text-align: center;
+}
+
+.modalMap {
+	color: #ff9900;
+	text-transform: uppercase;
+	left: 0;
+	font-size: .7em;
+	position: absolute;
+	text-align: center;
+	padding: 0.5em 1em;
+	z-index: 1;
+	background: #362e29;
+}
+
+.modalSvPicture {
+	height: 150px;
+	background: darkslateblue;
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+.modalPlayers {
+	width: 100%;
+	display: flex;
+	height: auto;
+	padding: 0.5em 0em;
+	flex-direction: column;
+	align-items: center;
+	
+	position:relative;
+}
+.modalPlayers::first-child {
+	border-radius: 2px;
+}
+.modalPlayers:last-child {
+	border-radius: 2px;
+}
+.titleBar {
+	background: #1c1714;
+	width: 100%;
+	position: relative;
+	-webkit-app-region: drag;
+	overflow: hidden;
+	display: block;
+	float: left;
+	color: white;
+	line-height: 30px;
+	user-select: none;
+	font-size: .8em;
+	z-index: 100;
+}
+
+.titleBarText {
+	/* height: 30px; */
+	width: auto;
+	display: block;
+	float: left;
+	position: relative;
+	/* line-height: 30px; */
+	left: 1em;
+}
+
+.minimizeButton {
+	content: "";
+	width: 30px;
+	height: 30px;
+	display: block;
+	position: relative;
+	float: right;
+	color: white;
+	-webkit-app-region: no-drag;
+}
+
+.minimizeButton::before {
+	content: "";
+	display: block;
+	width: 12px;
+	height: 2px;
+	background-color: rgb(255 255 255 / 90%);
+	position: relative;
+	left: 50%;
+	margin-top: 3px;
+	margin-left: -6px;
+	top: 50%;
+}
+
+.settingsContainer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	background: #404040;
+	z-index: 3;
+	overflow: hidden;
+}
+
+.closeButton {
+	content: "";
+	width: 30px;
+	height: 30px;
+	display: block;
+	position: relative;
+	float: right;
+	color: white;
+	-webkit-app-region: no-drag;
+}
+
+.closeButton::before {
+	content: "";
+	display: block;
+	width: 12px;
+	height: 2px;
+	background-color: rgb(255 255 255 / 90%);
+	position: relative;
+	transform: rotate(-45deg);
+	top: 50%;
+	margin-top: -1px;
+	left: 50%;
+	margin-left: -6px;
+}
+
+.closeButton::after {
+	content: "";
+	display: block;
+	width: 12px;
+	height: 2px;
+	background-color: rgb(255 255 255 / 90%);
+	position: relative;
+	transform: rotate(45deg);
+	top: 50%;
+	margin-top: -2px;
+	left: 50%;
+	margin-left: -6px;
+}
+
+.closeButton:hover {
+	background-color: #951313;
+}
+
+.minimizeButton:hover {
+	background-color: #323232;
+}
+
+.closeButton:active {
+	background-color: #d93c3c;
+}
+
+.minimizeButton:active {
+	background-color: #161616;
+}
+
+.container {
+	background-color: #292929;
+}
+
+.content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.modal {
+	background: #362e29f5;
+	position: absolute;
+	z-index: 5;
+	margin: 0 auto;
+	left: 100%;
+	bottom: 0;
+	width: 100%;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	border-radius: 5px 5px 0 0;
+	/* overflow: hidden; */
+}
+
+.modalNav {
+	position: absolute;
+	left: 50%;
+	top: -25px;
+	display: flex;
+	justify-content: center;
+	z-index: 20;
+	align-content: flex-start;
+}
+
+.modalNav span {
+	width: 30px;
+	height: 25px;
+	cursor: pointer;
+	position: absolute;
+	background: #ff9900;
+	border-radius: 12px 12px 0px 0px;
+}
+
+.modalNav span::before {
+	content: '';
+	width: 14px;
+	height: 2px;
+	display: block;
+	background-color: #1c1714;
+	transform: rotate(45deg) scale(.8);
+	position: relative;
+	margin: 0 auto;
+	top: 50%;
+	margin-top: -1px;
+}
+
+.modalNav span:hover::before {
+	background: #ff0000
+}
+
+.modalNav span::after {
+	content: '';
+	width: 14px;
+	height: 2px;
+	display: block;
+	background-color: #1c1714;
+	transform: rotate(-45deg) scale(.8);
+	position: relative;
+	margin: 0 auto;
+	top: 50%;
+	margin-top: -2px;
+}
+
+.modalNav span:hover::after {
+	background: #ff0000
+}
+
+.modalNav content {
+	color: white;
+}
+
+.os-content {
+	padding: 0 !important
+}
+
+.tbl-header {
+	display: block;
+	background-color: rgb(0 0 0 / 52%);
+}
+
+.tbl-content {
+	height: 480px;
+	overflow-x: auto;
+	float: left;
+	margin-top: 0px;
+}
+
+li:hover {
+	background: #b96713;
+}
+
+body {
+	background: #1a1a1a;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+	/* box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); */
+	background: #ff5722;
+}
+
+.player_spectacor {
+	color: #ffc107;
+	order: 1;
+	font-weight: 699;
+}
+
+.onePlayer span {
+	display: block;
+	float: right;
+	padding: 0 .5em;
+	text-align: right;
+}
+
+.team1 {
+	height: 15px;
+	display: block;
+	float: left;
+	text-align: center;
+	width: 60%;
+	position: relative;
+	background: #c5c5c5;
+}
+.team1:first-child {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+}
+.team1:last-child {
+	border-radius: 0 0 5px 5px;
+	overflow: hidden;
+}
+
+.team1::after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	height: 1px;
+	background: #0000007a;
+	display: none;
+	bottom: 0;
+}
+
+.teamSpec {
+	height: auto;
+	display: block;
+	float: left;
+	width: 60%;
+	position: relative;
+	background: #222222;
+	color: #ababab;
+}
+.teamSpec:last-child {
+	border-radius: 0 0 5px 5px;
+	overflow: hidden;
+}
+
+.modalPlayers .teamSpec:fisrt-child {
+	background: aqua
+}
+
+.teamSpec::after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	display: block;
+	background-color: #362e29;
+	height: 1px;
+	bottom: 0;
+}
+
+.modalPlayers .team1:nth-child(even) {
+	background-color: #a7a7a7;
+}
+
+.pName {
+	width: 60%;
+	display: block;
+	float: left;
+	text-align: center;
+	height: 15px;
+	font-size: .7em;
+	line-height: 15px;
+	font-weight: 600;
+}
+
+.pTeam {
+	width: 20%;
+	display: block;
+	float: left;
+	text-align: center;
+	height: 15px;
+	line-height: 15px;
+	/* background: aliceblue; */
+	font-size: .7em;
+	position: relative;
+}
+
+.pTeam::after {
+	content: "";
+	width: 1px;
+	position: absolute;
+	display: block;
+	top: 0;
+	background: #606262;
+	height: 100%;
+	right: 0;
+}
+
+.pTeamSpec {
+	width: 20%;
+	display: block;
+	float: left;
+	font-size: 0.7em;
+	text-align: center;
+	height: 15px;
+	line-height: 15px;
+	position: relative;
+}
+.pTeamSpec::after {
+	content:"";
+	display:block;
+	position:absolute;
+	background: #362e29;
+	height:100%;
+	width: 1px;
+	right: 0;
+	top: 0;
+}
+
+.pFrags {
+	width: 20%;
+	display: block;
+	float: left;
+	font-size: 0.7em;
+	text-align: center;
+	height: 15px;
+	line-height: 15px;
+	margin: 0;
+	padding: 0;
+	background: #f0ffff3b;
+}
+
+.pFrags::before {
+	content: "";
+	height: 100%;
+	width: 1px;
+	background: #0000007a;
+	position: absolute;
+	display: block;
+	top: 0;
+}
+
+.pFragsSpec {
+	width: 20%;
+	font-size: .7em;
+	display: block;
+	float: left;
+	line-height: inherit;
+	text-align: center;
+	height: 15px;
+	line-height: 15px;
+}
+
+.mainSettings {
+	display: block;
+	width: auto;
+	height: 30px;
+	float: right;
+	background: #24201d;
+	font-size: .7em;
+	line-height: 30px;
+	text-transform: uppercase;
+	text-align: center;
+	cursor: pointer;
+	font-weight: 600;
+	padding: 0 2em;
+	-webkit-app-region: no-drag;
+}
+
+.mainSettings:active {
+	background-color: #1c1714;
+}
+.mainSettings:hover {
+	background-color: #726b16;
+}
+
+.inAppBtns {
+	display: block;
+	float: left;
+}
+
+.progressBar {
+	display: block;
+	width: 50%;
+	background: #744db3;
+	position: absolute;
+	float: left;
+	overflow: hidden;
+	cursor: pointer;
+	right: 0;
+	line-height: 20px;
+	height: 20px;
+}
+
+.progressBar:hover {
+	background: #0a3407;
+}
+
+.progressBar span {
+	display: block;
+	position: absolute;
+	background: #6fab2ead;
+	top: 0;
+	height: 20px;
+	z-index: 2;
+}
+
+.progressBar b {
+	display: block;
+	position: relative;
+	top: 0;
+	font-size: .6em;
+	text-align: center;
+	width: 100%;
+	z-index: 3;
+	color: white;
+	height: 20px;
+	line-height: 20px;
+}
+
+.settingsWindow {
+	background-color: #404040;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	top: 30px;
+	flex-direction: column;
+	z-index: 4;
+}
+
+.settingsActive {
+	width: 100%;
+	height: 100%;
+}
+
+.settingsBtnActive {
+	background-color: #404040;
+}
+
+.settings_block {
+	display: flex;
+	width: 100%;
+	background: #404040;
+	top: 0;
+	position: absolute;
+	justify-content: flex-start;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	/* border-bottom: 1px solid #42346a; */
+}
+
+.block {
+	width: 90%;
+	height: auto;
+	background: #d9d9d9;
+	padding: 5px;
+	clear: both;
+	box-shadow: 1px 1px 0px 1px #484848;
+	margin-bottom: .1em;
+	position: relative;
+	/* border-radius: 2px; */
+}
+
+.block span {
+	background: #dde4eb;
+	font-weight: 600;
+	font-size: .8em;
+	color: #333;
+	height: auto;
+	float: left;
+	clear: both;
+	width: 100%;
+	line-height: 25px;
+	text-indent: 1em;
+	position: relative;
+}
+
+.settingsBtn {
+	width: auto;
+	height: 25px;
+	line-height: 25px;
+	background: #5db584;
+	display: block;
+	float: right;
+	padding: 0 1em;
+	position: relative;
+	text-transform: uppercase;
+	font-size: .8em;
+	cursor: pointer;
+}
+
+.settingsBtn:hover {
+	background: #15b6ae;
+}
+
+.settingsBtn:active {
+	background: #ff0707;
+}
+
+.pbHolder {
+	display: block;
+	width: 100%;
+	height: auto;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.modalOther {
+	color: rgb(255 255 255);
+	width: auto;
+	display: block;
+	right: 0;
+	background: #362e29;
+	font-size: .7em;
+	position: absolute;
+	text-align: center;
+	padding: 0.5em 1em;
+	z-index: 1;
+}
+
+.pbBox {
+	display: block;
+	float: left;
+	padding: .5em .5em;
+	font-size: .8em;
+}
+
+.pFragsSpec::before {
+	content: "";
+	background: #362e29;
+	height: 100%;
+	width: 1px;
+	display: block;
+	position: absolute;
+	top: 0;
+}
+
+.appPlayers {
+	display: block;
+	width: 98%;
+	height: 81%;
+	float: left;
+	position: absolute;
+	left: 100%;
+	z-index: 3;
+}
+
+.activeTab {
+	left: 1%;
+}
+
+li {
+	list-style: none;
+	border-bottom: 1px solid #362e29;
+	font-size: .7em;
+	float: left;
+	width: 100%;
+	display: block;
+	cursor: pointer;
+	color: white;
+	padding: 0.2em 0;
+}
+li:nth-child(even) {
+	background: dimgrey;
+}
+li:last-child {
+	border-bottom: none;
+}
+li:hover:nth-child(even) {
+	background: #b96713;
+}
+
+
+.orange_txt {
+	color: #ff9900;
+	text-transform: uppercase;
+}
+
+.green_txt {
+	color: #4bc921;
+	text-transform: uppercase;
+}
+
+.red_txt {
+	color: #21c9aa;
+	text-transform: uppercase;
+}
+
+#properTable {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: auto;
+	float: left;
+	background: #585858;
+}
+#favouritesTable {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: auto;
+	float: left;
+	background: #585858;
+}
+
+#myTable {
+	padding: 0;
+	margin: 0;
+}
+#myTable li {
+	background: #3c3c3c;
+	height: 22px;
+	line-height: 22px;
+	color: white;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+#myPlayers li {
+	
+background: #3c3c3c;
+	
+height: 22px;
+	
+line-height: 22px;
+	
+color: white;
+	
+text-transform: uppercase;
+	
+font-size: .7em;
+	
+font-weight: 600;
+}
+
+#myPlayers {
+	padding: 0;
+	margin: 0;
+}
+.headSpace {
+	padding-right: 10px;
+	display: block;
+	float: left;
+	width: 98%;
+	position: relative;
+	font-size: .8em !important;
+}
+
+.servBtnHolder {
+	width: auto;
+	height: auto;
+	display: block;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: .5em;
+	background: #362e29;
+	text-transform: uppercase;
+	position: relative;
+	border: 1px solid #1c1714;
+}
+
+.modalNavSpec {
+	width: auto;
+	height: auto;
+	background: #3c3c3c;
+	text-align: center;
+	font-size: .7em;
+	padding: 0.4em 0.5em;
+	color: white;
+	cursor: pointer;
+	float: left;
+}
+.modalNavSpec:hover {
+	background: #aac70e;
+}
+
+.modalNavSpecQtv {
+	width: auto;
+	height: auto;
+	background: #3c3c3c;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	float: left;
+	font-size: .7em;
+	padding: 0.4em 0.5em;
+}
+.modalNavSpecQtv:hover {
+	background: #f93900;
+}
+
+.modalNavJoin {
+	width: auto;
+	height: auto;
+	background: #3c3c3c;
+	text-align: center;
+	font-size: .7em;
+	padding: 0.4em 0.5em;
+	color: white;
+	cursor: pointer;
+	float: left;
+}
+
+.modalNavJoin:hover {
+	background: #338b14;
+}
+
+.modalNavJoin:active {
+	background: #3c991c;
+}
+.quee {
+	background: #878bff !important;
+}
+.modalNavSpecAlert {
+	width: auto;
+	height: 22px;
+	background: #3c3c3c;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	font-size: .7em;
+	padding: 1em;
+	position: a;
+	line-height: 22px;
+}
+.modalNavSpecAlert:hover {
+	background: #338b14;
+}
+.modalNavSpecAlert:active {
+	background: #ff9900;
+}
+.servBtnHolder:after {
+	content: "";
+	background: #222222;
+	display:block;
+	width: 100%;
+	height: 1px;
+	top: 50%;
+	position: absolute;
+	margin-top: -.5px;
+}
+
+.playerName {
+	width: 25%;
+	text-indent: 5px;
+	float: left;
+	height: 100%;
+}
+
+.playerServer {
+	width: 65%;
+	text-indent: 5px;
+	float: left;
+	height: 100%;
+}
+.playerPing {
+	width: 10%;
+	text-indent: 5px;
+	float: left;
+	height: 100%;
+}
+
+#playerList {
+	padding: 0;
+	margin: 0;
+	overflow-y: scroll;
+	width: 100%;
+	background: #585858;
+}
+
+.headPlayer {
+    width: 25%;
+	text-align: left;
+	cursor: pointer;
+	text-indent: 5px;
+	float: left;
+}
+.headPing {
+    width: 10%;
+    text-align: left;
+    cursor: pointer;
+    text-indent: 5px;
+    float: left;
+}
+
+.headPlayerServer {
+    width: 65%;
+    text-align: left;
+    cursor: pointer;
+    text-indent: 5px;
+    float: left;
+}
+.topTabActive {
+	background: #3c3c3c;
+	position: relative;
+	margin: 0;
+}
+.topTabActive:after {
+	content: "";
+	background: #b14949;
+	width: 100%;
+	height: 1px;
+	bottom: 0;
+}
+.titleBarText img {
+	height: 24px;
+	display: block;
+	float: left;
+	position: relative;
+	top: 3px;
+	left: 0px;
+}
+.addFav {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: blueviolet;
+    position: absolute;
+    margin-left: -10px;
+    left: 50%;
+    cursor: pointer;
+    z-index: 11;
+}
+
+
+
+/*  */
+
+.appFavourites {
+    display: none;
+}
+.appPlayers {
+    display: none;
+}
